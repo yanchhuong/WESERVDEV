@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/home")
 public class HomeController {
 
-   /* private RecordRepository repository;
+    private RecordRepository repository;
 
     @Autowired
     public HomeController(RecordRepository repository) {
@@ -54,5 +54,4 @@ public class HomeController {
         }
         return home(model);
     }
-    */
 }
