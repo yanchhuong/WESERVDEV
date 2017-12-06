@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
 
     private RecordRepository repository;
@@ -38,6 +37,7 @@ public class HomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+	@RequestMapping("/home")
     public String home(ModelMap model) {
         List<Record> records = repository.findAll();
         model.addAttribute("records", records);
@@ -54,4 +54,54 @@ public class HomeController {
         }
         return home(model);
     }
+	
+    @RequestMapping(value="/",method = RequestMethod.GET)
+	public String welcome(HttpServletRequest request, HttpServletResponse response) {
+		return "main_page";
+	}
+	@RequestMapping(value="/post",method = RequestMethod.GET)
+	public String postAds() {
+		return "post_control_001_view";
+	}
+	@RequestMapping(value="/preview",method = RequestMethod.GET)
+	public String previewPage() {
+		return "preview_page";
+	}
+	@RequestMapping(value="/admin",method = RequestMethod.GET)
+	public String admin() {
+		return "admin";
+	}
+	@RequestMapping(value="/feedback_control_001_view",method = RequestMethod.GET)
+	public String feedback() {
+		return "feedback_control_001_view";
+	}
+	@RequestMapping(value="/user_control_001_view",method = RequestMethod.GET)
+	public String User() {
+		return "user_control_001_view";
+	}
+	@RequestMapping(value="/menu_control_001_view",method = RequestMethod.GET)
+	public String menuControl() {
+		return "menu_control_001_view";
+	}
+	@RequestMapping(value="/message_control_001_view",method = RequestMethod.GET)
+	public String messageControl() {
+		return "message_control_001_view";
+	}
+	
+	@RequestMapping(value="/product_control_001_view",method = RequestMethod.GET)
+	public String productControl() {
+		return "product_control_001_view";
+	}
+	@RequestMapping(value="/location_control_001_view",method = RequestMethod.GET)
+	public String locationControl001() {
+		return "location_control_001_view";
+	}
+	
+	//======= auto vehicle
+	@RequestMapping(value="/auto_vehicle",method = RequestMethod.GET)
+	public String vehicle() {
+		return "auto_vehicle";
+	}
+	
+	
 }
