@@ -9,7 +9,7 @@ public class ViewsController extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		   //login
-		    registry.addViewController("/login").setViewName("login");
+		    registry.addViewController("/login").setViewName("hello");
 		
 	        registry.addViewController("/").setViewName("main_page");
 	        registry.addViewController("/post").setViewName("post_control_001_view");
