@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class ViewsController extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		   //login
+		    registry.addViewController("/login").setViewName("login");
+		
 	        registry.addViewController("/").setViewName("main_page");
 	        registry.addViewController("/post").setViewName("post_control_001_view");
 	        registry.addViewController("/preview").setViewName("preview_page");
