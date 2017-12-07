@@ -11,7 +11,7 @@ public class ViewsController extends WebMvcConfigurerAdapter {
 		   /*  Test view*/		
 		   
 		   /* chat  */
-		   registry.addViewController("/chatting").setViewName("index");
+		//   registry.addViewController("/chatting").setViewName("index");
 		   registry.addViewController("/chat").setViewName("realtimechat");
 		   
 		   //login
