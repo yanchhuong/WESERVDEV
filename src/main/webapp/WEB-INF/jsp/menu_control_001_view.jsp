@@ -39,7 +39,7 @@ top.ifrMainResize("N", 878);
 
 				<!-- 타이틀/버튼영역 -->
 				<div class="title_wrap mgb15">
-					<div class="left"><h1>Category Control</h1></div>
+					<div class="left"><h1>부서현황 > 부서설정</h1></div>
 					<div class="right"></div>
 				</div>
 				<!-- //타이틀/버튼영역 -->

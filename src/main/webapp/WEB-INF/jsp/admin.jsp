@@ -64,9 +64,9 @@ $(function(){
 						</div>
 						<!-- //select -->
 						<div class="select_com">
-							<div class="combo_no"><span></span></div>
+							<div class="combo_no"><span>웹케시(주)웹케시(주)웹케시(주)</span></div>
 						</div>
-						<p><strong>Admin</strong>User NAME</p>
+						<p><strong>Admin</strong> User</p>
 					</div>
 				</div>
 				<!-- //user view -->
@@ -74,19 +74,17 @@ $(function(){
 			<!-- //lnb top -->
 
 			<!-- group wrap -->
-			<div class="com_group_wrap" id="com_group">
+			<div class="com_group_wrap">
 				<!--company list -->
 				<div class="com_list">
 					<div class="com_item">
-						<div class="group_name ic_lnb_cmd ic_m6_1" style="background-color: #05a87c"><a href="javascrip:">Controll Panel</a></div><!-- 활성화클래스 on -->
+						<div class="group_name ic_lnb_cmd ic_m6_1 on"><a href="javascrip:">Controll Panel</a></div><!-- 활성화클래스 on -->
 						<div class="group_name2">
 							<ul>
 								<li><a href="javascrip:" id="cmenu" >Menu</a></li>
 								<li><a href="javascrip:" id="cuser"  >User</a></li><!-- (add)20170309 -->
-								<li><a href="javascrip:" id="cproduct">Product</a></li>
-								<li><a href="javascrip:" id="cfeedback">Feedback</a></li>
 								<li><a href="javascrip:" id="cmessage">Message</a></li>
-								<li><a href="javascrip:" id="cLocation">Location</a></li>
+								<li><a href="javascrip:" id="cfeedback">Feedback</a></li>
 							</ul>
 						</div>
 					</div>
@@ -97,7 +95,7 @@ $(function(){
 		</div>
 		<!-- //lnb box -->
 		
-		<iframe id="ifr_content" name="ifr_content" src="menu_control_001_view" 
+		<iframe id="ifr_content" name="ifr_content" src="cmenu" 
                     style="width:100%;min-width:600px;height:auto" 
                     scrolling="auto" frameborder="0" marginheight="0" marginwidth="0" >
        	</iframe> 

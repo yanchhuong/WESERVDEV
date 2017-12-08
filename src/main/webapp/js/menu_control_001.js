@@ -57,10 +57,10 @@ $(document).ready(function(){
 	//add main
 	$(document).on("click", "#addMain",function(e){
 		var input={};
-		input.lvl        =   $(this).parents('tr').find("#lvl").attr("value");
-		input.parentid   =   $(this).parents('tr').find("#parentid").val();
-	//	input.catgparent =   $(this).parents('tr').find("#catgparent").val();
-		input.usercd     =   $(this).parents('tr').find("#usercd").val();
+		input.lvl =        $(this).parents('tr').find("#lvl").attr("value");
+		input.parentid =   $(this).parents('tr').find("#parentid").val();
+		input.usercd =     $(this).parents('tr').find("#usercd").val();
+		input.vscatgid =   $(this).parents('tr').find("#vscatgid").val();
 		
 		 $(this).parents().find("#edit").remove();
 		 $(this).parents('tr').after(menu_control_001.editTrHtml(input));
@@ -71,7 +71,7 @@ $(document).ready(function(){
 		input.lvl = parseInt($(this).parents('tr').find("#lvl").attr("value"))+1;
 		input.parentid = $(this).parents('tr').find("#catgid").val();
 		input.usercd   = $(this).parents('tr').find("#usercd").val();
-		input.catgparent = $(this).parents('tr').find("#catgcd").val();
+		input.vscatgid =   $(this).parents('tr').find("#vscatgid").val();
 		 $(this).parents().find("#edit").remove();
 		 $(this).parents('tr').after(menu_control_001.editTrHtml(input));
    });
@@ -108,8 +108,7 @@ menu_control_001.listMenu=function(){
     			html += '           <input type="hidden" id= "pid" value="'+v.pid    +'"/>    ';
     			html += '           <input type="hidden" id= "usercd" value="'+v.usercd +'"/> ';
     			html += '           <input type="hidden" id= "parentid" value="'+v.parentid +'"/> ';
-    			html += '           <input type="hidden" id= "catgcd" value="'+ v.catgcd +'"/> ';
-    			html += '           <input type="hidden" id= "catgparent" value="'+v.catgparent +'"/> ';
+    			html += '           <input type="hidden" id= "vscatgid" value="'+v.vscatgid +'"/> ';
     			html += '           <input type="hidden" id= "fullengname" value="'+v.fullengname +'"/> ';
     			html += '           <input type="hidden" id= "fullkhname" value="'+v.fullkhname +'"/> ';
     			html += '           <input type="hidden" id= "randname" value="'+v.randname +'"/> ';
@@ -167,7 +166,7 @@ menu_control_001.listMenu=function(){
         	       html+='     <div class="dp1">									              ';
         	       html+='            <span class="ico_treefolder"></span> 		                  ';
         	       html+='            <input type="hidden" id="catgid" value="1">                 ';
-        	       html+='            <input type="hidden" id="lvl" value="1">                    ';
+        	       html+='            <input type="hidden" id="vscatgid" value="1">               ';
         	       html+='            <input type="text" id="txtnmeng" style="width:150px;">&nbsp;';
         	       html+='            <input type="text" id="txtnmkh" style="width:150px;">&nbsp; ';
         	       html+='		    <a id="btAdd"><img src="../img/btn/btn_s_ok.png" alt="저장"></a>';
@@ -175,7 +174,7 @@ menu_control_001.listMenu=function(){
         	       html+='	     </div>										                    ';
         	       html+='	 </td>											                    ';
         	       html+=' <td class="t_right"><a class="txt_d" id="parentid"></a></td>         ';
-        	       html+=' <td class="t_left"><a class="txt_d off">1</a></td>	        ';
+        	       html+=' <td class="t_left"><a class="txt_d off" id="lvl" value="1">1</a></td>	        ';
         	       html+=' <td class="t_left"><a class="txt_d off" id="usercd"></a></td>	    ';
         	       html+=' <td class="t_center">									            ';
         	       html+='	<div style="position:relative;">							        ';
@@ -210,18 +209,17 @@ menu_control_001.listMenu=function(){
 	
 };
 menu_control_001.editTrHtml = function(input){
-	 var  parentid = 0;
-	 var  catgparent = "";
 	 var edithtml='';
+	
 		if(input.lvl!='1'){
 			parentid = input.parentid ;
-			catgparent = input.catgparent;
 		}
      edithtml+=' <tr id="edit">                                                       '; 
      edithtml+=' <td class="t_center brd_r">								          ';
      edithtml+= '           <input type="hidden" id= "lvl" value="'+ input.lvl +'"/>  ';
-     edithtml+= '           <input type="hidden" id= "catgparent" value="'+ catgparent+'"/>';
- /*   edithtml+='	<div class="ly_po">									              ';
+     edithtml+= '           <input type="hidden" id= "vscatgid" value="'+ input.vscatgid +'"/>';
+     
+    /* edithtml+='	<div class="ly_po">									              ';
      edithtml+='		<a class="btn_folder_plus">추가</a>						      ';
      edithtml+='		<!-- layer popup -->								          ';
      edithtml+='		<div class="tree_layerpop" style="display:none;">		      ';
@@ -280,15 +278,14 @@ menu_control_001.addMenu= function(data,type){
 	var input={};
 	if(type ==1){
 		input["catgid"]      = $(data).parents("tr").find('#catgid').val();
-		input["catgcd"]      = $(data).parents("tr").find('#catgcd').val();
 	}
-	input["catgparent"]  = $(data).parents("tr").find('#catgparent').val();
+	input["vscatgid"]    = $(data).parents("tr").find('#vscatgid').val();
 	input["nm_eng"]      = $(data).parents("tr").find('#txtnmeng').val();
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
 	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
 	input["parentid"]    = $(data).parents("tr").find('#parentid').text();
+	input["pid"]         = '';
 	input["usercd"]      = $(data).parents("tr").find('#usercd').text();
-	console.log(input);
 	 $.ajax({
 	        type   : 'POST',
 	    	url    : '/category/save',
