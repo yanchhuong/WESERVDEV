@@ -24,11 +24,13 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
-@EnableAutoConfiguration
 @SpringBootApplication
-@EntityScan(basePackages = "com.code")
+@EnableAutoConfiguration
 @ComponentScan("com.code")
+@EntityScan(basePackages = "com.code")
+@EnableJpaRepositories(basePackages = "com.code")
 @PropertySource("classpath:application.properties")
 public class Application extends SpringBootServletInitializer {
 	
