@@ -27,19 +27,6 @@ public class FileSystemStorageService implements StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
-    @Override
-    public void store(MultipartFile file) {
-        try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-            }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-            System.out.println(this.rootLocation.toString());
-            
-        } catch (IOException e) {
-            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
-        }
-    }
 
     @Override
     public Stream<Path> loadAll() {
@@ -88,4 +75,25 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Could not initialize storage", e);
         }
     }
+
+	@Override
+	public void store(MultipartFile file, String name) {
+		try {
+            if (file.isEmpty()) {
+                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
+            }
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            System.out.println(this.rootLocation.toString());
+            
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+        }
+		
+	}
+
+	@Override
+	public void delete(String filename) {
+		// TODO Auto-generated method stub
+		
+	}
 }
