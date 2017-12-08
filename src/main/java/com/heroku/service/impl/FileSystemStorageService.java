@@ -1,29 +1,20 @@
 package com.heroku.service.impl;
 
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heroku.model.StorageProperties;
 import com.heroku.service.StorageService;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -37,25 +28,17 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file,String fileName) {
+    public void store(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            // create new File objects
-            String tempDirPath = this.rootLocation.toString();
-       //         String fileName = DateFormatUtils.format(new Date(), "yyyyMMdd") + "_"+ UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-            String tempPath = tempDirPath + File.separator+fileName;
-  
-       //    Files.copy(file.getInputStream(),this.rootLocation.resolve(file.getOriginalFilename()));
-            
-            FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(tempPath));
-            System.out.println(this.rootLocation.resolve(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            System.out.println(this.rootLocation.toString());
             
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
-    
     }
 
     @Override
@@ -105,15 +88,4 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Could not initialize storage", e);
         }
     }
-
-	@Override
-	public void delete(String filename) {
-		try {
-			Files.delete(this.rootLocation.resolve(filename));	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 }

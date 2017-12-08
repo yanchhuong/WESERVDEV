@@ -1,7 +1,8 @@
 package com.heroku.dao.impl;
-/*package com.code.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -10,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.code.chat.ChatMessage;
-import com.code.dao.ChatMessageRepository;
-
-
+import com.heroku.dao.ChatMessageRepository;
+import com.heroku.demo.Record;
+import com.heroku.model.ChatMessageModel;
 
 @Repository
 public class ChatMessageDaoImpl extends JdbcDaoSupport implements ChatMessageRepository{
@@ -25,19 +25,26 @@ public class ChatMessageDaoImpl extends JdbcDaoSupport implements ChatMessageRep
 	 private void initialize(){
 	        setDataSource(dataSource);
 	 }
-	    //...
 
 	@Override
-	public List<ChatMessage> getMessages(int messageIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChatMessageModel> getMessages(int messageIndex) {
+		String sql = "SELECT id,data FROM record";
+	    List< Map < String, Object>> rows = this.getJdbcTemplate().queryForList(sql);
+	 
+	    List<ChatMessageModel> result = new ArrayList<ChatMessageModel>();
+	    for(Map <String, Object> row:rows){
+	    	ChatMessageModel rec = new ChatMessageModel();
+	    	
+	        result.add(rec);
+	    }
+	    return result;
 	}
 	@Override
-	public void addMessage(ChatMessage chatMessage) {
-		String sql = "INSERT INTO CHATMESSAGE " +"(message,sender,recipient,ip,dtm) VALUES (?,?,?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{chatMessage.getMessage(),chatMessage.getSender(),chatMessage.getRecipient(),chatMessage.getIp(),chatMessage.getDate()});
+	public void addMessage(ChatMessageModel ChatMessageModel) {
+		String sql = "INSERT INTO record " +"(data) VALUES (?)" ;
+        this.getJdbcTemplate().update(sql, new Object[]{});
 		
 	}
 
+	
 }
-*/

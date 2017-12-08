@@ -1,16 +1,11 @@
 package com.heroku.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.heroku.dao.UserDao;
-import com.heroku.model.MUpdateUserStatusIn_U001;
-import com.heroku.model.MUserListIn_R001;
-import com.heroku.model.MUserListOut_R001;
-import com.heroku.model.RoleCountOut_R001;
+import com.heroku.dao.UsersDao;
 import com.heroku.model.UserDetailBean;
 import com.heroku.service.UserService;
 
@@ -18,7 +13,7 @@ import com.heroku.service.UserService;
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-    UserDao userDao;
+    UsersDao userDao;
 	
 	@Override
 	public boolean AddUser(UserDetailBean user) {
@@ -29,19 +24,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean resetPassword(String username, String newpass) {
-		return userDao.resetPassword(username, newpass);
+	public List<String> Listname(List<String> username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Override
-	public List<MUserListOut_R001> getUserList(MUserListIn_R001 input) {
-		return this.userDao.getUserList(input);
-	}
-
-	@Override
-	public List<RoleCountOut_R001> getRoleCount() {
-		return this.userDao.getRoleCount();
-	}
-
 
 }

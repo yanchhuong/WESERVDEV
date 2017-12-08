@@ -1,14 +1,17 @@
 package com.heroku.dao;
-/*package com.code.dao;
 
 import java.util.List;
 
-import com.code.chat.ChatMessage;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
+
+
+import com.heroku.model.ChatMessageModel;
 
 
  
 public interface ChatMessageRepository {
-	public List<ChatMessage> getMessages(int messageIndex);
-	public void addMessage(ChatMessage ChatMessage) ;
+	public List<ChatMessageModel> getMessages(int messageIndex);
+	public void addMessage(ChatMessageModel ChatMessageModel) ;
     
-}*/
+}

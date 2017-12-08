@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Language" content="en-us">
-<meta charset="UTF-16"> 
+<meta charset="UTF-8"> 
 
 <title>Chat</title>
 <script src="/js-lib/sockjs-0.3.4.js"></script>
@@ -97,16 +97,13 @@
       function sendMessageTo(user) {
         var chatInput = '#input-chat-' + user;
         var message = $(chatInput).val();
-        
-        
         if (!message.length) {
           return;
         }
-        
-        stompClient.send("/app/chat",{"content-type": "application/json;charset=UTF-16"}, JSON.stringify({
+        stompClient.send("/app/chat", {}, JSON.stringify({
           'recipient': user,
           'message' : message
-        })); 
+        }));
         $(chatInput).val('');
         $(chatInput).focus();
       }

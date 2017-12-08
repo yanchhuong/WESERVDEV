@@ -1,4 +1,3 @@
-package com.heroku.demo;
 /*
  * Copyright 2015 Benedikt Ritter
  *

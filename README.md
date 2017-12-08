@@ -6,7 +6,7 @@ This is a small demo application for showing how to run a [Spring Boot](http://p
 application on [Heroku](http://heroku.com). For more information see the Dev Center article on 
 [Deploying Spring Boot Applications to Heroku](https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku).
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 
 ## License
 
