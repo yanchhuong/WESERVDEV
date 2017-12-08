@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.code.demo;
+package com.code.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,11 +23,13 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 @Configuration
-@EntityScan(basePackages = "com.code")
 @EnableAutoConfiguration
 @SpringBootApplication
+@EntityScan(basePackages = "com.code")
 @ComponentScan("com.code")
+@PropertySource("classpath:application.properties")
 public class Application extends SpringBootServletInitializer {
 	
 	@Override
