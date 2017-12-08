@@ -24,7 +24,7 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 @Configuration
-@EntityScan(basePackages = "com.code.model")
+@EntityScan(basePackages = "com.code")
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan("com.code")
