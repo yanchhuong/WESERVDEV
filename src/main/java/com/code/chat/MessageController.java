@@ -23,9 +23,9 @@ public class MessageController {
   
   private SimpMessagingTemplate template;
   
-  @Autowired
+
   private ChatMessageService chatMessageService;
-  
+  @Autowired
   @Inject
   public MessageController(SimpMessagingTemplate template) {
     this.template = template;
