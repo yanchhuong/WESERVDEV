@@ -13,16 +13,17 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import com.code.model.LiveChatBean;
-import com.code.service.ChatMessageService;
+//import com.code.service.ChatMessageService;
 
 @Controller
 public class MessageController {
-  
-  private SimpMessagingTemplate template;
   @Autowired
   @Qualifier("clientService")
-  private ChatMessageService chatMessageService;
+  private SimpMessagingTemplate template;
+  @Autowired
+ // private ChatMessageService chatMessageService;
  
+
   @Inject
   public MessageController(SimpMessagingTemplate template) {
     this.template = template;
