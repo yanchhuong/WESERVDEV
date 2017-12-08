@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
 <meta charset="UTF-8"> 
 
 <title>Chat</title>
@@ -25,28 +24,27 @@
         stompClient = Stomp.over(socket);
         stompClient.connect('', '', function(frame) {
           whoami = frame.headers['user-name'];
+          console.log('whoami: ' + whoami);
           console.log('Connected: ' + frame);
           stompClient.subscribe('/user/queue/messages', function(message) {
+        	  console.log('message: ' + JSON.parse(message.body));
                 showMessage(JSON.parse(message.body));
           });
           stompClient.subscribe('/topic/active', function(activeMembers) {
-            showActive(activeMembers);
-            
+            showActive(activeMembers);  
             console.log('TEST:'+ activeMembers);
           });
         });
       }
       
       function showActive(activeMembers) {
+    	console.log('Body :' +activeMembers.body);
         renderActive(activeMembers.body);
         stompClient.send('/app/activeUsers', {}, '');
       }
       
       function renderActive(activeMembers) {
-    	  
-    	  console.log('SHow :' +activeMembers);
-    	  
-    	  
+    	console.log('SHow :' +activeMembers);
         var previouslySelected = $('.user-selected').text();
         var usersWithPendingMessages = new Object();
         $.each($('.pending-messages'), function(index, value) {
@@ -97,13 +95,17 @@
       function sendMessageTo(user) {
         var chatInput = '#input-chat-' + user;
         var message = $(chatInput).val();
+        
+        console.log("chatInput"+chatInput);
+        
         if (!message.length) {
           return;
         }
-        stompClient.send("/app/chat", {}, JSON.stringify({
+        
+        stompClient.send("/app/chat",{"content-type": "application/json;charset=UTF-16"}, JSON.stringify({
           'recipient': user,
           'message' : message
-        }));
+        })); 
         $(chatInput).val('');
         $(chatInput).focus();
       }
@@ -132,7 +134,9 @@
           
           chatSubmit.click(function(event) {
             var user = event.currentTarget.id.substring(12); // gets rid of 'submit-chat-'
+            console.log("RECIEVER:"+user);
             sendMessageTo(user);
+            
           });
           
           chatContainer.append(chatWindow);
@@ -155,6 +159,7 @@
         var userDisplay = $('<span>', {class: (message.sender === whoami ? 'chat-sender' : 'chat-recipient')});
         
         userDisplay.html(message.sender + ' says: ');
+        
         console.log(message);
         var messageDisplay = $('<span>');
         messageDisplay.html(message.message );
