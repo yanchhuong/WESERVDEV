@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 
-@ComponentScan("com.heroku")
+@ComponentScan("com.code")
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 
