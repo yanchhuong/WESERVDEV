@@ -3,14 +3,11 @@ package com.code.service.impl;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.stereotype.Service;
-
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Sets;
 
-@Service("clientService")
 public class ActiveUserService {
   
   private LoadingCache<String, UserStats> statsByUser = CacheBuilder.newBuilder().build(new CacheLoader<String, UserStats>() {
