@@ -10,8 +10,7 @@ $(document).ready(function(){
 		$(this).parent().find('.tree_layerpop').show();	
 	});
 	$(document).on("click", "#btCancelAdd",function(e){
-		
-		menu_control_001.listMenu();
+		menu_control_001.listMenu();	
 	});
 	$(document).on("click", "#btAdd",function(e){
 		menu_control_001.addMenu(this);
@@ -63,9 +62,8 @@ $(document).ready(function(){
 	//	input.catgparent =   $(this).parents('tr').find("#catgparent").val();
 		input.usercd     =   $(this).parents('tr').find("#usercd").val();
 		
-		 $("#dvsn_no").hide();
 		 $(this).parents().find("#edit").remove();
-		 $(this).parents('tbody:last-child').append(menu_control_001.editTrHtml(input));
+		 $(this).parents('tr').after(menu_control_001.editTrHtml(input));
     });
 	//add sub
 	$(document).on("click", "#addSub",function(e){
@@ -283,15 +281,12 @@ menu_control_001.addMenu= function(data,type){
 	if(type ==1){
 		input["catgid"]      = $(data).parents("tr").find('#catgid').val();
 		input["catgcd"]      = $(data).parents("tr").find('#catgcd').val();
-		input["parentid"]    = $(data).parents("tr").find('#parentid').val();
-	}else{
-		input["parentid"]    = $(data).parents("tr").find('#parentid').text();
 	}
 	input["catgparent"]  = $(data).parents("tr").find('#catgparent').val();
 	input["nm_eng"]      = $(data).parents("tr").find('#txtnmeng').val();
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
 	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
-	//input["parentid"]    = $(data).parents("tr").find('#parentid').text();
+	input["parentid"]    = $(data).parents("tr").find('#parentid').text();
 	input["usercd"]      = $(data).parents("tr").find('#usercd').text();
 	console.log(input);
 	 $.ajax({
