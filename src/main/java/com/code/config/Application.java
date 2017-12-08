@@ -29,8 +29,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan("com.code")
-@EntityScan(basePackages = "com.code")
-@EnableJpaRepositories(basePackages = "com.code")
+@EntityScan(basePackages = "com.code.model")
+@EnableJpaRepositories(basePackages = "com.code.dao")
 @PropertySource("classpath:application.properties")
 public class Application extends SpringBootServletInitializer {
 	
