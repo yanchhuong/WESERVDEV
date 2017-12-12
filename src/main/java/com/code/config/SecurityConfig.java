@@ -37,8 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/**/delete").access("hasRole('ROLE_ADMIN')")
 
 				.anyRequest().permitAll()
-				
-				.anyRequest().permitAll()
 		   .and()
 		   		.formLogin().loginPage("/login")
 		   		.usernameParameter("username")
