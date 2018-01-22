@@ -7,7 +7,6 @@ import com.code.comm.PagingUtils;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
-import com.code.model.MUserListOut_R002;
 import com.code.model.RoleCountOut_R001;
 import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
