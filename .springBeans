@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.code.config.Application</config>
+		<config>java:com.code.config.WebMvcJspApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
