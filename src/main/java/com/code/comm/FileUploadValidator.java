@@ -1,4 +1,4 @@
-package com.code.validator;
+package com.code.comm;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
