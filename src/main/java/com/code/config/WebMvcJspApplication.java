@@ -44,7 +44,7 @@ import com.code.model.StorageProperties;
 
 @Configuration
 @SpringBootApplication
-@EnableAutoConfiguration
+/*@EnableAutoConfiguration*/
 @ComponentScan("com.code")
 /*@EntityScan(basePackages = "com.code.model")*/
 @EnableJpaRepositories(basePackages = "com.code.dao")
