@@ -1,3 +1,4 @@
+package com.code.demo;
 /*
  * Copyright 2015 Benedikt Ritter
  *
@@ -12,9 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-package com.code.demo;
+ 
+package com.heroku.demo;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,13 +28,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class HomeController {
 
     private RecordRepository repository;
 
-    @Autowired
+   @Autowired
     public HomeController(RecordRepository repository) {
         this.repository = repository;
     }
@@ -42,6 +45,7 @@ public class HomeController {
         List<Record> records = repository.findAll();
         model.addAttribute("records", records);
         model.addAttribute("insertRecord", new Record());
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         return "home";
     }
 
@@ -54,4 +58,6 @@ public class HomeController {
         }
         return home(model);
     }
+   
 }
+*/

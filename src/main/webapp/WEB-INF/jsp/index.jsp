@@ -1,7 +1,6 @@
-
-<html lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
 <meta charset="UTF-8"> 
 
 <title>Chat</title>

@@ -27,7 +27,7 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>Spring Boot Heroku Example</h1>
+        <h1>Spring Boot Heroku</h1>
     </div>
 
     <div class="row">
@@ -53,7 +53,9 @@
                 </thead>
                 <tbody>
                     <tr th:each="record : ${records}">
-                        <td th:text="${record.data}">Some text</td>
+                        <td th:text="${record.id}">Some</td>
+                        <td th:text="${record.data}">Some</td>
+                        <td><a>delete</a></td>
                     </tr>
                 </tbody>
             </table>
