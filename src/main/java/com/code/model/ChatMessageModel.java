@@ -3,19 +3,29 @@ package com.code.model;
 
 
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
  
 /**
  * @author huseyinbabal
  */
 
 
-/*@Entity
-@Table(name = "chatmessage")*/
+@Entity
+@Table(name = "chatmessage")
 public class ChatMessageModel {
+ 
+    @Column(name = "id")
     private String id;
+    @Column(name = "text")
     private String text;
+    @Column(name = "author")
     private String author;
+    @Column(name = "date")
     private Date date;
+ 
     public ChatMessageModel() {
     }
  

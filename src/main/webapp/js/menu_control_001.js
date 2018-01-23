@@ -45,13 +45,13 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#btaddImg", function(){
-		var input = {};
-		input["randname"] = $(this).parents("tr").find("#randname").val();
-		input["catgid"]   = $(this).parents("tr").find("#catgid").val();
-		input["catgcd"]   = $(this).parents("tr").find("#catgcd").val();
+		var input={};
+		input["randname"]= $(this).parents("tr").find("#randname").val();
+		input["catgid"]=  $(this).parents("tr").find("#catgid").val();
+		input["pid"]=     $(this).parents("tr").find("#pid").val();
 		
 	//	wehrm.popup.openPopup("popup_uploadimg_002");
-		wehrm.popup.openPopup("popup_uploadimg_002", input, function(data){
+		wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
 			callbackFn(data);
     	});
 	});
@@ -121,7 +121,7 @@ menu_control_001.listMenu=function(){
     			if( v.lvl == '1'){
     				html += '					<li><a id="addMain">Add Main</a></li>		';
     			}
-    			html += '				<li><a id="addSub">Add Sub</a></li>					';
+    			html += '				<li><a id="addSub">Add Sub</a></li>			';
     			html += '				</ul>											    ';
     			html += '			</div>												    ';
     			html += '			<!-- //layer popup -->								 	';
@@ -132,11 +132,7 @@ menu_control_001.listMenu=function(){
     			html += '	<td class="t_right"><a class="txt_d">'+v.parentid+'</a></td>		     ';
     			html += '	<td class="t_left"><a class="txt_d off">'+v.lvl+'</a></td>				 ';
     			html += '	<td class="t_left"><a class="txt_d off">'+v.usercd+'</a></td>			 ';
-    			if(v.randname=="" || v.randname==null){
-        			html += '   <td><a href="javascript:"><img src="../img/ico/appicon_addfile_off.png" alt="첨부파일"></a></td>   ';
-    			}else{
-        			html += '   <td><a href="javascript:"><img src="../img/ico/appicon_addfile.png" alt="첨부파일"></a></td>   ';
-    			}
+    			
     			html += '	<td class="t_center">												     ';
     			html += '		<div style="position:relative;">									 ';
     			html += '			<a class="btn_folderset" title="설정"></a>					     ';
@@ -251,7 +247,6 @@ menu_control_001.editTrHtml = function(input){
      edithtml+=' <td class="t_right"><a class="txt_d" id="parentid">'+parentid+'</a></td>';
      edithtml+=' <td class="t_left"><a class="txt_d off" id="lvl">'+input.lvl+'</a></td>			';
      edithtml+=' <td class="t_left"><a class="txt_d off" id="usercd">'+input.usercd+'</a></td>	    ';
-     edithtml+=' <td><a href="#none"><img src="../img/ico/ico_add_file.png" alt="첨부파일"></a></td>   ';
      edithtml+=' <td class="t_center">									                ';
      edithtml+='	<div style="position:relative;">							        ';
      edithtml+='		<a class="btn_folderset" title="설정"></a>					    ';

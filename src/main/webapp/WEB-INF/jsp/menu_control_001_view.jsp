@@ -71,7 +71,6 @@ top.ifrMainResize("N", 878);
 							<col width="95px">
 							<col width="120px">
 							<col width="120px">
-							<col width="120px">
 							<col width="40px">
 							</colgroup>
 							<thead>
@@ -81,7 +80,6 @@ top.ifrMainResize("N", 878);
 								<th scope="col" class="t_right">Parent</th>
 								<th scope="col" class="t_left">Level</th>
 								<th scope="col" class="t_left">User</th>
-								<th scope="col" class="t_left"></th>
 								<th scope="col" class="t_left"></th>
 							</tr>
 							</thead>
@@ -96,7 +94,6 @@ top.ifrMainResize("N", 878);
 								<col width="95px">
 								<col width="120px">
 								<col width="120px">
-								<col width="120px">
 								<col width="40px">
 								</colgroup>
 								<thead class="bg">
@@ -104,7 +101,6 @@ top.ifrMainResize("N", 878);
 										<td class="t_center"></td>
 										<td class="t_left"><strong>Total</strong></td>
 										<td class="t_right" ><strong id="CNT"></strong></td>
-										<td class="t_left"></td>
 										<td class="t_left"></td>
 										<td class="t_left"></td>
 										<td class="t_left"></td>

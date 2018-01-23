@@ -1,45 +1,62 @@
 package com.code.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.code.demo.Record;
+import com.code.model.UserDetailBean;
 import com.code.service.UserService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
-
-
+import javax.validation.Valid;
 @Controller
 public class LoginController  {
-    @Autowired
-	UserService userService;
-	@RequestMapping(value = "/login")
+	
+    UserService userService;
+    
+	 @Autowired
+    LoginController( UserService userService){
+       this.userService=userService;
+    }
+    
+	
+	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public String showForm(ModelMap model,HttpServletRequest request) {
-	/*	HttpSession session=request.getSession(false);
-		model.addAttribute("login", new LoginForm());
-		if(session==null){
-			model.addAttribute("status", "Log In");
-		}*/
-		return "login_view";
+		
+		return "login";
 	}
+	
 	@RequestMapping(value = "/home",method = RequestMethod.GET)
 	public String home(
 			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
+
+		final String obj = 	SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+	
+		
+		System.out.println( "++++++"   +obj);
 		return "home";
 	}
-	@RequestMapping(value = "/hello",method = RequestMethod.GET)
-	public String hello(
-			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
-		return "hello";
-	}
-	@RequestMapping(value = "/403",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/chatting",method = RequestMethod.GET)
 	public String error(
 			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
-		return "403";
+		return "index";
 	}
+	
+
+	
 }

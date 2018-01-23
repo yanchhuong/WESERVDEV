@@ -26,7 +26,7 @@ var input = <%=input%>;
 $(function(){
 	// Invoke the plugi
 	$("#randname").val(input.randname);
-	$("#catgcd").val(input.catgcd);
+	$("#pid").val(input.pid);
 	
 });
 </script>
@@ -37,7 +37,7 @@ $(function(){
 <body>
 
 <input type="hidden" id="randname">
-<input type="hidden" id="catgcd">
+<input type="hidden" id="pid">
  <div class="uploadWrapper">
   <form id="imageUploadForm" class="imageUploadForm" method="post" action="/upload_file/uploadimg" enctype="multipart/form-data">
     <span class="helpText" id="helpText">Upload an image</span>

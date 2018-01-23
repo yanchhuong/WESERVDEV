@@ -115,10 +115,8 @@ body {
 }
 .imageUploadForm .imgFrame img {
 	max-height: 100%;
-    /* width: 100%; */
+    width: 100%;
 	left:0%;
-	width:100px;display: block;
-    margin:auto;padding: 70px 0;
 }
 
 .imageUploadForm.loading .helpText {

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" class="leaf">
 <head>
-	<meta charset="UTF-8">
-	<meta name="_csrf" content="${_csrf.token}"/>
-	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta charset="UTF-8">
 
-	<%@include file="fragments/include_page.jsp"%>
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" type="text/css" href="/css/css_page/reset.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/css_page/content.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/css_page/content_media_screen.css" media="all">
+<link rel="stylesheet" type="text/css" href="/css/css_page/button.css" media="all">
+<script type="text/javascript" src="../js_lib/js_page/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js_lib/js_page/collJsPlugin.js"></script>
+<script type="text/javascript" src="../js_lib/js_page/common.js"></script> -->
 
-<style>
 
-</style> 
- 
+
+ <%@include file="fragments/include_page.jsp"%>
 </head>
-
 
 <body>
 
@@ -21,11 +24,47 @@
 
 	<!-- header -->
    	<div class="header_wrap"><!--<div class="header_wrap search">-->
-		<jsp:include page="header_include.jsp"/>
+		<!-- header_inner top-bar-wrap -->
+        <div class="header_inner">
+			<!-- logo -->
+            <h1 class="logo"><a href="#none"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
+			<!-- //logo -->
+
+			<!-- button_menu_mobile -->
+            <button type="button" class="btn_gnb">GNB</button>
+			<!-- //button_menu_mobile -->
+
+			<!-- search_box_header -->
+            <div id="searchview" onclick="schView()">
+                <fieldset>
+                    <legend>검색</legend>
+                    <input type="text" class="txt" value="Product name, area name, @ shop name, initial search" disabled="">
+                </fieldset>
+            </div>
+            
+			<!-- //search_box_header -->
+
+			<!-- aleim -->
+            <button type="button" class="btn_alrim new" onclick="gotalklist()"><span>Notice</span></button>
+			<!--<button type="button" class="btn_alrim new" onclick="gotalklist()"><span>Notice</span></button>-->
+			<!-- //aleim -->
+
+			<!-- search_wrap -->
+            <div class="searchwrap">
+                <button type="button" class="btn_back" onclick="schHide()">뒤로</button>
+                <div id="searcharea">
+                    <fieldset>
+                        <legend>검색</legend>
+                        <input type="text" id="main_search_input_text" class="txt" placeholder="Product name, area name, @ shop name, initial search">
+                        <button type="button" class="btn_sch" onclick="goSearchPage()">검색</button>
+                    </fieldset>
+                </div>
+            </div>
+			<!-- //search_wrap -->
+        </div>
+		<!-- //header_inner -->
     </div>
 	<!-- // header -->
-	
-	
 
 	<!-- container -->
 	<div id="container">
@@ -35,13 +74,13 @@
 				<div class="gnb_inner">
 					<button type="button" class="btn_gnbclose">Close</button>
 					<dl class="memview">
-						<dt><a href="javascript:void(0);"><img id="sidebar_photo" src="img/bg/bg_nophoto.png" alt="User"></a></dt>
+						<dt><a href="#"><img id="sidebar_photo" src="img/bg/bg_nophoto.png" alt="User"></a></dt>
 						<dd id="sidebar_name">Please Login</dd>
 					</dl>
 					<div class="meminfo">
-						<a href="javascript:void(0);" class="sidebar_item"><em>Goods</em></a>
-						<a href="javascript:void(0);" class="sidebar_faverd"><em>Stream</em></a>
-						<a href="javascript:void(0);" class="sidebar_following"><em>Follow</em></a>
+						<a href="#none" class="sidebar_item"><em>Goods</em></a>
+						<a href="#none" class="sidebar_faverd"><em>Stream</em></a>
+						<a href="#none" class="sidebar_following"><em>Follow</em></a>
 					</div>
 					<dl class="category">
 						<dt>
@@ -49,7 +88,7 @@
 							<button type="button" class="btn_upload"><span>Post Free here!</span></button>
 						</dt>
 						<dd id="sidebar_catagory_list">
-							<!-- <a href="#none" class="ctg_01">Women's clothing</a>
+							<a href="#none" class="ctg_01">Women's clothing</a>
 							<a href="#none" class="ctg_02">Men's clothing</a>
 							<a href="#none" class="ctg_03">Fashion goods</a>
 							<a href="#none" class="ctg_04">Beauty / Beauty</a>
@@ -60,7 +99,7 @@
 							<a href="#none" class="etc_01">Life / Stationery / Furniture / Food</a>
 							<a href="#none" class="etc_02">Vehicles / Motorcycles</a>
 							<a href="#none" class="etc_03">More</a>
-							<a href="#none" class="etc_04">Stargaz</a> -->
+							<a href="#none" class="etc_04">Stargaz</a>
 						</dd>
 					</dl>
 					<div class="btncenter">
@@ -76,14 +115,22 @@
 
 			<!-- sub_category -->
 			<div class="sub_cat">
-				<div class="hdbox">
-					<h3><!-- Women's Clothing --></h3> 
-					<a href="javascript:void(0);" class="btn_subCatClose">
-						<img src="img/btn/btn_subCatClose.png" alt="Sub Category Close">
-					</a>
-				</div>
+				<div class="hdbox">Women's Clothing <a href="#none" class="btn_subCatClose"><img src="img/btn/btn_subCatClose.png" alt="Sub Category Close"></a></div>
 				<div class="ctglist">
-					<ul></ul>
+					<ul>
+						<li><a href="#none"><em>Long sleeve T-shirt</em><span>999 Items</span></a></li>
+						<li><a href="#none"><em>Short Sleeve T-shirt</em><span>10 Items</span></a></li>
+						<li><a href="#none"><em>Man-to-man / hoody</em><span>99 Items</span></a></li>
+						<li><a href="#none"><em>One Piece</em><span>999 Items</span></a></li>
+						<li><a href="#none"><em>Blouse</em><span>800 Items</span></a></li>
+						<li><a href="#none"><em>Shirt / Souvenir</em><span>999 Items</span></a></li>
+						<li><a href="#none"><em>Long sleeve T-shirt</em><span>999 Items</span></a></li>
+						<li><a href="#none"><em>Short Sleeve T-shirt</em><span>10 Items</span></a></li>
+						<li><a href="#none"><em>Man-to-man / hoody</em><span>99 Items</span></a></li>
+						<li><a href="#none"><em>One Piece</em><span>999 Items</span></a></li>
+						<li><a href="#none"><em>Blouse</em><span>800 Items</span></a></li>
+						<li><a href="#none"><em>Shirt / Souvenir</em><span>999 Items</span></a></li>
+					</ul>
 					<button class="btn_more"><span class="btn_text">Show More</span><span class="btn_collape"></span></button>
 				</div>
 			</div>
@@ -95,12 +142,12 @@
 					<div class="tit_rst"><span>Products </span><strong>1561811</strong><span>Items</span></div>
 					<div class="rbox">
 						<div class="cstselect">
-							<a href="javascript:void(0);" class="selected"><span>Popularity</span></a>
+							<a href="#" class="selected"><span>Popularity</span></a>
 							<ul class="layselected">
-								<li><a href="javascript:void(0);">Latest</a></li>
-								<li><a href="javascript:void(0);">Bestselling</a></li>
-								<li><a href="javascript:void(0);">Low-cost</a></li>
-								<li><a href="javascript:void(0);">Highest Priority</a></li>
+								<li><a href="#none">Latest</a></li>
+								<li><a href="#none">Bestselling</a></li>
+								<li><a href="#none">Low-cost</a></li>
+								<li><a href="#none">Highest Priority</a></li>
 							</ul>
 						</div>
 						<!--<button type="button" class="btn_txt">Advanced Search</button>-->
@@ -110,7 +157,7 @@
 
 				<!-- goods_list -->
 				<ul class="goodslist">
-					<!-- <li>
+					<li>
 						<a href="#none" class="thumb">
 							<img src="img/products/prod_01.jpg" alt="" class="thumb loaded">
 							<p class="txtinfo">
@@ -135,8 +182,7 @@
 								</ul>
 							</div>
 						</div>
-					</li> -->
-<!--			
+					</li>
 					<li>
 						<a href="#none" class="thumb">
 							<span class="badge icon_plus">Plus</span>
@@ -423,14 +469,12 @@
 							</div>
 						</div>
 					</li>
-
--->
 				</ul>
-				<!-- //goods_list -->				
+				<!-- //goods_list -->
 			</div>
 
-			<div class="pagination paginationjs-theme-blue" style="cursor: default;padding-left: 43%;">
-				<!-- <a href="#none" class="pag_prev">next</a>
+			<div class="pagination">
+				<a href="#none" class="pag_prev">next</a>
 				<span>
 					<a href="#none" class="on">1</a>
 					<a href="#none">2</a>
@@ -438,24 +482,22 @@
 					<a href="#none">4</a>
 					<a href="#none">5</a>
 				</span>
-				<a href="#none" class="pag_next">next</a> -->
+				<a href="#none" class="pag_next">next</a>
 			</div>
 
 		</div>
 		<!-- //container -->
     </div>
 	<!-- // container -->
-	
-	
 
 	<!-- footer -->
 	<footer>
 		<div class="footerwrap">
 			<div class="botmenu">
-				<a href="javascript:void(0);">Information</a>
-				<a href="javascript:void(0);">Terms and Conditions</a>
-				<a href="javascript:void(0);">Privacy Policy</a>
-				<a href="javascript:void(0);">Terms of Service</a>
+				<a href="#none">Information</a>
+				<a href="#none">Terms and Conditions</a>
+				<a href="#none">Privacy Policy</a>
+				<a href="#none">Terms of Service</a>
 			</div>
 			<address>
 				<p>
@@ -466,29 +508,12 @@
 		</div>
 		<div class="txtmsg">
 			Please Do Not Hesitate to Contact US.<br>
-			Copyright â Online Shopping. All rights reserved
+			Copyright ⓒ Online Shopping. All rights reserved
 		</div>
 	</footer>
 	<!-- //footer -->
-
 </div>
 <!-- //wrap -->
 
-<script>
-/* (function () {
-    $(document).ready(function () {
-        $('#navbox-trigger').click(function () {
-            return $('#navigation-bar').toggleClass('navbox-open');
-        });
-         return $(document).on('click', function (e) {
-            var $target;
-            $target = $(e.target);
-            if (!$target.closest('.navbox').length && !$target.closest('#navbox-trigger').length) {
-                return $('#navigation-bar').removeClass('navbox-open');
-            }
-        });
-    });
-}.call(this)); */
-</script>
 </body>
 </html>

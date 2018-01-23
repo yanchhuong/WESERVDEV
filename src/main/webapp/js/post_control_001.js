@@ -4,14 +4,34 @@
  var animating; //flag to prevent quick multiclick glitches
  var post_control_001={};
  var ctgr_name = "";
- var catgcd;
- 
- 
+ var catgid;
  $(document).ready(function(){
-	 
 	 post_control_001.listMenu();
-	 post_control_001.OnLoadImage();
-	 post_control_001.listProvince();
+	 
+	// SELECT MENU BUTTON
+//	  $('.menu-item-btn').click(function() {
+//	    var buttonId = "#" + jQuery(this).attr("id");
+//	    var lastChar = buttonId.charAt(buttonId.length-1);
+//	    var contentId = '#content-' + lastChar;
+//	    // If on mobile 
+//	    if ($(window).width() <= 600) {
+//	      if ($(contentId).hasClass('show-content')) {
+//	        $(contentId).removeClass('show-content');
+//	        $(buttonId).removeClass('selected');
+//	      }else {
+//	        $(contentId).addClass('show-content');
+//	        $(buttonId).addClass('selected');
+//	      }
+//	    }
+//	    // If on desktop
+//	    else {
+//	      $('.menu-item-btn').removeClass('selected');
+//	      $(buttonId).addClass('selected');
+//	      $('.menu-item-content').removeClass('show-content');
+//	      $(contentId).addClass('show-content');
+//	    }
+//	  });
+	 
 	 
 	 $(document).on("click", ".menu-item-btn", function(){
 		 $('.selected').removeClass('selected');
@@ -19,7 +39,7 @@
 		 $(this).addClass('selected');
 		 $(this).next().addClass('show-content');
 	 });
-
+	 
 	 $(document).on("click", ".next", function(){
  		if(animating) return false;
  			animating = true;
@@ -28,7 +48,7 @@
  			
  			if($(this).parent().is('li')){
  				$("#ctgr_nm").val(ctgr_name);
- 				catgcd = $(this).attr("data-id");
+ 				catgid = $(this).attr("data-id");
 				current_fs = $('#form0');
  				next_fs    = $('#form1');
  			}else{
@@ -71,6 +91,7 @@
 		 animating = true;
 		 current_fs = $(this).parent();
 		 previous_fs = $(this).parent().prev();
+
  		 //deactivate current step on progressbar
 		 $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 
@@ -89,7 +110,7 @@
  				 current_fs.css({'left': left});
  				 previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
 			 },
- 			 duration: 800,
+ 			 duration: 800, 
  			 complete: function(){
  				 current_fs.hide();
  				 animating = false;
@@ -97,45 +118,22 @@
  				//this comes from the custom easing plugin
  				easing: 'easeInOutBack'
  			});
- 	});
-	 
-	 $("#price").on("keypress",function (event) {
-         //this.value = this.value.replace(/[^0-9\.]/g,'');
-		 $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-	         if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-	         	$("#alertPrice").show();
-	            event.preventDefault();
-	         }else{
-	         	$("#alertPrice").hide();
-	         }
-	     });
-	 
-	 $("#phone_number").on("keypress",function (event) {
-         //this.value = this.value.replace(/[^0-9\.]/g,'');
-		 $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-	         if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-	         	$("#alertPhone").show();
-	            event.preventDefault();
-	         }else{
-	         	$("#alertPhone").hide();
-	         }
-	     });
-	 
+ 		});
  
-	 $(document).on("click", ".wrap_img", function(){
-		 var dat = $(this).find("#randname").val();
-		 post_control_001.removeFile(dat);
-		 $(this).remove();
-		 
-	 });
-
-	 $(".submit").click(function(){
-		 return false;
-	 });
-	 
-	 $("#saveAll").click(function(){
-		 post_control_001.SaveProductPost();
-	 });
+ 		$(".submit").click(function(){
+ 			return false;
+ 		})
+ 		
+ 		$("#saveAll").click(function(){
+ 			if($("#save_contact").is(":checked")){
+ 				alert('save all data');
+ 				alert(catgid);
+ 			}else{
+ 				alert('save only previouse');
+ 			}
+ 		});
+ 		
+ 		
 
 });
 
@@ -158,83 +156,54 @@ post_control_001.listMenu=function(){
     			html += '<li data-id="'+v.catgid+'" class="menu-item">';
     			html += '<a href="#" class="menu-item-btn" id="btn-1"><span>'+v.nm_eng+'</span></a>';
     			html += '<div class="menu-item-content">';
-	    		html += '<h3 class="title">'+v.nm_eng+'</h3>';
-	    		html += '<div class="contact-card">';
-	    		html += '<ul>';
-		    		$.each(dat.OUT_REC, function(i,v){
-		    			if((parentId == v.parentid) && (v.lvl == "2")){
-		        			html += '<li><a href="#" class="next" data-id='+v.catgcd+'>'+v.nm_eng+'</a></li>';
-		        		}
-		    		});
-	    		html += '</ul>';
-	    		html += '</div>';
+	    			html += '<h3 class="title">'+v.nm_eng+'</h3>';
+	    			html += '<div class="contact-card">';
+	    			html += '<ul>';
+		    			$.each(dat.OUT_REC, function(i,v){
+		    				if((parentId == v.parentid) && (v.lvl == "2")){
+		        				html += '<li><a href="#" class="next" data-id='+v.catgid+'>'+v.nm_eng+'</a></li>';
+		        			}
+		    			});
+	    			html += '</ul>';
+	    			html += '</div>';
     			html += '</div';
     			html += '</li>';
     		}
     	});
+
     	tbody.html(html);
+//    	html= "";
+//    	$.each(dat.OUT_REC, function(i,v){
+//    		if(v.lvl == "1"){
+//    		   html += "<li data-id="+v.catgid+" class='current-menu-item'><a href='' class='next'>"+v.nm_eng+"</a></li>";
+//    		}    		
+//    		
+//    	});
+//    	
+//    	$("#MENU").append(html);
+
+//    	var item = "";
+//    	$("#MENU li").each(function(){
+//			item = "";
+//			var mainLi = $(this).data("id");
+//			$.each(dat.OUT_REC, function(i,v){
+//				if(v.lvl == "2"){
+//    				if(mainLi == v.parentid){
+//    	    			console.log("test" +mainLi+" and "+v.parentid);
+//    	    			item += "<li data-id="+v.catgid+" class='next'><a href='#' class='next'>"+v.nm_eng+"</a></li>";    	    			
+//    	    		}
+//    	    	}    			
+//	        });
+//			$(this).append("<ul>"+item+"</ul>");
+//		});
 	})
 };
-
-post_control_001.listProvince=function(){
-	$.ajax({
-    	type   : 'GET',
-	    url    : "/location_map/province_list",
-	    cache  : true
-	})
-    .done(function(dat){
-    	$.each(dat.OUT_REC, function(i,v){
-    		$("#form3 table #province").append($('<option name="'+v.nm_eng+'" id="'+v.id+'">'+v.nm_eng+'</option>'));
-    	});
-    });
-};
-
 
 post_control_001.SaveProductPost=function(){
-	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var recImg 	= [];
-	var input   = {};
-	var isChk   = false;
-	
-	if($("#save_contact").is(":checked")){
-		isChk = true;
-		//update
-	}else{
-		isChk = false;
-		//insert
-	}
-	
-	input["is_checked"] = isChk;
-	input["catgcd"] = catgcd;
-	input["title"]  = $("#title").val();
-	input["price"]  = $("#price").val();
-	input["desc"]   = $("#description").val();
-
-//	here input image
-	$("#results div").each(function(){
-		recImg.push({
-			"type"     :$(this).find("#type").val(),
-			"size"     :$(this).find("#size").val(),
-			"path"     :$(this).find("img").attr("value"),
-			"orname"   :$(this).find("#orname").val(),
-			"regdate"  :$(this).find("#regdate").val(),
-			"randname" :$(this).find("#randname").val()
-		});
-	});
-	input["inRec"] = recImg;
-
-//	address table
-	input["usercd"]   = $("#usercd").val();
-	input["cphone"]   = $("#phone_number").val();
-	input["country"]  = $("#country").val();
-	input["province"] = $("#province option:selected").text();
-	input["detail"]   = $("#addr_detail").val();
-	
-	console.log("result after input "+JSON.stringify(input));
+	 
 	
 	$.ajax({
-		url: '/products/insert_product',
+		url: '',
 		cache: true,
 		processData: false,
 		contentType: false,
@@ -246,112 +215,12 @@ post_control_001.SaveProductPost=function(){
         },
         data: JSON.stringify(input),
         success: function(result){
-        	alert(result);
+        	
         }
 	})
 };
 
-post_control_001.OnLoadImage=function(){
-	
-	var makeInput = function() {
-		return $('<input type="file" accept="image/jpeg, image/gif, image/png" name="files[]" style="opacity:0;" multiple>');
-	};
-	
-	$('#upload').click(function() {
-		var hookInput = makeInput();
-	    var id = 'i' + parseInt((new Date)/1000);
-	    hookInput.attr('id', id);
-	    $('.fileform').append(hookInput);
-	    $('#' + id).click();
-	    $(hookInput).on('change', setImage);
-	});
-	
-	function setImage() {
-		for (var i = 0; i < this.files.length; i++) {
 
-			var id = $(this).attr('id');
-			var newFile = $(this).get(0).files[i];
-			fr = new FileReader();
-
-			if(newFile.size <  10485760){
-				post_control_001.uploadFormData(newFile);
-			}else{
-				alert("over size limit...");
-			}
-//				var img = $('<img>');
-//	            img.attr('src', e.target.result);
-//	            img.css('height', '160px');
-//	            $('#results').append(img);
-//	            $(img).on('click', {id: id}, removeImage);
-				
-//			fr.readAsDataURL(newFile);
-			if ($('#results').children().length > 5) {
-				$('#upload').css('background', '#ddd');
-				$('#upload').unbind();
-			}
-		}
-	}
-
-	function removeImage(e) {
-		$(this).remove();
-	    $('#' + e.data.id).remove();
-	}
-};
-
-post_control_001.uploadFormData = function(file){
-	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var oMyForm    = new FormData();
-	var wrap_img   = $('<div class="wrap_img" style="display: inline;"></div>');
-
-	oMyForm.append("file", file);
-	$.ajax({
-		url: '/upload_file/uploadimg',
-	    data: oMyForm,
-	    dataType: 'text',
-	    cache   : true,
-	    processData: false,
-	    contentType: false,
-	    type: 'POST',
-	    beforeSend: function(xhr) {
-	    	xhr.setRequestHeader(csrfHeader, csrfToken);
-	    },
-	    success: function(data){
-	    	
-	    	data=JSON.parse(data);
-	    	wrap_img.append($('<img width="200px" height="140px" value="'+document.location.origin+"/upload_file/files/"+'" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
-	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" );
-	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" );
-	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" );
-	    	wrap_img.append("<input type='hidden' id='randname' value='"+ data.OUT_REC.randname+"'>" );
-	    	wrap_img.append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
-	    	$("#results").append(wrap_img);
-
-	    }
-	});
-};
-
-post_control_001.removeFile = function(dat){
-	
-	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	  var csrfToken  = $("meta[name='_csrf']").attr("content");
-	  var input = {};
-	     input.filename = dat;
-	  $.ajax({
-		  url: '/upload_file/remove_file_local',
-		  cache: false,
-		  dataType: 'json',
-	      contentType: 'application/json',
-	      async: true,
-		  beforeSend: function(xhr) {
-			  xhr.setRequestHeader(csrfHeader, csrfToken);
-		  },
-		  data:input,
-		  success: function(data){
-//			  alert(data.ERROR);
-		  }
-	  });
-};
 
 
 
