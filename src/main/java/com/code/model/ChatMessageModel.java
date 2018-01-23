@@ -3,9 +3,6 @@ package com.code.model;
 
 
 import java.util.Date;
-
-import javax.persistence.Column;
-import org.springframework.data.annotation.Id;
  
 /**
  * @author huseyinbabal
@@ -15,16 +12,10 @@ import org.springframework.data.annotation.Id;
 /*@Entity
 @Table(name = "chatmessage")*/
 public class ChatMessageModel {
-    @Id
-    @Column(name = "id")
     private String id;
-    @Column(name = "text")
     private String text;
-    @Column(name = "author")
     private String author;
-    @Column(name = "date")
     private Date date;
- 
     public ChatMessageModel() {
     }
  

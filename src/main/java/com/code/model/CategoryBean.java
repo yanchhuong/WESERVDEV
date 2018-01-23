@@ -1,50 +1,39 @@
 package com.code.model;
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity(name = "category")
-@Table(name="category")
-public class CategoryBean implements Serializable { 
+
+/*@Entity(name = "category")
+@Table(name="category")*/
+public class CategoryBean { 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	@Column(name="catgid")
+
 	private long catgid;  
-	
-	@Column(name="nm_eng")	
+
 	private String nm_eng;
 	
-	@Column(name="nm_kh")	
+	
 	private String nm_kh;
 	
-	@Column(name="parentid")	
+	
 	private long parentid;
 	
-	@Column(name="lvl")	
+
 	private String lvl;
 	
-	@Column(name="pid")	
+
 	private long pid;
 	
-	@Column(name="usercd")	
+	
 	private String usercd;
 	
-	@Column(name="seq")	
+
 	private long seq;
 	
-	@Column(name="regdate")	
-	private String regdate;
 	
-	@Column(name="catgcd")	
+	private String regdate;
+
 	private String catgcd;
 	
-	@Column(name="catgparent")	
+
 	private String catgparent;
 	
 	
