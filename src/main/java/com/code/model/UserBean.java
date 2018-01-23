@@ -1,11 +1,13 @@
 package com.code.model;
 
-public class UserBean extends UserRoleBean {
+public class UserBean extends UserRoleBean_R001 {
 
 	private long id;
+	@Override
 	public long getId() {
 		return id;
 	}
+	@Override
 	public void setId(long id) {
 		this.id = id;
 	}
