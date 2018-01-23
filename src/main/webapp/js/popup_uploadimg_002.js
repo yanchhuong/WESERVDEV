@@ -58,8 +58,6 @@ $(document).ready(function(){
 	 });
 	
 });
-
-
 function init(input){
 	var isHas =  input.randname; 
 	if(isHas!= 'null'){
@@ -72,7 +70,6 @@ function init(input){
 		  $("#img").attr("src", "");
 	}
 };
-
 function removeFile(dat){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken = $("meta[name='_csrf']").attr("content");
@@ -126,14 +123,13 @@ function uploadFormData(){
     }
   });
 };
-
 function SaveFile(){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken = $("meta[name='_csrf']").attr("content");
 	  var input = {};
 	      input["orname"]   = $("#orname").val();
 	      input["randname"] = $("#randname").val();
-	      input["regdate"]  = $("#regdate").val();
+	      input["regdate"] = $("#regdate").val();
 	      input["size"]     = $("#size").val();
 	      input["type"]     = $("#type").val();
 	      input["pid"]      = $("#pid").val();

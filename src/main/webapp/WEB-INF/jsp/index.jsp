@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8"> 
+<meta http-equiv="Content-Language" content="en-us">
+<meta charset="UTF-16"> 
 
 <title>Chat</title>
 <script src="/js-lib/sockjs-0.3.4.js"></script>

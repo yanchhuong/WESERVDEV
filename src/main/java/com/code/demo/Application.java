@@ -13,52 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.code.config;
+package com.code.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.code.model.StorageProperties;
-import com.code.service.StorageService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-
-@ComponentScan("com.code")
 @SpringBootApplication
-@EnableConfigurationProperties(StorageProperties.class)
-
-public class Application extends SpringBootServletInitializer{
-	private static  Logger LOGGER =  LoggerFactory.getLogger(Application.class);
-
-
+@ComponentScan("com.code")
+public class Application extends SpringBootServletInitializer {
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
 	}
-
+	
     public static void main(String[] args) {
-      //  SpringApplication.run(Application.class, args);
-    	 LOGGER.info("Start to Access URLs:HEROKU.......");
-        SpringApplication app = new SpringApplication(Application.class);
-      //  app.setBannerMode(Banner.Mode.OFF);
-        app.run(args);   
-        LOGGER.info("Finish Access URLs:HEROKU");
+        SpringApplication.run(Application.class, args);
     }
-    
-   @Bean
-	CommandLineRunner init(StorageService storageService) {
-		return (args) -> {
-            storageService.deleteAll();
-            storageService.init();
-		};
-	}
+
 }

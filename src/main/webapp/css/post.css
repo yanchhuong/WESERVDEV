@@ -1,4 +1,3 @@
-@charset "EUC-KR";
 /*custom font*/
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
 
@@ -87,45 +86,8 @@ body {
   margin: 0;
   width: 350px;
   height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
   background: #ecebe9;
 }
-
-.force-overflow
-{
-	min-width: 10px;
-}
-
-/*
- *  STYLE 15
- */
-
-.style-15::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
-	background-color: #F5F5F5;
-	border-radius: 10px;
-}
-
-.style-15::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
-}
-
-.style-15::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: #FFF;
-	background-image: -webkit-gradient(linear,
-									   40% 0%,
-									   75% 84%,
-									   from(#595959),
-									   to(#808080),
-									   color-stop(.6,#b3b3b3))
-}
-
 
 li.menu-item {
   width: 325px;
@@ -144,11 +106,11 @@ a.menu-item-btn {
           align-items: center;
   width: 100%;
   color: white;
-  padding: 9px;
+  padding: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
-  /*font-weight: bold;*/
+  font-weight: bold;
   background: #ecebe9;
   text-decoration: none;
   
@@ -170,9 +132,9 @@ a.menu-item-btn i.fa-chevron-down {
   position: relative;
 }
 .selected::after {
-  /*top: 12px;*/
+  top: 12px;
   content: '';
-  right: -5px;
+  right: -8px;
   width: 15px;
   height: 15px;
   position: absolute;
@@ -192,7 +154,7 @@ a.menu-item-btn i.fa-chevron-down {
 /* Menu Item Main Content */
 
 .menu-item-content {
-  background: #ecebe9;
+  background: #34b188;
   position: absolute;
   margin-left: 30px;
   overflow-y: auto;  
@@ -251,20 +213,14 @@ button.toggle-btn:hover {
 h3 {
   margin: 11px;
   color: #ffffff;
-  /*font-size: 18px;
-  font-weight: bold;*/
+  font-size: 18px;
+  font-weight: bold;
 }
 
 h4 {
 	margin: 0;
 	font-size: 15px;
     font-weight: bold;
-}
-
-.title{
-	padding: 11px;
-	margin: 0;
-	background-color: #1ab188;	
 }
 
 .contact-cards {
@@ -274,14 +230,10 @@ h4 {
 }
 
 .contact-card {
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	/* display: flex; */
 	padding: 6px 0 10px 0;
     display: inline-block;
-    /* background: #ffffff; */
-    /* min-width: 250px; */
-    width: 100%;
+    background: #ffffff;
+    min-width: 250px;
     flex: 1;
 }
 
@@ -328,8 +280,8 @@ h4 {
   }
   /* Stacks content under corresponding menu button */
 	.menu-item-content {
-	width: 100%;
     position: relative;
+    width: 100%;
     padding: 12px 0 12px 12px !important;
   }
   .contact-card {
@@ -361,11 +313,11 @@ h4 {
 /* code from codepen */
 
 /*inputs*/
-#msform input, select {
+#msform input,select {
 	width: 100%;
-	padding: 11px;
+	padding: 5px;
 	color: #2C3E50;
-	font-size: 100%;
+	font-size: 13px;
 	border-radius: 0px;
 	margin-bottom: 10px;
 	box-sizing: border-box;
@@ -377,40 +329,37 @@ h4 {
 	text-align: left;
 	vertical-align: top;
 }
-
-#msform tr td:first-child{
-	width: 160px;
-}
 /*span*/
 #msform span {
     color: #0e0e0e;
 }
 /*textarea*/
  #msform textarea  {
-	width: 100%;
-    padding: 15px;
-    color: #2C3E50;
-	font-size: 13px;
+	margin: 0px 0px 10px; width: 530px; height: 159px;
+	 
+	/* 
+	padding: 15px;
+	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
+	width: 100%;*/
 	box-sizing: border-box;
-	border: 1px solid #ccc;
 	font-family: montserrat;
-	margin: 0px 0px 10px; 
-	height: 159px;
+	color: #2C3E50;
+    font-size: 13px;
  }
 
 /*buttons*/
 #msform .action-button {
 	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
 	color: white;
 	border: 0 none;
-	cursor: pointer;
-	margin: 10px 5px;
-	padding: 10px 5px;
-	font-weight: bold;
 	border-radius: 1px;
-	background: #27AE60;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
 }
 
 
@@ -419,8 +368,8 @@ h4 {
 }
 /*headings*/
 .fs-title {
-	color: #2C3E50;
 	font-size: 28px;
+	color: #2C3E50;
 	margin-top: -6px;
 	text-transform: uppercase;
 }
@@ -432,10 +381,10 @@ h4 {
 }
 /*progressbar*/
 #progressbar {
-	overflow: hidden;
 	margin-bottom: 30px;
-	counter-reset: step;
+	overflow: hidden;
 	/*CSS counters to number the steps*/
+	counter-reset: step;
 }
 #progressbar li {
 	float: left;
@@ -476,8 +425,8 @@ h4 {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	color: white;
 	background: #27AE60;
+	color: white;
 }
 
 
@@ -489,26 +438,27 @@ upload file
 		display:none;  
 	  }
       #upload {
-      	color:#fff;
         height:35px;
+        text-align:center;
+        line-height:35px;
+        color:#fff;
+        background-color:#27AE60;
         margin:10px 0;
         cursor:pointer;
-        line-height:35px;
-        text-align:center;
-        background-color:#27AE60;
       }
       #results {
-      	padding:5px;
-        margin:10px 0;
         border: 1px solid #ecebe9;
         background-color: whitesmoke;
+        padding:5px;
+        margin:10px 0;
       }
       #results img {
-      	margin:0 5px 0 0;
         border:1px solid #000;
+        margin:0 5px 0 0;
       }
 	 #results img:hover,#results img:focus {
-	 	cursor:pointer;
-	 	opacity: 0.3; filter: alpha(opacity=30);
-	    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
-	}
+	     box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+		 opacity: 0.3; filter: alpha(opacity=30);
+		 cursor:pointer;
+
+     }
