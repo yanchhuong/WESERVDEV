@@ -15,6 +15,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import com.code.model.Chat;
 import com.code.service.RandomFactService;
 
 

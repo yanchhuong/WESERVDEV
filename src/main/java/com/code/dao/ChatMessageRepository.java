@@ -2,11 +2,15 @@ package com.code.dao;
 
 import java.util.List;
 
-import com.code.model.LiveChatBean;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
+
+import com.code.model.ChatMessageModel;
 
 
+ 
 public interface ChatMessageRepository {
-	public List<LiveChatBean> getMessages(int messageIndex);
-	public void addMessage(LiveChatBean chatMessage) ;
+	public List<ChatMessageModel> getMessages(int messageIndex);
+	public void addMessage(ChatMessageModel ChatMessageModel) ;
     
 }
