@@ -5,18 +5,17 @@ package com.code.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
  
 /**
  * @author huseyinbabal
  */
 
 
-@Entity
-@Table(name = "chatmessage")
+/*@Entity
+@Table(name = "chatmessage")*/
 public class ChatMessageModel {
- 
+    @Id
     @Column(name = "id")
     private String id;
     @Column(name = "text")
