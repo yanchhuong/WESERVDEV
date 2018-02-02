@@ -39,7 +39,6 @@ import org.springframework.boot.CommandLineRunner;
 
 @Configuration
 @SpringBootApplication
-@EnableAutoConfiguration
 @ComponentScan("com.code")
 @EntityScan(basePackages = "com.code.model")
 @PropertySource("classpath:application.properties")
