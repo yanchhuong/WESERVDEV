@@ -12,11 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.code.service.UserService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
+	
+	@Autowired
+	private UserService iUserDao;
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -56,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		   .and()
 		   		.formLogin()
 		   		.loginPage("/login")
-		   	//	.successHandler(new SuccessLoginHandler(iUserDao))//.defaultSuccessUrl("/")
+		   		.successHandler(new SuccessLoginHandler(iUserDao))//.defaultSuccessUrl("/")
 		   		.failureHandler(new CustomLoginFailureHandler())//.failureUrl("/login")
 		   		.usernameParameter("username")
 				.passwordParameter("password")
