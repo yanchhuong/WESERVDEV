@@ -11,53 +11,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.code.comm.ByteUtilApp;
+import com.code.comm.ConnectionUtils;
+import com.code.comm.SqlFormatUtils;
 import com.code.dao.IUserDao;
-import com.code.model.UserDetailBean;
+import com.code.model.UserSignupBeanIn_C001;
 
 @Repository
-public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
-
+public class UserDaoImpl implements IUserDao{	
 	@Autowired
 	protected DataSource dataSource;
-	 
 	 @PostConstruct
 	 private void initialize(){
-	        setDataSource(dataSource);
+	        ConnectionUtils.setDataSource(dataSource);
 	 }
-	    //...
-	
+
 	@Override
-	public void insertRole(UserDetailBean user) {
-		String sql = "INSERT INTO USER_ROLES " +"(username,role) VALUES (?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole()});
-		
+	public void insertRole(UserSignupBeanIn_C001 user) {
+		//String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (?,?,?,?)" ;
+		String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (:username,:role,:regdate,:usercd)" ;
+		try{
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(user));
+		}catch(Exception e){
+			
+		}
 	}
 	@Override
-	public void insertUserLog(UserDetailBean user) {
-		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUserCd(),user.getUsername(),user.getPassword()});
-        
-        
-		
+	public void insertUserLog(UserSignupBeanIn_C001 input) {
+		//String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (?,?,?)" ;
+		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (:usercd,:username,'"+ByteUtilApp.encrypePassword(input.getPassword())+"')";
+		try{
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+		}catch(Exception e){
+			
+		}
 	}
 	@Override
-	public void insertUserDetail(UserDetailBean user) {
-		String sql = "INSERT INTO USER_DETAIL " +"(regdate,fname,lname,username_fk,email,user_cd) VALUES (?,?,?,?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getRegisterDate(),user.getFirst(),user.getLast()
-        		,user.getUsername(),user.getEmail(),user.getUserCd()});
-		
+	public void insertUserDetail(UserSignupBeanIn_C001 input) {
+		String sql = "INSERT INTO USER_DETAIL " +"(regdate,fname,lname,username_fk,email,usercd) VALUES (:regdate,:fname,:lname,:username,:email,:usercd)" ;
+		try{
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
+		}catch(Exception e){
+			
+		}
 	}
+
 	@Override
 	public List<String> listUsername(List<String> username) {
-		 String sql = "SELECT fname FROM USER_DETAIL";
-		    List< Map < String, Object>> rows = this.getJdbcTemplate().queryForList(sql);
-		    String list;
-		    List<String> result = new ArrayList<String>();
-		    for(Map <String, Object> row:rows){
-		    	list=(String)row.get("fname");
-		        result.add(list);
-		    }   
-		    return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
+		
+
 
 }

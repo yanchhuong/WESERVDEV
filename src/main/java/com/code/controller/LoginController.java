@@ -37,7 +37,7 @@ public class LoginController  {
 	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public String showForm(ModelMap model,HttpServletRequest request) {
 		
-		return "login";
+		return "login_view";
 	}
 	
 	@RequestMapping(value = "/home",method = RequestMethod.GET)

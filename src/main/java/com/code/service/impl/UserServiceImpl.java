@@ -6,21 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.code.dao.IUserDao;
-import com.code.model.UserDetailBean;
+import com.code.model.UserSignupBeanIn_C001;
 import com.code.service.UserService;
 
 @Service 
 public class UserServiceImpl implements UserService{
-
+	private IUserDao userDao;
+   
 	@Autowired
-    IUserDao userDao;
+	public UserServiceImpl(IUserDao userDao){
+		this.userDao = userDao;
+	}
 	
 	@Override
-	public boolean AddUser(UserDetailBean user) {
+	public boolean AddUser(UserSignupBeanIn_C001 user) {
 		userDao.insertUserLog(user);
 		userDao.insertRole(user);
 		userDao.insertUserDetail(user);
 		return true;
+	}
+	
+	@Override
+	public boolean resetPassword(String username, String newpass) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -28,5 +37,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
