@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.code.dao.IUserDao;
+import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
 import com.code.service.UserService;
 
@@ -33,9 +34,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<String> Listname(List<String> username) {
+	public UserSessionBean getSessionDao(String input) {
 		// TODO Auto-generated method stub
-		return null;
+		UserSessionBean data=null;
+		for(UserSessionBean obj: this.userDao.getSessionDao(input)){
+			data=obj;
+		}
+		return data;
 	}
 
 

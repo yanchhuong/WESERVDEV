@@ -2,6 +2,7 @@ package com.code.dao;
 
 import java.util.List;
 
+import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
 public interface IUserDao {
    
@@ -9,7 +10,6 @@ public interface IUserDao {
     void  insertUserLog(UserSignupBeanIn_C001 user);
     void  insertUserDetail(UserSignupBeanIn_C001 user);
     
-    List<String> listUsername(List<String> username);
-    
-    
+    public List<UserSessionBean> getSessionDao(String input);
+
 }
