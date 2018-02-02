@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.code.dao.UsersDao;
+import com.code.dao.IUserDao;
 import com.code.model.UserDetailBean;
 import com.code.service.UserService;
 
@@ -13,7 +13,7 @@ import com.code.service.UserService;
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-    UsersDao userDao;
+    IUserDao userDao;
 	
 	@Override
 	public boolean AddUser(UserDetailBean user) {
