@@ -35,20 +35,20 @@ import org.springframework.boot.CommandLineRunner;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 
-public class Application extends SpringBootServletInitializer{
-	private static  Logger LOGGER =  LoggerFactory.getLogger(Application.class);
+public class WebMvcJspApplication extends SpringBootServletInitializer{
+	private static  Logger LOGGER =  LoggerFactory.getLogger(WebMvcJspApplication.class);
 
 
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
+		return application.sources(WebMvcJspApplication.class);
 	}
 
     public static void main(String[] args) {
       //  SpringApplication.run(Application.class, args);
     	 LOGGER.info("Start to Access URLs:HEROKU.......");
-        SpringApplication app = new SpringApplication(Application.class);
+        SpringApplication app = new SpringApplication(WebMvcJspApplication.class);
       //  app.setBannerMode(Banner.Mode.OFF);
         app.run(args);   
         LOGGER.info("Finish Access URLs:HEROKU");
