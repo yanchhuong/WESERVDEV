@@ -12,19 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.code.service.UserService;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
-	
-	@Autowired
-	private UserService iUserDao;
-	SecurityConfig(UserService iUserDao){
-		this.iUserDao=iUserDao;
-	}
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -38,20 +30,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-
+		
+		
+                 
 				// control by log in for page
-				.antMatchers("/chatting")
-				.access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
+				.antMatchers("/chatting").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EMPLOYEE')")
 
 				.antMatchers("/users").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/users/add").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/users/**/update").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/users/**/delete").access("hasRole('ROLE_ADMIN')")
-
+				
+				.antMatchers("/post").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
+				
+				.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/users/add").access("hasRole('ROLE_ADMIN')")
+				
+				.antMatchers("/users/**/update").access("hasRole('ROLE_ADMIN')")
 				.anyRequest().permitAll()
+				
+		        .antMatchers("/login*","/signin/**","/signup/**").permitAll()
+		   /*.and() 
+		      .authorizeRequests().antMatchers("/rest/**").authenticated()//  authenticationEntryPoint(new RESTAuthenticationEntryPoint()
+           */				
 		   .and()
-		   		.formLogin().loginPage("/login")
-		   		.successHandler(new SuccessLoginHandler(iUserDao))//.defaultSuccessUrl("/")
+		   		.formLogin()
+		   		.loginPage("/login")
+		   	//	.successHandler(new SuccessLoginHandler(iUserDao))//.defaultSuccessUrl("/")
+		   		.failureHandler(new CustomLoginFailureHandler())//.failureUrl("/login")
 		   		.usernameParameter("username")
 				.passwordParameter("password")
 				
