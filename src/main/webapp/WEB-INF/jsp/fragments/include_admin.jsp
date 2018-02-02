@@ -20,7 +20,11 @@
    <link rel="stylesheet" type="text/css" href="../../css_admin/idx_content.css" media="all">
    <link rel="stylesheet" type="text/css" href="../../css_admin/content.css" media="all">
     
-    
+  <!-- testing pagination -->
+  <link href="../../css/pagination.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="../../js-lib/tbl.paginging.js?<%=_localDatetim%>"></script>
+  
+  
   <!--Jquery files  -->
     <script type="text/javascript" src="../../js_admin/1.10.2.jquery.min.js?<%=_localDatetim%>"></script>
     <script type="text/javascript" src="../../js_admin/common.js?<%=_localDatetim%>"></script>
@@ -29,7 +33,7 @@
   <!-- Pagination -->
     <script type="text/javascript" src="../../js_admin/jquery.simplePagination.js?<%=_localDatetim%>"></script>
    
-  <!-- datepicker -->
+   <!-- datepicker -->
    <link rel="stylesheet" type="text/css" href="../../css_admin/jquery-ui.css" media="all">
    <script type="text/javascript" src="../../js_admin/jquery-ui.js?<%=_localDatetim%>"></script>
    <script type="text/javascript" src="../../js_admin/wehrm.ui.js?<%=_localDatetim%>"></script>
@@ -38,10 +42,17 @@
     <script type="text/javascript" src="../../js_admin/wehrm.popup.js?<%=_localDatetim%>"></script> 
     <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetim%>"></script>
     
+    <script type="text/javascript" src="../../js-lib/wehrm.string.js?<%=_localDatetim%>"></script>
+    
+    
+
+    
     <!--js custom  
     <script type="text/javascript" src="../../common/js_admin/layout.popup.js"></script>
     <script type="text/javascript" src="../../common/js_admin/wehrm.file.js"></script>
     <script type="text/javascript" src="../../common/js_admin/wehrm.popup.js"></script>
     <script type="text/javascript" src="../../common/js_admin/layout.wehrm.ui.js"></script>-->
+    
+    
     
 <!--     <script type="text/javascript" src="../../common/js_admin/jquery-3.2.1.min.js"></script> -->
