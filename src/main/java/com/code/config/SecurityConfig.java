@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.code.service.UserService;
 
@@ -29,15 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordEncoder(passwordEncoder())
 				.usersByUsernameQuery("select username,password, enabled from users where username=?")
 				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-		        
-
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		
-		
-                 
 				// control by log in for page
 				.antMatchers("/chatting").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EMPLOYEE')")
 
@@ -65,18 +63,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		   		.failureHandler(new CustomLoginFailureHandler())//.failureUrl("/login")
 		   		.usernameParameter("username")
 				.passwordParameter("password")
-				
 			.and()
 				.logout().logoutSuccessUrl("/login?logout")
-				
+			.and()
+			 	.rememberMe()
+			 	.rememberMeCookieName("example-app-remember-me")
+		        .tokenRepository(persistentTokenRepository())
+		        .tokenValiditySeconds(24 * 60 * 60)
 			.and()
 				.exceptionHandling().accessDeniedPage("/403")
-			.and().csrf();
+				.accessDeniedHandler(accessDeniedHandler())
+			.and().csrf()
+			.csrfTokenRepository(new CookieCsrfTokenRepository()) // setting token
+			;
+		// add iframe work
+		http.headers().frameOptions().disable();
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler(){
+	    return new CustomAccessDeniedHandler();
+	}
+	
+	@Bean
+	  public PersistentTokenRepository persistentTokenRepository() {
+	      JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+	      repo.setDataSource(dataSource);
+	      return repo;
+	 }
+	
 
 }
