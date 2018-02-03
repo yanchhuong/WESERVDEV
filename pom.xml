@@ -15,6 +15,19 @@
     </parent>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.3</version>
+		</dependency>
+        <!--Commons IO » 1.3.2  -->
+        <dependency>
+    		<groupId>org.apache.commons</groupId>
+    		<artifactId>commons-io</artifactId>
+   	 		<version>1.3.2</version>
+	    </dependency>
+    
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
