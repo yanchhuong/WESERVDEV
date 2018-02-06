@@ -8,8 +8,8 @@
   Date date = new Date();
   String _localDatetime = dateFormat.format(date);
   
- %>
-
+ %> 
+  
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
    	<link rel="stylesheet" type="text/css" href="../../css/css_page/reset.css" media="all">
@@ -24,6 +24,7 @@
     
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
 	<link rel='stylesheet prefetch' href='http://bigbangburger.com/css/fonts.css'>
+	
     <%-- <script  src="../../js-lib/jquery-1.10.2.js?<%=_localDatetime%>"></script> --%>
     
     <script  src="../../js-lib/collJsPlugin.js?<%=_localDatetime%>"></script>
@@ -45,5 +46,3 @@
     <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeTaPMPKXYYp_py-BCqzRQCpGova3ukYE&sensor=true"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    
-    <script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>

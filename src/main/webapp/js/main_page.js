@@ -6,10 +6,11 @@ var countClick = 0;
 var clickChat = 0;
 var appendChat = '';
 
-$(document).ready(function(){	
+$(document).ready(function(){
 	$(".sub_cat").hide();
-	main_page.listProduct();
 	main_page.loadCategory();
+	main_page.listProduct();
+	
 	
 //    $(document).delegate("#dropdown-toggle", "click", function(){
 //    	countClick++;
@@ -108,26 +109,22 @@ $(document).ready(function(){
 });
 
 main_page.loadCategory = function(){
-	_loadingWholeStart();
-
 	$.ajax({
 		type   : 'GET',
 	    url    : "/category/list",
-	    cache  : true,
-	    async  : false,
-	    success: (function(dat){
-		    _loadingWholeStop();
-	    	var html = "";
-	    	
-	    	$.each(dat.OUT_REC, function(i,v){
-	    		var j = i + 1;
-	    		if(v.lvl == "1"){
-	    			html += '<a href="#none" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
-	    		}
-	    	});
-	    	$("#sidebar_catagory_list").html(html);	    	
-	    })
-	});
+	    cache  : true
+	})
+	.done(function(dat){
+    	var html = "";
+    	
+    	$.each(dat.OUT_REC, function(i,v){
+    		var j = i + 1;
+    		if(v.lvl == "1"){
+    			html += '<a href="#none" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
+    		}
+    	});
+    	$("#sidebar_catagory_list").html(html);
+	})
 };
 
 
@@ -203,7 +200,6 @@ main_page.showMoreCatg = function(){
 
 
 main_page.listProduct = function(parentId){
-	_loadingWholeStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken = $("meta[name='_csrf']").attr("content");
 
@@ -222,6 +218,7 @@ main_page.listProduct = function(parentId){
         },
 	})
     .done(function(dat) {
+    	
     	$(".pagination").pagination({
     	    dataSource: dat.OUT_REC,
     	    totalNumber: 8,
@@ -270,7 +267,8 @@ main_page.listProduct = function(parentId){
     	    	$(".pagination").prev().find(".goodslist").append(html);
     	    }
     	})
-        _loadingWholeStop();
+    	
+    	
     })
 };
 
@@ -371,5 +369,4 @@ appendChat += '      <a href="#" class="fa fa-link"></a>																								
 appendChat += '      <a href="#" class="fa fa-trash-o"></a>																														';
 appendChat += '      <a href="#" class="fa fa-search"></a>																														';
 appendChat += '    </div>																																		';
-appendChat += '</div>';
-
+appendChat += '</div>																																		';

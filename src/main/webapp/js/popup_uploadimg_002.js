@@ -79,9 +79,8 @@ function init(input){
 function removeFile(dat){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken  = $("meta[name='_csrf']").attr("content");
-	  var input = {};
+	 var input = {};
 	     input.filename = dat;
-	     alert(JSON.stringify(input))
 	  $.ajax({
 		  url: '/upload_file/remove_file_name',
 		  cache: false,
@@ -91,7 +90,7 @@ function removeFile(dat){
 		  beforeSend: function(xhr) {
 			  xhr.setRequestHeader(csrfHeader, csrfToken);
 		  },
-		  data: JSON.stringify(input),
+		  data:input,
 		  success: function(data){
 			  var callbackFn = parent.wehrm.popup.callbackFn["popup_uploadimg_002"];
 	  		  if($.isFunction(callbackFn)) {

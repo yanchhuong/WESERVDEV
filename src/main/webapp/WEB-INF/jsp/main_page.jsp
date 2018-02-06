@@ -24,6 +24,8 @@
 		<jsp:include page="header_include.jsp"/>
     </div>
 	<!-- // header -->
+	
+	
 
 	<!-- container -->
 	<div id="container">

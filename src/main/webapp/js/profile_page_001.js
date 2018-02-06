@@ -22,32 +22,11 @@ $(document).ready(function(){
     $("#sub-pt").hide();*/
     $("#lang-wrap").hide();
     
+    
     $("#lang-switch").click(function(){
        $("#lang-wrap").toggle();
     });
     
-    $(document).delegate(".user-name", "mouseenter", function(){
-    	$("#blur").removeClass("blur");
-    });
-    
-    $(document).delegate(".user-name", "mouseleave", function(){
-    	$("#blur").addClass("blur");
-    });
-    
-    $(document).delegate(".user-name", "click", function(){
-    	$(".ico_save").show();
-    });
-    
-    $(document).delegate(".ico_save", "mouseenter", function(){
-    	$("#blur").removeClass("blur");
-    });
-
-    $(document).delegate(".ico_save", "click", function(){
-    	$(this).hide();
-    	$("#blur").addClass("blur");
-    	alert($(".user-name").text());
-    });
-  
     $(document).delegate("#usr_pf_posts", "click", function(){
     	if(!$(this).hasClass('on')){
     		$("#usr_pf_saves").removeClass('on');
@@ -411,9 +390,8 @@ profile_page_001.loadData = function(){
 	_loadingStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input = $.urlParam("usercd");
+	var input = $("#usercd").val();
 
-	console.log("getting usercd: "+JSON.stringify(input));
     $.ajax({
 		  type	: 'POST',
 		  url	:'/userdetails/getuserdetails',
@@ -489,6 +467,7 @@ profile_page_001.loadData = function(){
 				  }
 			  strYear += '</select></li>';
 			  
+			  console.log(strDay);
 			  $("#phone").append(strPhone);
 			  $(".email").append(strEmail);
 			  $(".birthday").append(strShowBD);
@@ -515,7 +494,7 @@ profile_page_001.updatePhonno = function(){
 	});
 	strPhone = strPhone.substring(1,(strPhone.length));
 	
-	input["usercd"] = $.urlParam("usercd");
+	input["usercd"] = $("#usercd").val();
 	input["cphone"] = strPhone;
 	
 	$.ajax({
@@ -530,7 +509,7 @@ profile_page_001.updatePhonno = function(){
 			xhr.setRequestHeader(csrfHeader, csrfToken);
 		},
 		success : function(data){
-			console.log(data.SMS);
+			console.log("phone: "+data.SMS);
 			_loadingStop();
 		}
 	});
@@ -545,7 +524,7 @@ profile_page_001.updateEmail = function($this){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	
 	
-	input["usercd"] = $.urlParam("usercd");
+	input["usercd"] = $("#usercd").val();
 	input["email"]  = $($this).prev().val();
 	
 	$.ajax({
@@ -574,9 +553,10 @@ profile_page_001.updateBirthdate = function(newdate){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	
 	
-	input["usercd"]     = $.urlParam("usercd");
+	input["usercd"]     = $("#usercd").val();
 	input["birthdate"]  = newdate;
 	
+	console.log("update BD: "+JSON.stringify(input));
 	$.ajax({
 		type	: 'POST',
 		url	    :'/userdetails/updateuserbirthdate',
@@ -603,9 +583,10 @@ profile_page_001.updateGender = function(newdate){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	
 	
-	input["usercd"] = $.urlParam("usercd");
+	input["usercd"] = $("#usercd").val();
 	input["sex"]    = newdate;
 	
+	console.log("update BD: "+JSON.stringify(input));
 	$.ajax({
 		type	: 'POST',
 		url		:'/userdetails/updateusergender',
@@ -633,7 +614,3 @@ function _loadingStop(){
 	$("#wait").fadeOut(15);
 }
 
-$.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    return results[1] || 0;
-}
