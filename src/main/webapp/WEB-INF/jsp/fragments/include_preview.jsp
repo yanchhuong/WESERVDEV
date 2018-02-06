@@ -55,6 +55,7 @@
     <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetime%>"></script>
     
     <script type="text/javascript" src="../../js-lib/wehrm.string.js?<%=_localDatetime%>"></script>
+    <script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
     
 <!--     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js'></script>

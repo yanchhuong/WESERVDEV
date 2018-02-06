@@ -23,9 +23,16 @@
 	<%@include file="fragments/include_profile.jsp"%>
     <script type="text/javascript" src="/js/profile_page_001.js"></script>
     <script type="text/javascript" src="/js/toastr-profile.js"></script>
-    <style>
-		
-    </style>
+	<style type="text/css">
+		/* About Section */
+		#tf-about {padding: 30px 0;}
+		.intro{padding:10px 0;}
+		ul.about-list {margin: 30px 0 0;}
+		.section-title hr {border-color: #fcac45;border-width: 4px;width: 60px;float: left;clear: both;}
+		hr {margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;}
+		ul.about-list li {display: block;font-size: 16px;line-height: 30px;font-family: 'Open Sans', sans-serif;}
+		ul.about-list li span {margin-right: 10px;}
+	</style>
 </head>
 
 
@@ -57,11 +64,15 @@
 					</span>
 					<!-- //user pf -->
 					
-                    
+                    <div class="blur" id="blur"></div>
 					<!-- user name -->
-					<h2 class="user-name">NH Website Design Branding Digital Strategy</h2>
+					<h2 class="user-name" contenteditable="true">NH Website Design Branding Digital Strategy</h2>
+					<div class="ico_save" style="display:none;position:absolute;top:79%;right:48%;opacity:.7;">
+						<span><a href="javascript:"><img width="25px" height="25px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Antu_mail-task.svg/600px-Antu_mail-task.svg.png"></a>
+						</span>
+					</div>
 					<!-- //user name -->
-					<div class="blur"></div>
+					
 				</div>
 				<!-- action controll -->
 				<ul class="tab_cnt cboth">
@@ -140,7 +151,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">Adidas Yeezyboost 350 [Season 3] by Kanye West x Adidas</a>
-		                <h1 id="pro-price">$590</h1>
+		                <h1 id="pro-price">$90</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -194,7 +205,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">2XUltra Tide: Use less, more effective</a>
-		                <h1 id="pro-price">$5</h1>
+		                <h1 id="pro-price">$500</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -220,7 +231,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">2010 Land Rover Range Rover Envoque</a>
-		                <h1 id="pro-price">$280,000</h1>
+		                <h1 id="pro-price">$280</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -246,7 +257,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">The Holy Bible</a>
-		                <h1 id="pro-price">$35</h1>
+		                <h1 id="pro-price">$850</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -362,7 +373,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">Adidas Yeezyboost 350 [Season 3] by Kanye West x Adidas</a>
-		                <h1 id="pro-price">$590</h1>
+		                <h1 id="pro-price">$90</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -416,7 +427,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">2XUltra Tide: Use less, more effective</a>
-		                <h1 id="pro-price">$5</h1>
+		                <h1 id="pro-price">$800</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -442,7 +453,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">2010 Land Rover Range Rover Envoque</a>
-		                <h1 id="pro-price">$280,000</h1>
+		                <h1 id="pro-price">$280</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -468,7 +479,7 @@
 		            </div><!--end of product thumbnail-->
 		            <div id="pro-desc-wrap">
 		                <a href="#" class="pro-title">The Holy Bible</a>
-		                <h1 id="pro-price">$35</h1>
+		                <h1 id="pro-price">$1500</h1>
 		            </div><!--end of product description-->
 		            <div style="clear:both"></div>
 		            <div id="pro-action-wrap">
@@ -766,47 +777,40 @@
 	            </div>
 
 	            <div id="labels_detail" class="settings-tab-panel pM">
-	                <div class="i7 y0">
-						<div>
-	                        <div class="zB">
-								<input checked="checked" id="btariaid-152" type="checkbox" class="iY">
-								<label for="btariaid-152"class="me">Keyboard shortcuts</label>
-							</div>
-	                        <div class="iV">Tip: Hit "Shift + ?" to see the keyboard shortcuts</div>
-						</div>
-	                    <div jstcache="3724" jsinstance="1">
-	                        <div jstcache="3725">
-	                            <div jstcache="3726">
-	                                <div jstcache="3729">
-	                                    <div class="zB">
-	                                        <input id="btariaid-155" type="checkbox" jstcache="3732"class="iY" jsan="7.iY,0.id,0.type,22.jsaction">
-	                                        <label for="btariaid-155" jstcache="3733" class="me" jsan="7.me,0.for">Redirect Gmail to inbox.google.com</label>
-	                                    </div>
-	                                    <div jstcache="3734" class="iV" jsan="7.iV">Always take me to Inbox when I visit Gmail in a web browser. You can always get back to Gmail by clicking on the link in the main menu.</div>
-	                                </div>
-	                                <div jstcache="3730" style="display:none"></div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div jstcache="3724" jsinstance="*2">
-	                        <div jstcache="3725">
-	                            <div jstcache="3726">
-	                                <div jstcache="3729">
-	                                    <div class="zB">
-	                                        <input id="btariaid-158" type="checkbox" jstcache="3732"class="iY" jsan="7.iY,0.id,0.type,22.jsaction">
-	                                        <label for="btariaid-158" jstcache="3733" class="me" jsan="7.me,0.for">Make notifications stay on the screen longer</label>
-	                                    </div>
-	                                    <div jstcache="3734" class="iV" jsan="7.iV">Notifications will stay on screen for 30 seconds</div>
-	                                </div>
-	                                <div jstcache="3730" style="display:none"></div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <button jstcache="3727" jsaction="global.delete_search_history" class="BX H dH" jsan="7.BX,7.H,7.dH,22.jsaction">CLEAR SEARCH HISTORY</button>
-	                </div>
-	                <div jstcache="3720" class="nl">
-	                    <button tabindex="0" jstcache="3778"class="Jc H dH">DONE</button>
-	                </div>
+	            
+					<!-- About Us Page ========================================== -->
+					<div id="tf-about">
+					  <div class="container">
+					    <div class="row">
+					      <div class="col-md-9 ">
+					        <div class="about-text">
+					          <div class="section-title">
+					
+					            <h2>Some words <strong>about me</strong></h2>
+					            <hr>
+					            <div class="clearfix"></div>
+					          </div>
+					          <p class="intro">We love building and rebuilding brands through our specific skills. Using colour, fonts, and illustration, we brand companies in a way they will never forget.</p>
+					          <ul class="about-list">
+					            <li>
+					              <span class="fa fa-dot-circle-o"></span>
+					              <strong>Marketing</strong> - <em>We deliver uniqueness and quality</em>
+					            </li>
+					            <li>
+					              <span class="fa fa-dot-circle-o"></span>
+					              <strong>Skills</strong> - <em>Delivering fast and excellent results</em>
+					            </li>
+					            <li>
+					              <span class="fa fa-dot-circle-o"></span>
+					              <strong>Clients</strong> - <em>Satisfied clients thanks to our experience</em>
+					            </li>
+					          </ul>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
 	            </div>
 
 	            <div id="labels_feedback" class="settings-tab-panel pM">

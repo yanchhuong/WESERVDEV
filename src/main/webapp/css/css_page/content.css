@@ -484,8 +484,8 @@ ul.items_foot_opts > li.ico_time > span:before{content:none;}
 .comment_wrap.view ul li > div.comment > div.customer{top:4px !important;}
 .comment > div.customer{position:absolute;top:0;left:0;display:block;width:31px;height:31px;border:1px solid #ededed;border-radius:3px;}
 .comment > div.customer > img{display:block;width:29px;height:29px;}
-.comment > div > p{display:block;padding:0 0 2px;font-size:14px;color:#000;text-align:left;line-height:24px;}
-.comment > div > h5{display:block;vertical-align:top;margin:-4px 0 0;padding:0 0 3px;font-size:18px;color:#000;text-align:left;line-height:18px;}
+.comment > div > p{display:block;padding:0 0 2px;font-size:12px;color:#000;text-align:left;line-height:24px;}
+.comment > div > h5{display:block;vertical-align:top;margin:-4px 0 0;padding:0 0 3px;font-size:20px;color:#000;text-align:left;line-height:18px;}
 .comment > div.field_comment{padding-right:80px;}
 .comment > div.field_comment > .btn_wrap{float:right;position:absolute;top:-5px;right:0;}
 .comment > div > textarea{display:block;width:100%;margin:0;padding:5px 0 5px 5px;min-height:31px;font-size:14px;color:#000;border:1px solid #ededed;}

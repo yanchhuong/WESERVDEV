@@ -5,6 +5,7 @@ var preview_page_001 = {};
 var edit_btn;
 var like = 1;
 var Session_usercd = "";
+var ListPro_usercd = "";
 $(document).ready(function() {
 	preview_page_001.getSesion();
 	preview_page_001.insertViewProduct();
@@ -16,7 +17,8 @@ $(document).ready(function() {
 	preview_page_001.loadRelatedProduct();
 	preview_page_001.getSesion();
 	preview_page_001.checkLikeProduct();
-
+	
+	
 	$('#image_gallery').lightSlider({
 		gallery:true,
 		item:1,
@@ -63,14 +65,15 @@ $(document).ready(function() {
 	});
 	
 	$(document).delegate("#sellerName, #sellerphoto", "click", function(){
-		var usercd = $("#usercd").val();
-		if($("#usercd").val() == ''){
-			wehrm.popup.openPopup("login",{}, function(data){
-				callbackFn(data);
-			});
-		}else{
-			window.location.href = document.location.origin+'/profile_page_001?usercd='+usercd;
-		}
+//		var usercd = $("#usercd").val();
+//		if($("#usercd").val() == ''){
+//			wehrm.popup.openPopup("login",{}, function(data){
+//				callbackFn(data);
+//			});
+//		}else{
+//			window.location.href = document.location.origin+'/profile_page_001?usercd='+usercd;
+//		}
+		window.location.href = document.location.origin+'/profile_page_001?usercd='+ListPro_usercd;
 	});
 	
 	$(document).delegate("#post", "click", function(){
@@ -80,8 +83,10 @@ $(document).ready(function() {
 			});
 			location.reload();
 		}else{
-			preview_page_001.insertProductCommentAdd();
-			$(".field_comment").find("#comment_contents").val("");
+			if($(".field_comment").find("#comment_contents").val() != ''){
+				preview_page_001.insertProductCommentAdd();
+				$(".field_comment").find("#comment_contents").val("");				
+			}
 		}
 	});
 	
@@ -287,8 +292,6 @@ preview_page_001.loadProductAddress = function(){
 				  html += '<p class="sell_tel">: '+wehrm.string.formatPhoneNumber(v.cphone, "")+'</p>';
 				  html += '<p class="sell_localtion">: '+v.province+'</p>';
 				  html += '<p class="sell_map">: '+v.detail+'</p>';
-				
-				  console.log("test: "+wehrm.string.formatPhoneNumber(v.cphone," "));
 			  });
 			  $(".seller_info").append(html);
 		  }
@@ -297,6 +300,7 @@ preview_page_001.loadProductAddress = function(){
 
 
 preview_page_001.loadProductPictures = function(){
+//	_loadingWholeStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input  =  $.urlParam("prcd");
@@ -322,6 +326,7 @@ preview_page_001.loadProductPictures = function(){
 			  });
 
 			  $("#image_gallery").append(html);
+//			  _loadingWholeStop();
 		  }
 	  });
 //	  preview_page_001.loadSliderLibrary();
@@ -367,8 +372,9 @@ preview_page_001.loadProductDetail = function(){
 				  html +=	'</ul>';
 				  html += '</div>';
 				   
+				  ListPro_usercd = v.usercd;
 				  desc += '<p>'+v.description+'</p>';
-				  
+				  console.log("test usercd: "+ListPro_usercd);
 			  });
 			$(".prod_price").append(html);
 			$(".tab01").append(desc);
@@ -383,6 +389,7 @@ preview_page_001.insertProductCommentAdd = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
+	
 	input["content"] = $(".field_comment").find("#comment_contents").val();
 	input["prcd"]    = $.urlParam("prcd");
 	input["usercd"]  = $("#usercd").val();

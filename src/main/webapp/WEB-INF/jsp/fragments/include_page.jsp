@@ -51,7 +51,7 @@
     <script  src="../../js-lib/tbl.paginging.js?<%=_localDatetime%>"></script>
     <script type="text/javascript" src="../../js-lib/lightslider.js?<%=_localDatetime%>"></script>
     <script type="text/javascript" src="/js/main_page.js?<%=_localDatetime%>"></script>
-    
+    <script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
 
 
  
