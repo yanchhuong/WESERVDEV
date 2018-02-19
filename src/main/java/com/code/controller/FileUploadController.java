@@ -3,7 +3,6 @@ package com.code.controller;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.hsqldb.lib.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -157,7 +156,7 @@ public class FileUploadController {
     
     @RequestMapping(value="/save_file_name",method = RequestMethod.POST ,produces=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Map<String,Object> saveCategory(@RequestBody FileUploadBean fileUploadBean){
-    	if(!StringUtil.isEmpty(fileUploadBean.getOld_randname())) {
+    	if(!"".equals(fileUploadBean.getOld_randname())) {
     		this.iFileImageService.deleteProfileImage(fileUploadBean);
     	}
     	this.iFileImageService.saveFileUploadBean(fileUploadBean);
