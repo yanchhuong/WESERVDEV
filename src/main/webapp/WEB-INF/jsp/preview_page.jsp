@@ -51,8 +51,8 @@
 					</dl>
 					<div class="meminfo">
 						<a href="javascrip:" class="sidebar_item"><em>Goods</em></a>
-						<a href="javascrip:" class="sidebar_faverd"><em>stream</em></a>
-						<a href="javascrip:" class="sidebar_following"><em>Follow</em></a>
+						<a href="javascrip:" class="sidebar_signup"><em>Sign Up</em></a>
+						<a href="javascrip:" class="sidebar_login"><em>Log In</em></a>
 					</div>
 					<dl class="category">
 						<dt>
@@ -307,13 +307,15 @@
 							<a>
 								<dl>
 									<dt id="sellerName">
-										<p>Shoping Online<span>'s shop</span></p>
+										<p>Shoping Online's TESTING</span></p>
 									</dt>
 									<dd class="info">
 										<span> Open 723 days</span>
 										<span>Products 9999 Items</span>
 									</dd>
-									<dd id="sellerphoto" class="photo"><img src="img/users/users.jpg" alt="" class="loaded"></dd>
+									<dd id="sellerphoto" class="photo">
+										<img src="img/users/users.jpg" alt="" class="loaded">
+									</dd>
 								</dl>
 							</a>
 						</div>

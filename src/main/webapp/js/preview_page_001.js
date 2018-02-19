@@ -5,6 +5,7 @@ var preview_page_001 = {};
 var edit_btn;
 var like = 1;
 var Session_usercd = "";
+var ListPro_usercd = "";
 $(document).ready(function() {
 	preview_page_001.getSesion();
 	preview_page_001.insertViewProduct();
@@ -16,7 +17,8 @@ $(document).ready(function() {
 	preview_page_001.loadRelatedProduct();
 	preview_page_001.getSesion();
 	preview_page_001.checkLikeProduct();
-
+	preview_page_001.loadProfileImage();
+	
 	$('#image_gallery').lightSlider({
 		gallery:true,
 		item:1,
@@ -29,7 +31,34 @@ $(document).ready(function() {
 			$('#image_gallery').removeClass('cS-hidden');
 		}  
 	});
-		
+
+	$(document).delegate(".sidebar_signup", "click", function(){
+		wehrm.popup.openPopup("login", {}, function(data){
+			callbackFn(data);
+		});
+	});
+
+	$(document).delegate(".sidebar_login", "click", function(){
+		var status  = 'login';
+		wehrm.popup.openPopup("login", {status}, function(data){
+			callbackFn(data);
+		});
+	});
+	
+	$(document).delegate("#btn_upload", "click", function(){
+		alert();
+//		var link = '/post';
+//		var status  = 'login';
+//		if(getSesion() == ''){
+//			wehrm.popup.openPopup("login", {link, status}, function(data){
+//				callbackFn(data);
+//			});
+//		}else{
+//
+//			window.location.href = document.location.origin+'/post?usercd='+getSesion();
+//		}
+	});
+	
 	$('.comment_opt').generPlugIn({
 		btnCombo	:	'.btn_comment_opt',
 		layerCom	:	'.layer_comm_opt'
@@ -38,11 +67,10 @@ $(document).ready(function() {
 	$('.related_prod').readMoreDetPage();
 	
 	$(document).delegate(".ico_wishlist > span", "click", function(){
-		
+		var status = 'login';
 		if($("#usercd").val() == ''){
-			wehrm.popup.openPopup("login",{url:"/preview?prcd=e09752f9-4849-4513-b4cf-73d4dc60000f20171223122818&parentid=9"}, function(data){
+			wehrm.popup.openPopup("login",{url:"/preview?prcd=e09752f9-4849-4513-b4cf-73d4dc60000f20171223122818&parentid=9",status}, function(data){
 				callbackFn(data);
-//				location.reload();
 			});
 		}else{
 			if($(".ico_wishlist").hasClass('heart')){
@@ -63,32 +91,37 @@ $(document).ready(function() {
 	});
 	
 	$(document).delegate("#sellerName, #sellerphoto", "click", function(){
-		var usercd = $("#usercd").val();
-		if($("#usercd").val() == ''){
-			wehrm.popup.openPopup("login",{}, function(data){
-				callbackFn(data);
-			});
-		}else{
-			window.location.href = document.location.origin+'/profile_page_001?usercd='+usercd;
-		}
+//		var usercd = $("#usercd").val();
+//		if($("#usercd").val() == ''){
+//			wehrm.popup.openPopup("login",{}, function(data){
+//				callbackFn(data);
+//			});
+//		}else{
+//			window.location.href = document.location.origin+'/profile_page_001?usercd='+usercd;
+//		}
+		window.location.href = document.location.origin+'/profile?ref='+$("#pcd").val();
 	});
 	
 	$(document).delegate("#post", "click", function(){
+		var status  = 'login';
 		if($("#usercd").val() == ''){
-			wehrm.popup.openPopup("login",{}, function(data){
+			wehrm.popup.openPopup("login",{status}, function(data){
 				callbackFn(data);
 			});
 			location.reload();
 		}else{
-			preview_page_001.insertProductCommentAdd();
-			$(".field_comment").find("#comment_contents").val("");
+			if($(".field_comment").find("#comment_contents").val() != ''){
+				preview_page_001.insertProductCommentAdd();
+				$(".field_comment").find("#comment_contents").val("");				
+			}
 		}
 	});
 	
 
 	$(document).delegate("#btn_edit", "click", function(){
+		var status  = 'login';
 		if($("#usercd").val() == ''){
-			wehrm.popup.openPopup("login", function(data){
+			wehrm.popup.openPopup("login", {status}, function(data){
 				callbackFn(data);
 			});
 			document.location.reload(true);
@@ -127,10 +160,10 @@ $(document).ready(function() {
 	    $(this).slideUp(800);
     });
 	
-	$(document).delegate(".col-xs-6", "click", function(){
-		var prcd = $(this).find("#prcd").val();
+	$(document).delegate("#relPro", "click", function(){
+		var prcd 	 = $(this).find("#prcd").val();
 		var parentid = $(this).find("#parentid").val();
-		window.open(document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid);
+		window.open(document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid);
     });
 
 });
@@ -139,7 +172,7 @@ $(document).ready(function() {
 preview_page_001.loadCategory = function(){
 	$.ajax({
 		type   : 'GET',
-	    url    : "/category/list",
+	    url    : "/category/list_category",
 	    cache  : true
 	})
 	.done(function(dat){
@@ -155,13 +188,44 @@ preview_page_001.loadCategory = function(){
 	})
 };
 
+preview_page_001.loadProfileImage = function(){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var input = {};
+	
+	input["usercd"] = ListPro_usercd;
+
+    $.ajax({
+    	type	: 'POST',
+		url		: '/userdetails/selectprofileimage',
+		async	: false,
+		cache	: true,
+		data	: JSON.stringify(input),
+	    dataType	: 'json',
+	    contentType : 'application/json',
+		beforeSend  : function(xhr) {
+			xhr.setRequestHeader(csrfHeader, csrfToken);
+		},
+		success : function(data){
+			var strPrf = '';
+			$("#sellerphoto").html("");
+			console.log("image: "+JSON.stringify(data.OUT_REC));
+			$.each(data.OUT_REC, function(i, v){
+				strPrf += '<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="" class="loaded">';
+			});
+
+			$("#sellerphoto").append(strPrf);
+		  }
+	  });
+};
+
 
 preview_page_001.insertViewProduct = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -187,7 +251,7 @@ preview_page_001.likeProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -212,7 +276,7 @@ preview_page_001.deleteLikeProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -237,7 +301,7 @@ preview_page_001.checkLikeProduct = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
     $.ajax({
 		  type	: 'POST',
 		  url	:'/likes/check_like',
@@ -265,11 +329,11 @@ preview_page_001.checkLikeProduct = function(){
 preview_page_001.loadProductAddress = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input  =  $.urlParam("prcd");
+	var input  =  $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
-		  url	:'/products/preview_product_address',
+		  url	:'/products/product_picture_address',
 		  async	: true,
 		  cache	: false,
 		  data	: input,
@@ -287,8 +351,8 @@ preview_page_001.loadProductAddress = function(){
 				  html += '<p class="sell_tel">: '+wehrm.string.formatPhoneNumber(v.cphone, "")+'</p>';
 				  html += '<p class="sell_localtion">: '+v.province+'</p>';
 				  html += '<p class="sell_map">: '+v.detail+'</p>';
-				
-				  console.log("test: "+wehrm.string.formatPhoneNumber(v.cphone," "));
+				  html += '<input type="hidden" id="pcd" value="'+v.pcd+'" />';
+				  $("#sellerName").find("p").text(v.pnm);
 			  });
 			  $(".seller_info").append(html);
 		  }
@@ -297,14 +361,15 @@ preview_page_001.loadProductAddress = function(){
 
 
 preview_page_001.loadProductPictures = function(){
+//	_loadingWholeStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input  =  $.urlParam("prcd");
+	var input  =  $.urlParam("ref1");
 
 	
     $.ajax({
 		  type	: 'POST',
-		  url	: '/products/preview_product_address',
+		  url	: '/products/product_picture_address',
 		  async	: false,
 		  cache	: false,
 		  data	: input,
@@ -322,6 +387,7 @@ preview_page_001.loadProductPictures = function(){
 			  });
 
 			  $("#image_gallery").append(html);
+//			  _loadingWholeStop();
 		  }
 	  });
 //	  preview_page_001.loadSliderLibrary();
@@ -333,12 +399,12 @@ preview_page_001.loadProductDetail = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 		
-	input["prcd"]  =  $.urlParam("prcd");
+	input["prcd"]  =  $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
 		  url	: '/products/list_product',
-		  async	: true,
+		  async	: false,
 		  cache	: false,
 		  data	: JSON.stringify(input),
           dataType	  : 'json',
@@ -367,8 +433,9 @@ preview_page_001.loadProductDetail = function(){
 				  html +=	'</ul>';
 				  html += '</div>';
 				   
+				  ListPro_usercd = v.usercd;
 				  desc += '<p>'+v.description+'</p>';
-				  
+				  console.log("test usercd: "+ListPro_usercd);
 			  });
 			$(".prod_price").append(html);
 			$(".tab01").append(desc);
@@ -383,8 +450,9 @@ preview_page_001.insertProductCommentAdd = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
+	
 	input["content"] = $(".field_comment").find("#comment_contents").val();
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -410,7 +478,7 @@ preview_page_001.loadProductComments = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 
     $.ajax({
 		  type	: 'POST',
@@ -503,7 +571,7 @@ preview_page_001.updateProductComments = function(data){
 	input["content"] = $(data).parents(".hideComment").children().find("#commentUpdate").val();
 	input["id"]		 = $(data).parents(".hideComment").children().find("input").val();
 	input["usercd"]	 = $("#usercd").val();
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
@@ -557,8 +625,8 @@ preview_page_001.loadRelatedProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]  =  $.urlParam("prcd");
-	input["parentid"]  =  $.urlParam("parentid");
+	input["prcd"]  	   =  $.urlParam("ref1");
+	input["parentid"]  =  $.urlParam("ref2");
 
 
     $.ajax({
@@ -577,52 +645,53 @@ preview_page_001.loadRelatedProduct = function(){
 			  $(".carousel-inner").html("");
   			  var item3  = '';
   			  var checkI = 0;
-  			  
-  			 $.each(data.OUT_REC, function(i, v){
-  				  checkI++;
+  			 if(data.OUT_REC.length > 0 || data.OUT_REC == null){
+  	  			 $.each(data.OUT_REC, function(i, v){
+  	  				  checkI++;
 
-				  if(checkI == 1){
-					  item3 += '<div class="item">';
-					  item3 += '<div class="row">';
-				  }
+  					  if(checkI == 1){
+  						  item3 += '<div class="item">';
+  						  item3 += '<div class="row">';
+  					  }
 
-				  item3 += '<div class="col-xs-6 col-sm-4"> '
-			            + '    <div class="tcb-product-item"> '
-			            + '        <input type="hidden" id="prcd" value="'+v.prcd+'" /> '
-			            + '        <input type="hidden" id="parentid" value="'+v.parentid+'" /> '
-			            + '        <div class="tcb-product-photo"> '
-			            + '            <a href="#"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
-			            + '        </div> '
-			            + '        <div class="tcb-product-info"> '
-			            + '            <div class="tcb-product-title"> '
-			            + '                <h4><a href="#">'+v.title+'</a></h4></div> '
-			            + '            <div class="tcb-product-rating">	'
-			            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
-			            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
-			            + '                <i class="glyphicon glyphicon-star"></i>	'
-			            + '                <a href="#">(4,585 ratings)</a> '
-			            + '            </div> '
-			            + '            <div class="tcb-hline"></div> '
-			            + '            <div class="tcb-product-price"> '
-			            + '                '+v.price+' (17% off) '
-			            + '            </div> '
-			            + '        </div> '
-			            + '    </div> '
-			            + ' </div> ';
-				  
-				  if(checkI == 3 || (data.OUT_REC.length-1) == i){
-					  checkI = 0;
-					  
-					  item3 += '</div>';
-					  item3 += '</div>';
-					  $(".carousel-inner").append(item3);
-					  
-					  item3 = "";
-				  }
-  			 });
-  			 $(".carousel-inner .item:eq(0)").addClass("active");
+  					  item3 += '<div class="col-xs-6 col-sm-4" id="relPro"> '
+  				            + '    <div class="tcb-product-item"> '
+  				            + '        <input type="hidden" id="prcd" value="'+v.prcd+'" /> '
+  				            + '        <input type="hidden" id="parentid" value="'+v.parentid+'" /> '
+  				            + '        <div class="tcb-product-photo"> '
+  				            + '            <a href="#"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
+  				            + '        </div> '
+  				            + '        <div class="tcb-product-info"> '
+  				            + '            <div class="tcb-product-title"> '
+  				            + '                <h4><a href="#">'+v.title+'</a></h4></div> '
+  				            + '            <div class="tcb-product-rating">	'
+  				            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
+  				            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
+  				            + '                <i class="glyphicon glyphicon-star"></i>	'
+  				            + '                <a href="#">(4,585 ratings)</a> '
+  				            + '            </div> '
+  				            + '            <div class="tcb-hline"></div> '
+  				            + '            <div class="tcb-product-price"> '
+  				            + '                '+v.price+' (17% off) '
+  				            + '            </div> '
+  				            + '        </div> '
+  				            + '    </div> '
+  				            + ' </div> ';
+  					  
+  					  if(checkI == 3 || (data.OUT_REC.length-1) == i){
+  						  checkI = 0;
+  						  
+  						  item3 += '</div>';
+  						  item3 += '</div>';
+  						  $(".carousel-inner").append(item3);
+  						  
+  						  item3 = "";
+  					  }
+  	  			 });
+  	  			 $(".carousel-inner .item:eq(0)").addClass("active");
+  			 }
+
 	      }
-
     });
 };
 $.urlParam = function(name){

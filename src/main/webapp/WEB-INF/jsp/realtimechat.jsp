@@ -1,240 +1,240 @@
+<!DOCTYPE html>
 <html lang="en" >
+
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Widget</title>
+  	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<!-- default header name is X-CSRF-TOKEN -->
+ 	<meta name="_csrf" content="${_csrf.token}"/>
+ 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+  	<title>Direct Messaging</title>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
 
-  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
- 
-  <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
-
+	<script src="https://use.typekit.net/hoy3lrg.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+  	
+    <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
+    <script src="/js-lib/jquery-2.1.0.min.js"></script>
+    <script src="/js-lib/sockjs-0.3.4.js"></script>
+    <script src="/js-lib/stomp.js"></script>
+  
 </head>
 
 <body>
-    <div class="container clearfix">
-    <div class="people-list" id="people-list">
-      <div class="search">
-        <input type="text" placeholder="search" />
-        <i class="fa fa-search"></i>
-      </div>
-      <ul class="list">
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Vincent Porter</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Aiden Chavez</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 7 mins ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Mike Thomas</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Erica Hughes</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Ginger Johnston</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Tracy Carpenter</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 30 mins ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Christian Kelly</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 10 hours ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Monica Ward</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Dean Henry</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> offline since Oct 28
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Peyton Mckinney</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="chat">
-      <div class="chat-header clearfix">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
-        
-        <div class="chat-about">
-          <div class="chat-with">Chat with Vincent Porter</div>
-          <div class="chat-num-messages">already 1 902 messages</div>
-        </div>
-        <i class="fa fa-star"></i>
-      </div> <!-- end chat-header -->
-      
-      <div class="chat-history">
-        <ul>
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
-            </div>
-            <div class="message other-message float-right">
-              Hi Vincent, how are you? How is the project coming along?
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:12 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Are we meeting today? Project has been already finished and I have results to show you.
-            </div>
-          </li>
-          
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
-            </div>
-            <div class="message other-message float-right">
-              Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:20 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Actually everything was fine. I'm very excited to show this to our team.
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:31 AM, Today</span>
-            </div>
-            <i class="fa fa-circle online"></i>
-            <i class="fa fa-circle online" style="color: #AED2A6"></i>
-            <i class="fa fa-circle online" style="color:#DAE9DA"></i>
-          </li>
-          
-        </ul>
-        
-      </div> <!-- end chat-history -->
-      
-      <div class="chat-message clearfix">
-        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
-                
-        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-        <i class="fa fa-file-image-o"></i>
-        
-        <button>Send</button>
 
-      </div> <!-- end chat-message -->
-      
-    </div> <!-- end chat -->
-    
-  </div> <!-- end container -->
-
-<script id="message-template" type="text/x-handlebars-template">
-  <li class="clearfix">
-    <div class="message-data align-right">
-      <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-    </div>
-    <div class="message other-message float-right">
-      {{messageOutput}}
-    </div>
-  </li>
-</script>
-
-<script id="message-response-template" type="text/x-handlebars-template">
-  <li>
-    <div class="message-data">
-      <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-      <span class="message-data-time">{{time}}, Today</span>
-    </div>
-    <div class="message my-message">
-      {{response}}
-    </div>
-  </li>
-</script>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
-
+	<div id="frame">
+		<div id="sidepanel">
+			<div id="profile">
+				<div class="wrap">
+					<img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+					<p>Mike Ross</p>
+					<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+					<div id="status-options">
+						<ul>
+							<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+							<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+							<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+							<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+						</ul>
+					</div>
+					<div id="expanded">
+						<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="mikeross" />
+						<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="ross81" />
+						<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="mike.ross" />
+					</div>
+				</div>
+			</div>
+			<div id="search">
+				<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+				<input type="text" placeholder="Search contacts..." />
+			</div>
+			<div id="contacts">
+				<ul>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status online"></span>
+							<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Louis Litt</div>
+								<div style="float:right;">9:30 PM<i style="margin-left: 8px;" class="fa fa-envelope" aria-hidden="true"></i></div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact active">
+						<div class="wrap">
+							<span class="contact-status busy"></span>
+							<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Harvey Specter</div>
+								<div style="float:right;">7:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status away"></span>
+							<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Rachel Zane</div>
+								<div style="float:right;">2:45 PM<i style="margin-left: 8px;" class="fa fa-envelope" aria-hidden="true"></i></div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status online"></span>
+							<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Donna Paulsen</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status busy"></span>
+							<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Jessica Pearson</div>
+								<div style="float:right;">2:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status"></span>
+							<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Harold Gunderson</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status"></span>
+							<img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Daniel Hardman</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status busy"></span>
+							<img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Katrina Bennett</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status"></span>
+							<img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Charles Forstman</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+					<li class="contact">
+						<div class="wrap">
+							<span class="contact-status"></span>
+							<img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
+							<div class="meta">
+								<div class="name" style="float:left;">Jonathan Sidwell</div>
+								<div style="float:right;">12:30 PM</div>
+								<p class="preview" style="margin-top: 20px;">You just got LITT up, Mike.</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="bottom-bar">
+				<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+				<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+			</div>
+		</div>
+		<div class="content">
+			<div class="contact-profile" id="reciever" data-id="AAA">
+				<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+				<p>Harvey Specter</p>
+				<div class="social-media">
+					<i class="fa fa-facebook" aria-hidden="true"></i>
+					<i class="fa fa-twitter" aria-hidden="true"></i>
+					 <i class="fa fa-instagram" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="messages">
+				<ul>
+					<li class="sent">
+						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+						<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+					</li>
+					<li class="replies">
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>When you're backed against the wall, break the god damn thing down.</p>
+					</li>
+					<li class="replies">
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>Excuses don't win championships.</p>
+					</li>
+					<li class="sent">
+						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+						<p>Oh yeah, did Michael Jordan tell you that?</p>
+					</li>
+					<li class="replies">
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>No, I told him that.</p>
+					</li>
+					<li class="replies">
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>What are your choices when someone puts a gun to your head?</p>
+					</li>
+					<li class="sent">
+						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+						<p>What are you talking about? You do what they say or they shoot you.</p>
+					</li>
+					<li class="replies">
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+					</li>
+				</ul>
+			</div>
+			<div class="message-input">
+				<div class="wrap">
+				<input type="text" placeholder="Write your message..." id="txtCHAT" />
+				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+				<button class="submit send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+ <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ -->
 <script  src="/js/realtimechat.js"></script>
-<script src="/js-lib/sockjs-0.3.4.js"></script>
-<script src="/js-lib/stomp.js"></script>
-<script src="/js-lib/jquery-2.1.0.min.js"></script>
+
+
+
 
 </body>
+
 </html>
