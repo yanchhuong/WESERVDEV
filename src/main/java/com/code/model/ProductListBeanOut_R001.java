@@ -16,8 +16,6 @@ public class ProductListBeanOut_R001 {
 	private String viewcnt;
 	private String likecnt;
 	private String store_nm;
-	private String pcd;
-	
 	
 	public long getPrid() {
 		return prid;
@@ -109,13 +107,6 @@ public class ProductListBeanOut_R001 {
 	public void setLikecnt(String likecnt) {
 		this.likecnt = likecnt;
 	}
-	public String getPcd() {
-		return pcd;
-	}
-	public void setPcd(String pcd) {
-		this.pcd = pcd;
-	}
-
 
 
 }

@@ -6,38 +6,87 @@ var countClick = 0;
 var clickChat = 0;
 var appendChat = '';
 
-$(document).ready(function(){	
+$(document).ready(function(){
 	$(".sub_cat").hide();
-	main_page.listProduct();
 	main_page.loadCategory();
-	if(getSesion() != ''){
-		main_page.loadProfileImage();
-	}	
+	main_page.listProduct();
 	
-	$(document).delegate(".sidebar_signup", "click", function(){
-		wehrm.popup.openPopup("login", {}, function(data){
-			callbackFn(data);
-		});
-	});
-
-	$(document).delegate(".sidebar_login", "click", function(){
-		var status  = 'login';
-		wehrm.popup.openPopup("login", {status}, function(data){
-			callbackFn(data);
-		});
-	});
 	
-	$(document).delegate("#btn_upload", "click", function(){
-		var link = '/post';
-		var status  = 'login';
-		if(getSesion() == ''){
-			wehrm.popup.openPopup("login", {link, status}, function(data){
-				callbackFn(data);
-			});
-		}else{
-			window.location.href = document.location.origin+'/post?usercd='+getSesion();
-		}
-	});
+//    $(document).delegate("#dropdown-toggle", "click", function(){
+//    	countClick++;
+//    	$(".wrapper").hide();
+//    	$('.notification-menu').slideToggle();
+//    	$(".wrap_setting").hide();
+//    	$('#navigation-bar').removeClass('navbox-open');
+//    	if(countClick > 1){
+//    		countClick = 0;
+//    		$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+//    	}else{
+//    		$(".btn_alrim").css({"background": "url(img/bg/musical-bell-outline-change.png) no-repeat 50% 14px", "background-size": "19px 23px"});
+//    	}
+//    });
+//    
+//    $(document).delegate(".notification-menu", "mouseleave", function(){
+//    	countClick = 0;
+//    	$('.notification-menu').hide();
+//    	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+//    });
+//
+//    $('.chat[data-chat=person1]').addClass('active-chat');
+//    $('.person[data-chat=person1]').addClass('active');
+////    $(".wrapper").hide();
+//    
+//    $('.left .person').mousedown(function(){
+//        if ($(this).hasClass('.active')) {
+//            return false;
+//        } else {
+//            var findChat = $(this).attr('data-chat');
+//            var personName = $(this).find('.name').text();
+//            $('.right .top .name').html(personName);
+//            $('.chat').removeClass('active-chat');
+//            $('.left .person').removeClass('active');
+//            $(this).addClass('active');
+//            $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+//        }
+//    });
+//    
+//    $(document).delegate(".ico_chat", "click", function(){
+//    	countClick++;
+//    	if(countClick > 1){
+//    		countClick = 0;
+//    		$(".ico_chat").find("img").attr("src","img/bg/chat.png");
+//    	}else{
+//    		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
+//    	}
+//    	$('.notification-menu').hide();
+//    	$(".wrapper").slideToggle();
+//    	$(".wrap_setting").hide();
+//    	$('#navigation-bar').removeClass('navbox-open');
+//    	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+//    });
+//    
+//    $(document).delegate("ul.people li", "click", function(){
+//    	countClick = 0;
+//    	$(".ico_chat").find("img").attr("src","img/bg/chat.png");
+//    	$(".wrapper").hide();
+//    	$(".chat_list").next().append(appendChat);    	
+//    });
+//    $(document).delegate(".fa-minus", "click", function(){ $(this).parents('.chatbox').toggleClass('chatbox-min'); });
+//    $(document).delegate(".fa-close", "click", function(){ $(this).parents('.chatbox').remove(); });
+//    
+//    $(document).delegate('#navbox-trigger', "click", function(){
+//    	$(".wrapper").hide();
+//    	$('.notification-menu').hide();
+//    	$(".wrap_setting").hide();
+//    	$('#navigation-bar').toggleClass('navbox-open');
+//    });
+//    
+//    $(document).delegate('#setting_trigger', "click", function(){
+//    	$(".wrapper").hide();
+//    	$('.notification-menu').hide();
+//    	$('#navigation-bar').removeClass('navbox-open');
+//    	$(".wrap_setting").slideToggle();
+//    });
     
 	$(document).delegate("#sidebar_catagory_list a", "click", function(){
 		parentId   = $(this).attr("catg-id");
@@ -47,36 +96,35 @@ $(document).ready(function(){
 		main_page.categoryChild(parentId);
 	});
 	
+	
+	
 //	$(document).delegate(".goodslist li", "click", function(){
 	$(".goodslist li").live("click", function(){
 		var prcd = $(this).find("#prcd").val();
 		var parentid = $(this).find("#parentid").val();
-		window.location.href = document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid;
+		window.location.href = document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid;
 //		window.location.href = document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid;
 	});
 	
 });
 
 main_page.loadCategory = function(){
-	_loadingWholeStart();
 	$.ajax({
 		type   : 'GET',
-	    url    : "/category/list_category",
-	    cache  : true,
-	    async  : false,
-	    success: (function(dat){
-	    	var html = "";
-	    	
-	    	$.each(dat.OUT_REC, function(i,v){
-	    		var j = i + 1;
-	    		if(v.lvl == "1"){
-	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
-	    		}
-	    	});
-	    	$("#sidebar_catagory_list").html(html);
-	    	_loadingWholeStop();
-	    })
-	});
+	    url    : "/category/list",
+	    cache  : true
+	})
+	.done(function(dat){
+    	var html = "";
+    	
+    	$.each(dat.OUT_REC, function(i,v){
+    		var j = i + 1;
+    		if(v.lvl == "1"){
+    			html += '<a href="#none" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
+    		}
+    	});
+    	$("#sidebar_catagory_list").html(html);
+	})
 };
 
 
@@ -109,7 +157,7 @@ main_page.categoryChild = function(parentId){
     				$(".sub_cat").hide();
     			}else{
     				$(".sub_cat").show()
-    				html += '<li><a href="javascript:"><em>'+v.nm_eng+'</em><span>'+v.cnt+' Items</span></a></li>';
+    				html += '<li><a href="#none"><em>'+v.nm_eng+'</em><span>'+v.cnt+' Items</span></a></li>';
     			}
     		});
     	}else{
@@ -152,13 +200,11 @@ main_page.showMoreCatg = function(){
 
 
 main_page.listProduct = function(parentId){
-	_loadingWholeStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var csrfToken = $("meta[name='_csrf']").attr("content");
 
 	var input = {};
 	input["catgid"] = parentId;
-	console.log("first parentId: "+parentId);
 	$.ajax({
     	type   : 'POST',
 	    url    : "/products/list_product",
@@ -172,6 +218,7 @@ main_page.listProduct = function(parentId){
         },
 	})
     .done(function(dat) {
+    	
     	$(".pagination").pagination({
     	    dataSource: dat.OUT_REC,
     	    totalNumber: 8,
@@ -188,7 +235,7 @@ main_page.listProduct = function(parentId){
     	    	$(".pagination").prev().find(".goodslist").empty();
     	    	$.each(data, function(i,v){
     	    		html += '<li>';
-    		        html += 	'<a href="javascript:" class="thumb">';
+    		        html += 	'<a href="#none" class="thumb">';
     			    html += 		'<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="first_product" class="thumb loaded">';
     			    html += 		'<p class="txtinfo">';
     				html += 		'<em>'+v.title+'</em>';
@@ -201,15 +248,15 @@ main_page.listProduct = function(parentId){
     		    	html += 	'<div class="items_foot">';
     			    html += 	'<div class="flt">';
     				html += 		'<ul class="items_foot_opt">';
-    				html += 		'<li class="ico_local"><a href="javascript:"></a></li>';
-    				html += 		'<li class="ico_save"><a href="javascript:"></a></li>';
-    				html += 		'<li class="ico_fb"><a href="javascript:"></a></li>';
+    				html += 		'<li class="ico_local"><a href="#none"></a></li>';
+    				html += 		'<li class="ico_save"><a href="#none"></a></li>';
+    				html += 		'<li class="ico_fb"><a href="#none"></a></li>';
     				html += 		'</ul>';
     			    html += 	'</div>';
     			    html += 	'<div class="frl">';
     				html += 		'<ul class="items_foot_view">';
-    				html += 		'<li class="ico_atlist"><a href="javascript:">'+v.likecnt+'</a></li>';
-    				html += 		'<li class="ico_local"><a href="javascript:">'+v.viewcnt+'</a></li>';
+    				html += 		'<li class="ico_local"><a href="#none">'+v.viewcnt+'</a></li>';
+    				html += 		'<li class="ico_atlist"><a href="#none">'+v.likecnt+'</a></li>';
     				html += 		'</ul>';
     				html += 	'</div>';
     				html += 	'</div>';		
@@ -220,63 +267,106 @@ main_page.listProduct = function(parentId){
     	    	$(".pagination").prev().find(".goodslist").append(html);
     	    }
     	})
-        _loadingWholeStop();
+    	
+    	
     })
 };
 
-
-main_page.loadProfileImage = function(){
-	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input = {};
-	
-	input["usercd"] = getSesion();
-	
-    $.ajax({
-    	type	: 'POST',
-		url		: '/userdetails/selectprofileimage',
-		async	: false,
-		cache	: true,
-		data	: JSON.stringify(input),
-	    dataType	: 'json',
-	    contentType : 'application/json',
-		beforeSend  : function(xhr) {
-			xhr.setRequestHeader(csrfHeader, csrfToken);
-		},
-		success : function(data){
-
-			$.each(data.OUT_REC, function(i, v){
-				$("#sidebar_photo").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
-//				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
-			});
-
-		  }
-	  });
-};
-
-
-function getSesion(){
-	 var sessionObj = "";
-	 $.ajax({
-		 type   : 'GET',
-	     url    : "/get_sesssion",
-	     cache  : true,
-	     async : false
-	 })
-	 .done(function(dat){
-	  if(dat.SESSION_IS!=null){
-	   sessionObj = dat.SESSION_IS.usercd;
-	   console.log("in getsession: "+sessionObj);
-	  }
-	 })
-	 return sessionObj;
-};
-
-
-//call back
-function callbackFn(data){
-	if(data.IS_TRUE){
-		location.reload();
-	}	
-}
-
+appendChat += '<div class="chatbox">																																	';
+appendChat += '    <div class="chatbox-top">																															';
+appendChat += '      <div class="chatbox-avatar">																															';
+appendChat += '        <a target="_blank" href="https://www.facebook.com/mfreak"><img src="https://gravatar.com/avatar/2449e413ade8b0c72d0a15d153febdeb?s=512&d=https://codepen.io/assets/avatars/user-avatar-512x512-6e240cf350d2f1cc07c2bed234c3a3bb5f1b237023c204c782622e80d6b212ba.png" /></a> 	';
+appendChat += '      </div>																																		';
+appendChat += '      <div class="chat-partner-name">																														';
+appendChat += '        <span class="status online"></span>																														';
+appendChat += '        <a target="_blank" href="https://www.facebook.com/mfreak">Mamun Khandaker</a>																								';
+appendChat += '      </div>																																		';
+appendChat += '      <div class="chatbox-icons">																															';
+appendChat += '        <a href="javascript:void(0);"><i class="fa fa-minus"></i></a>																										';
+appendChat += '        <a href="javascript:void(0);"><i class="fa fa-close"></i></a>       																										';
+appendChat += '      </div>      																																	';
+appendChat += '    </div>																																		';
+appendChat += '    																																			';
+appendChat += '    <div class="chat-messages">																															';
+appendChat += '       <div class="message-box-holder">																														';
+appendChat += '        <div class="message-box">																															';
+appendChat += '          Hello																																	';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-sender">																															';
+appendChat += '           Mamun Khandaker																																';
+appendChat += '         </div>																																	';
+appendChat += '        <div class="message-box message-partner">																													';
+appendChat += '          Hi.																																	';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-box">																															';
+appendChat += '          How are you doing?																																';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-sender">																															';
+appendChat += '           Mamun Khandaker																																';
+appendChat += '         </div>																																	';
+appendChat += '        <div class="message-box message-partner">																													';
+appendChat += '          Im doing fine. How about you?																														';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-box">																															';
+appendChat += '          I am fine.																																	';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-box">																															';
+appendChat += '          Do you know why I knocked you today?																													';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-box">																															';
+appendChat += '          Theres something important I would like to share with you. Do you have some time?																								';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-sender">																															';
+appendChat += '           Mamun Khandaker																																';
+appendChat += '         </div>																																	';
+appendChat += '        <div class="message-box message-partner">																													';
+appendChat += '          Yeah sure. Lets meet in the Einstein cafe this evening and discuss the matter.																								';
+appendChat += '        </div>																																	';
+appendChat += '      </div>																																		';
+appendChat += '      																																		';
+appendChat += '      <div class="message-box-holder">																														';
+appendChat += '        <div class="message-sender">																															';
+appendChat += '           Mamun Khandaker																																';
+appendChat += '         </div>																																	';
+appendChat += '        <div class="message-box message-partner">																													';
+appendChat += '          I thought of coming to your place and discuss about it but I had to finish my projects and I didnt have enough time to go out of the house.																';
+appendChat += '        </div>																																	';
+appendChat += '      </div>      																																	';
+appendChat += '    </div>																																		';
+appendChat += '    																																			';
+appendChat += '    <div class="chat-input-holder">																															';
+appendChat += '      <textarea class="chat-input"></textarea>																													';
+appendChat += '      <input type="submit" value="Send" class="message-send" />																											';
+appendChat += '    </div>																																		';
+appendChat += '    <div class="attachment-panel">																															';
+appendChat += '      <a href="#" class="fa fa-thumbs-up"></a>																													';
+appendChat += '      <a href="#" class="fa fa-camera"></a>																														';
+appendChat += '      <a href="#" class="fa fa-video-camera"></a>																													';
+appendChat += '      <a href="#" class="fa fa-image"></a>																														';
+appendChat += '      <a href="#" class="fa fa-paperclip"></a>																													';
+appendChat += '      <a href="#" class="fa fa-link"></a>																														';
+appendChat += '      <a href="#" class="fa fa-trash-o"></a>																														';
+appendChat += '      <a href="#" class="fa fa-search"></a>																														';
+appendChat += '    </div>																																		';
+appendChat += '</div>																																		';

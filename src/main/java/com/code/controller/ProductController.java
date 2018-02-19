@@ -34,6 +34,19 @@ public class ProductController {
 	@Autowired
 	public ProductController(IProductService iProductService){
 		this.iProductService = iProductService;
+		
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public  @ResponseBody Map<String,Object> getListProduct(@RequestBody ProductListBeanIn_R001 input){
+		List<ProductListBeanOut_R001> obj = this.iProductService.getProductList(input);
+		PagingUtils page = new PagingUtils();
+		return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",obj);
+	                put("PAGINATION",page);
+	            }
+	        };
 	}
 
 	@RequestMapping(value = "/update_status", method = RequestMethod.POST)
@@ -55,10 +68,12 @@ public class ProductController {
 //		UserSessionBean rec = SessionManager.getSession(request, response);
 		
 		PostProductBean_C001 obj = input;
+//		obj.setUsercd(rec.getUsercd());
 		obj.setPrcd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
 		obj.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+		
 		if(this.iProductService.insertProducts(obj)) {
-			ErrorMGS = "Inserted success!";
+			ErrorMGS="Update success!";
 		}
 		return new HashMap<String,Object>(){
 			{
@@ -69,20 +84,18 @@ public class ProductController {
 	
 	@RequestMapping(value = "/list_product", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> listProduct(@RequestBody ProductParam_IN001 input){
-		List<ProductListBeanOut_R002> listProduct = this.iProductService.getListProduct(input);
+		List<ProductListBeanOut_R002> listProduct = this.iProductService.listProduct(input);
 		List<CategoryCount_OUT001>    subCategory = this.iProductService.subCatgCount(input);
-		int cntProducts = this.iProductService.countProducts(input);
 		return new HashMap<String, Object>(){
 			{
 				put("SUB_OUTREC", subCategory);
 				put("OUT_REC", listProduct);
-				put("CNT", cntProducts);
 			}
 		};
 	}
 	
 	
-	@RequestMapping(value = "/product_picture_address", method = RequestMethod.POST)
+	@RequestMapping(value = "/preview_product_address", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> previewAddress(@RequestBody String prcd){
 		List<ProductAddressOut_R001> listProductAddress = this.iProductService.getProductAddress(prcd);
 		List<FileUploadBean> listProductPictures = this.iProductService.getProductPictures(prcd);

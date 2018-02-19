@@ -69,8 +69,14 @@ const edmundAPIRequest = ({ endpoint, parameters={}, success }) => {
     view: 'basic',
   };
 
-  const url = '${edmundBaseUrl}${endpoint}?${encodeQueryData($.extend({}, defaultParameters, parameters ))}';
+  const url = `${edmundBaseUrl}${endpoint}?${encodeQueryData($.extend(
+    {},
+    defaultParameters,
+    parameters
+  ))}';
+
   $.get(url, success);
+  
 };
 
 
@@ -168,7 +174,7 @@ $(() => {
               console.log('SUCCESS');
               console.log('data', data);
               const makeOptions = data.makes.map((make) => (
-                '<option value="${make.niceName}">${make.name}</option>'
+                `<option value="${make.niceName}">${make.name}</option>`
               ))
               makeOptions.unshift('<option value="none">None</option>')
 
@@ -189,14 +195,14 @@ $(() => {
         proceed: (make) => {
           const year = $formElements.year.val();
           edmundAPIRequest({
-            endpoint: '/${make}/models',
+            endpoint: `/${make}/models`,
             parameters: {
               year,
               view: 'basic',
             },
             success: (data) => {
               const modelOptions = data.models.map((model) => (
-                '<option value="${model.niceName}">${model.name}</option>'
+                `<option value="${model.niceName}">${model.name}</option>`
               ))
               modelOptions.unshift('<option value="none">None</option>')
 
@@ -217,13 +223,13 @@ $(() => {
           const year = $formElements.year.val();
           const make = $formElements.make.val();
           edmundAPIRequest({
-            endpoint: '/${make}/${model}/${year}/styles',
+            endpoint: `/${make}/${model}/${year}/styles`,
             parameters: {
               view: 'basic',
             },
             success: (data) => {
               const styleOptions = data.styles.map((style) => (
-                '<option value="${style.id}">${style.name}</option>'
+                `<option value="${style.id}">${style.name}</option>`
               ))
               styleOptions.unshift('<option value="none">None</option>')
 
@@ -242,14 +248,14 @@ $(() => {
         },
         proceed: (style) => {
           edmundAPIRequest({
-            endpoint: '/styles/${style}/engines',
+            endpoint: `/styles/${style}/engines`,
             parameters: {
               view: 'basic',
             },
             success: (data) => {
               console.log('engine data', data);
               const engineOptions = data.engines.map((engine) => (
-                '<option value="${engine.id}">${engine.cylinder} Cyl ${engine.size} Litre</option>'
+                `<option value="${engine.id}">${engine.cylinder} Cyl ${engine.size} Litre</option>`
               ))
               engineOptions.unshift('<option value="none">None</option>')
 
@@ -273,13 +279,13 @@ $(() => {
           const styleId = $formElements.style.val();
 
           edmundAPIRequest({
-            endpoint: '/styles/${styleId}/transmissions',
+            endpoint: `/styles/${styleId}/transmissions`,
             parameters: {
               view: 'basic',
             },
             success: (data) => {
               const transmissionOptions = data.transmissions.map((transmission) => (
-                '<option value="${transmission.id}">${transmission.name} - ${transmission.transmissionType}</option>'
+                `<option value="${transmission.id}">${transmission.name} - ${transmission.transmissionType}</option>`
               ))
               transmissionOptions.unshift('<option value="none">None</option>')
 
@@ -376,7 +382,7 @@ $(() => {
 
   // Populate the Year field
   const years = range(2017, 1989).map((year) => (
-    '<option value="${year}">${year}</option>'
+    `<option value="${year}">${year}</option>`
   ));
   years.unshift('<option value="none">None</option>')
   $formElements.year.html(years);
@@ -399,7 +405,7 @@ $(() => {
         val = $formElements[key].val();
         if (val === 'none' || val === null) {
           // Invalid field state!
-          errorHtml += '<p>Please select a ${key}</p>';
+          errorHtml += `<p>Please select a ${key}</p>`;
           handleInvalidField($formElements[key]);
         } else {
           handleValidField($formElements[key]);
@@ -411,7 +417,7 @@ $(() => {
     const mileage = $formElements.mileage.val();
     if (mileage === '' || (!Number.parseInt(mileage) && Number.parseInt(mileage) !== 0)) {
       // Invalid field state!
-      errorHtml += '<p>Please enter your mileage</p>';
+      errorHtml += `<p>Please enter your mileage</p>`;
       handleInvalidField($formElements.mileage);
     } else {
       handleValidField($formElements.mileage);
@@ -421,7 +427,7 @@ $(() => {
     const zipcode = $formElements.zipcode.val();
     if (zipcode === '' || !Number.parseInt(zipcode)) {
       // Invalid field state!
-      errorHtml += '<p>Please enter your zip code</p>';
+      errorHtml += `<p>Please enter your zip code</p>`;
       handleInvalidField($formElements.zipcode);
     } else {
       handleValidField($formElements.zipcode);
@@ -454,11 +460,10 @@ $(() => {
           apiResponsesReceived += 1;
 
           const maintenanceScheduleList = data.actionHolder.map((action) => (
-        		  '<li>${action.item} - ${action.itemDescription}</li>'
-        		  ));
-          $resultElements.maintenanceSchedules.html(
-        		  '<ul>${maintenanceScheduleList.join("")}</ul>'
-        		  );
+            `<li>${action.item} - ${action.itemDescription}</li>`
+          ));
+          $resultElements.maintenanceSchedules.html(`<ul>${maintenanceScheduleList.join('')}</ul>`);
+
           if (apiResponsesReceived === totalAPIRequests) {
             showResults();
           }
@@ -474,9 +479,11 @@ $(() => {
           apiResponsesReceived += 1;
 
           const recalls = data.recallHolder.map((recall) => (
-            '<h5>${recall.recallNumber} - ${recall.componentDescription}</h5>'+
-            '<p><strong>${recall.defectConsequence}</strong></p>'+
-            '<p>${recall.defectCorrectiveAction}</p>'
+            `
+            <h5>${recall.recallNumber} - ${recall.componentDescription}</h5>
+            <p><strong>${recall.defectConsequence}</strong></p>
+            <p>${recall.defectCorrectiveAction}</p>
+            `
           ));
           $resultElements.recalls.html(recalls.join(''));
 
@@ -495,8 +502,10 @@ $(() => {
           apiResponsesReceived += 1;
 
           const bulletins = data.serviceBulletinHolder.map((bulletin) => (
-            '<h5>${bulletin.bulletinNumber} - ${bulletin.componentDescription}</h5>'+
-            '<p>${bulletin.summaryText}</p>'
+            `
+            <h5>${bulletin.bulletinNumber} - ${bulletin.componentDescription}</h5>
+            <p>${bulletin.summaryText}</p>
+            `
           ));
           $resultElements.bulletins.html(bulletins.join(''));
 

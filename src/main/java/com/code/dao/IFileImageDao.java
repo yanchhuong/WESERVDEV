@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;*/
 import com.code.model.FileUploadBean;
 
 public interface IFileImageDao /* extends JpaRepository<FileUploadBean,Long>*/{
-	 public void remove(String randname);
+	 public void remove(String filename);
 	 public void insertNew(FileUploadBean input);
-	 public void deleteProfileImage(FileUploadBean input);
 }

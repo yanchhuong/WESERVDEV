@@ -28,20 +28,17 @@ import com.code.service.UserService;
 @RequestMapping(value = "/users")
 public class UserController {
 	UserService userService;
-	
 	@Autowired
 	public UserController(UserService userService) {
 		this.userService=userService;
 	}
-	
 	@RequestMapping(value = "/sign_up",method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> addUser(ModelMap model,HttpServletRequest request,@RequestBody UserSignupBeanIn_C001 input){
 		UserSignupBeanIn_C001 record =  input;
         record.setEnabled(true);
         record.setUsername(input.getEmail());
         record.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
-//        record.setUsercd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
-        record.setUsercd(UUID.randomUUID().toString());
+        record.setUsercd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
         userService.AddUser(record); 
         return new HashMap<String,Object>(){
             {
@@ -51,7 +48,6 @@ public class UserController {
             }
         };
 	}
-	
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {	   
 		   PAGINATION pageIn = new PAGINATION();
@@ -69,7 +65,6 @@ public class UserController {
 	            }
 	        };
 	}
-	
 	@RequestMapping(value = "/updatestatus", method = RequestMethod.POST)
 	public  @ResponseBody Map<String,Object> updateUsers(@RequestBody MUpdateUserStatusIn_U001 input) {
 		this.userService.updateUserStatus(input);
@@ -92,22 +87,20 @@ public class UserController {
 	            }
 	        };
 	}
-	
 	@RequestMapping(value = "/add_roles_list", method = RequestMethod.POST)
-	public  @ResponseBody Map<String,Object> addRoleList(@RequestBody RoleListBean_R001 input) {
-		if(input!=null){
-			RoleListBean_R001 inRec= input;
-			inRec.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
-			this.userService.addRoleList(input);
-		}
-		return new HashMap<String,Object>(){
-			{
-				put("OUT_REC",input);
-	            put("CODE","200"); 
-	        }
-		};
+	 public  @ResponseBody Map<String,Object> addRoleList(@RequestBody RoleListBean_R001 input) {
+		  if(input!=null){
+			  RoleListBean_R001 inRec= input;
+			  inRec.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+			  this.userService.addRoleList(input);
+		  }
+	        return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",input);
+	                put("CODE","200"); 
+	            }
+	        };
 	}
-	
 	@RequestMapping(value = "/remove_roles_list", method = RequestMethod.POST)
 	 public  @ResponseBody Map<String,Object> removeRoleList(@RequestBody RoleListBean_R001 input) {
 		  if(input!=null){
@@ -121,4 +114,8 @@ public class UserController {
 	       };
 	}
 
+	
+	
+	
+	
 }

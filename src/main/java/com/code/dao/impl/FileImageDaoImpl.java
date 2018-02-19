@@ -1,8 +1,5 @@
 package com.code.dao.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -25,13 +22,10 @@ public class FileImageDaoImpl  implements IFileImageDao {
 
 	@Override
 	public void remove(String input) {
-		String sql = "delete from filepicture where randname = :randname";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("randname", input);
+		String sql = "delete  from filepicture where randname = :randname";
 		try{
-			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, params);
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
-			System.out.println("Error sql: "+sql);
 			e.printStackTrace();
 		}
 		
@@ -42,18 +36,8 @@ public class FileImageDaoImpl  implements IFileImageDao {
 		if(input.getOrname().length() > 100) {
 			input.setOrname("Big file");
 		}
-		String sql ="insert into filepicture (orname, randname, regdate, type, path, size, prcd, usercd, catgcd, pcd, kind)"+
-				    " values(:orname, :randname, :regdate, :type, :path, :size, :prcd, :usercd, :catgcd, :pcd, :kind)";
-		try{
-			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void deleteProfileImage(FileUploadBean input) {
-		String sql ="delete from filepicture where usercd = :usercd";
+		String sql ="insert into filepicture (orname, randname, regdate, type, path, size, prcd, usercd, catgcd)"+
+				    " values(:orname, :randname, :regdate, :type, :path, :size, :prcd, :usercd, :catgcd)";
 		try{
 			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){

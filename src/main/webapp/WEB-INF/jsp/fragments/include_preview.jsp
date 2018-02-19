@@ -8,11 +8,11 @@
   Date date = new Date();
   String _localDatetime = dateFormat.format(date);
   
- %>
+ %> 
   
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<!--<meta http-equiv="Cache-Control" content="No-Cache">
+<!--     <meta http-equiv="Cache-Control" content="No-Cache">
     <meta http-equiv="Pragma" content="No-Cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
    
@@ -28,9 +28,10 @@
 
    	<link rel="stylesheet" type="text/css" href="../../css/css_page/slider.css" media="all">
     
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css'>
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css'> -->    
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css'>
+ -->    
     
     <!-- icon link -->
    	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
@@ -54,7 +55,6 @@
     <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetime%>"></script>
     
     <script type="text/javascript" src="../../js-lib/wehrm.string.js?<%=_localDatetime%>"></script>
-    <script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
     
 <!--     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js'></script>

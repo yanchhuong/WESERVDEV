@@ -34,8 +34,8 @@ public class FileImageServiceImpl implements IFileImageService{
 	}
 
 	@Override
-	public void remove(String randname) {
-		this.iFileImageDao.remove(randname);
+	public void remove(String filename) {
+		this.iFileImageDao.remove(filename);
 	}
 	@Override
 	public long getPIDCount() {
@@ -46,10 +46,6 @@ public class FileImageServiceImpl implements IFileImageService{
 	public void insertNew(FileUploadBean fileUploadBean) {
 		this.iFileImageDao.insertNew(fileUploadBean);
 		
-	}
-	@Override
-	public void deleteProfileImage(FileUploadBean fileUploadBean) {
-		this.iFileImageDao.deleteProfileImage(fileUploadBean);
 	}
 
 

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.code.dao.IFileImageDao;
-import com.code.model.FileUploadBean;
-import com.code.model.PostProductBean_C001;
 import com.code.model.UserDetailInOut;
 import com.code.service.IUserDetailService;
 
@@ -22,12 +19,10 @@ import com.code.service.IUserDetailService;
 public class UserDetailController {
 
 	private IUserDetailService iUserDetailService;
-	private IFileImageDao iFileImageDao;
 	
 	@Autowired
-	public UserDetailController(IUserDetailService iUserDetailService, IFileImageDao iFileImageDao) {
+	public UserDetailController(IUserDetailService iUserDetailService) {
 		this.iUserDetailService = iUserDetailService;
-		this.iFileImageDao = iFileImageDao;
 	}
 	
 	@RequestMapping(value = "/getuserdetails", method = RequestMethod.POST)
@@ -79,16 +74,4 @@ public class UserDetailController {
             }
         };
 	}
-	
-	@RequestMapping(value = "/selectprofileimage", method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> updateUserProfile(@RequestBody UserDetailInOut input) {
-		List<FileUploadBean> outrec = this.iUserDetailService.getProfileImage(input);
-		System.out.println("in Controller: "+outrec.toString());
-		return new HashMap<String,Object>(){
-			{
-                put("OUT_REC", outrec);
-            }
-        };
-	}
-	
 }

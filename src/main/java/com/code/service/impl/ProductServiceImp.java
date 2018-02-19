@@ -16,7 +16,6 @@ import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
 import com.code.model.ProductListBeanOut_R002;
 import com.code.model.ProductParam_IN001;
-import com.code.model.UserPageInOut_001;
 import com.code.service.IProductService;
 
 @Service
@@ -27,6 +26,11 @@ public class ProductServiceImp  implements IProductService{
 	public ProductServiceImp(IProductRepository iProductRepository, IFileImageDao iFileImageDao){
 		this.iProductRepository = iProductRepository;
 		this.iFileImageDao = iFileImageDao;
+	}
+	
+	@Override
+	public List<ProductListBeanOut_R001> getProductList(ProductListBeanIn_R001 input) {
+		return this.iProductRepository.getListProduct(input);
 	}
 	
 	@Override
@@ -55,7 +59,7 @@ public class ProductServiceImp  implements IProductService{
 	}
 
 	@Override
-	public List<ProductListBeanOut_R002> getListProduct(ProductParam_IN001 input) {
+	public List<ProductListBeanOut_R002> listProduct(ProductParam_IN001 input) {
 		return this.iProductRepository.listProduct(input);
 	}
 
@@ -85,11 +89,6 @@ public class ProductServiceImp  implements IProductService{
 	@Override
 	public void insertViewProduct(ProductBeanIn_U001 input) {
 		this.iProductRepository.insertViewProduct(input);
-	}
-
-	@Override
-	public int countProducts(ProductParam_IN001 input) {
-		return this.iProductRepository.countProducts(input);
 	}
 
 

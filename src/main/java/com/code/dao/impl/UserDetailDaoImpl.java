@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.IUserDetailRepostory;
-import com.code.model.FileUploadBean;
 import com.code.model.UserDetailInOut;
 
 @Repository
@@ -94,33 +93,5 @@ public class UserDetailDaoImpl implements IUserDetailRepostory{
         	System.out.println("Error: "+sql);
         }
 	}
-
-	@Override
-	public List<FileUploadBean> getProfileImage(UserDetailInOut input) {
-		
-//		String usercd = input.getUsercd();
-//		usercd.replace("\"", "");	
-		String sql = "select f.orname, f.randname, f.regdate, f.\"type\", f.\"path\",\r\n" + 
-					"		   f.\"size\", f.prcd, f.usercd, f.catgcd, f.kind,\r\n" + 
-					"		   p.pcd, p.pnm\r\n" + 
-					"from filepicture f\r\n" + 
-					"right join page_store p on p.usercd = f.usercd\r\n"+
-					"where p.usercd = :usercd";
-		
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("usercd", input.getUsercd());
-
-		List<FileUploadBean> result  = null;
-		try{
-			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sql, params,
-					new BeanPropertyRowMapper<FileUploadBean>(FileUploadBean.class));
-
-			System.out.println("in Repo: "+result);
-		}catch(Exception e){
-			System.out.println("error: "+sql);
-		}
-		return result;
-	}
-
 
 }
