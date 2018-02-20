@@ -1,14 +1,41 @@
+var header_page = {};
 var show;
 var countClick = 0;
 var clickChat = 0;
 var appendChat = '';
 
 $(document).ready(function(){
+
+	if(getSession() != ''){
+		header_page.loadProfileHeaderImage();
+	}else{
+		$(".wrap_setting").find("ul > li:eq(0), li:eq(2)").hide();
+		
+	}
 	
+	$(document).delegate("#logo", "click", function(){
+    	window.location.href = document.location.origin;
+    });
+    	
+	$(document).delegate("#login_sess", "click", function(){
+		var status  = 'login';
+		wehrm.popup.openPopup("login", {status}, function(data){
+			callbackFn(data);
+		});
+	});
+		
+    $(document).delegate("#logout_sess", "click", function(){
+    	var logOutYes = confirm("Are you sure ?");
+    	if(logOutYes){
+    		wehrm.ui.logOut();
+    		location.reload();
+    	}
+    });
+    
     $(document).delegate("#dropdown-toggle", "click", function(){
     	countClick++;
     	$(".wrapper").hide();
-    	$('.notification-menu').slideToggle();
+    	$('#notification-menu').slideToggle();
     	$(".wrap_setting").hide();
     	$(".navbox").hide();
     	if(countClick > 1){
@@ -19,9 +46,9 @@ $(document).ready(function(){
     	}
     });
     
-    $(document).delegate(".notification-menu", "mouseleave", function(){
+    $(document).delegate("#notification-menu", "mouseleave", function(){
     	countClick = 0;
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
 
@@ -51,25 +78,27 @@ $(document).ready(function(){
     	}else{
     		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
     	}
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".wrapper").slideToggle();
     	$(".wrap_setting").hide();
     	$(".navbox").hide();
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
     
-    $(document).delegate("ul.people li", "click", function(){
+    $(document).delegate("ul.people > li.human", "click", function(){
     	countClick = 0;
     	$(".ico_chat").find("img").attr("src","img/bg/chat.png");
     	$(".wrapper").hide();
-    	$(".chat_list").next().append(appendChat);    	
+//    	$(".chat_list").next().append(appendChat); 
+    	$(".chatbox-holder").append(appendChat);
     });
+    
     $(document).delegate(".fa-minus", "click", function(){ $(this).parents('.chatbox').toggleClass('chatbox-min'); });
     $(document).delegate(".fa-close", "click", function(){ $(this).parents('.chatbox').remove(); });
     
     $(document).delegate('#navbox-trigger', "click", function(){
     	$(".wrapper").hide();
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".wrap_setting").hide();
 //    	$('#navigation-bar').toggleClass('navbox-open');
     	$(".navbox").slideToggle();
@@ -78,11 +107,74 @@ $(document).ready(function(){
     $(document).delegate('#setting_trigger', "click", function(){
     	$(".wrapper").hide();
     	$(".navbox").hide();
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".wrap_setting").slideToggle();
     });
     
+    $(document).delegate(".animate > table, tbody", "click", function(){
+    	var pcd = $(this).find('td').attr('data-pcd');
+    	window.location.href = document.location.origin+'/profile?ref='+pcd;
+    });
+
+    
 });
+
+
+
+header_page.loadProfileHeaderImage = function(){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var input = {};
+	
+	input["usercd"] = getSession();
+	
+    $.ajax({
+    	type	: 'POST',
+		url		: '/userdetails/selectprofileimage',
+		async	: false,
+		cache	: true,
+		data	: JSON.stringify(input),
+	    dataType	: 'json',
+	    contentType : 'application/json',
+		beforeSend  : function(xhr) {
+			xhr.setRequestHeader(csrfHeader, csrfToken);
+		},
+		success : function(data){
+			$(".animate").find("table, tbody").html("");
+			
+			$.each(data.OUT_REC, function(i, v){
+				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
+				
+				if(v.pnm.length > 20){
+					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm.substring(0,15)+' . . .</td></tr>');
+				}else{
+					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm+'</td></tr>');
+				}
+			});
+		  }
+	  });
+};
+
+
+function getSession(){
+	 var sessionObj = "";
+	 $.ajax({
+		 type   : 'GET',
+	     url    : "/get_sesssion",
+	     cache  : true,
+	     async : false
+	 })
+	 .done(function(dat){
+	  if(dat.SESSION_IS!=null){
+	   sessionObj = dat.SESSION_IS.usercd;
+	   console.log("in getsession: "+sessionObj);
+	  }
+	 })
+	 return sessionObj;
+};
+
+
+
 
 appendChat += '<div class="chatbox">																																	';
 appendChat += '    <div class="chatbox-top">																															';

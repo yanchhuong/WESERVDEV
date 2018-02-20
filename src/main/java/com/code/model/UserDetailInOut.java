@@ -1,5 +1,6 @@
 package com.code.model;
 
+import java.util.ArrayList;
 public class UserDetailInOut {
 	
 	private String fullname;
@@ -9,7 +10,6 @@ public class UserDetailInOut {
 	private String birthdate;
 	private String cphone;
 	private String usercd;
-	
 	
 	public String getFullname() {
 		return fullname;

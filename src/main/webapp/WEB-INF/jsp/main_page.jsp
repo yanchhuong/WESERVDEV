@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" class="leaf">
 <head>
-	<meta charset="UTF-8">
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
@@ -24,8 +23,6 @@
 		<jsp:include page="header_include.jsp"/>
     </div>
 	<!-- // header -->
-	
-	
 
 	<!-- container -->
 	<div id="container">
@@ -35,18 +32,18 @@
 				<div class="gnb_inner">
 					<button type="button" class="btn_gnbclose">Close</button>
 					<dl class="memview">
-						<dt><a href="javascript:void(0);"><img id="sidebar_photo" src="img/bg/bg_nophoto.png" alt="User"></a></dt>
+						<dt><a href="javascript:void(0);"><img id="sidebar_photo" width="35px" height="35px" src="../../img/bg/bg_nophoto.png" alt="User"></a></dt>
 						<dd id="sidebar_name">Please Login</dd>
 					</dl>
 					<div class="meminfo">
 						<a href="javascript:void(0);" class="sidebar_item"><em>Goods</em></a>
-						<a href="javascript:void(0);" class="sidebar_faverd"><em>Stream</em></a>
-						<a href="javascript:void(0);" class="sidebar_following"><em>Follow</em></a>
+						<a href="javascript:void(0);" class="sidebar_signup"><em>Sign Up</em></a>
+						<a href="javascript:void(0);" class="sidebar_login"><em>Log In</em></a>
 					</div>
 					<dl class="category">
 						<dt>
 							<strong>Category</strong>
-							<button type="button" class="btn_upload"><span>Post Free here!</span></button>
+							<button type="button" class="btn_upload" id="btn_upload"><span>Post Free here!</span></button>
 						</dt>
 						<dd id="sidebar_catagory_list">
 							<!-- <a href="#none" class="ctg_01">Women's clothing</a>
@@ -491,4 +488,6 @@
 }.call(this)); */
 </script>
 </body>
+
+<%@include file="fragments/html_iframes.jsp"%>
 </html>

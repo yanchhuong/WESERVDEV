@@ -28,6 +28,7 @@ public class SuccessLoginHandler implements AuthenticationSuccessHandler{
 	SuccessLoginHandler(UserService iUserDao){
 		this.iUserDao=iUserDao;
 	}
+	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
 	@Override
