@@ -150,7 +150,7 @@ function LoadData(){
         	  html    +='<div class="wrap">'
         	  html    +='<span class="contact-status online"></span>'
 		      if(v.randname!=null){
-	        	  html    +='<img src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" alt="">'
+	        	  html    +='<img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" alt="">'
 
 		      }else{
 		          html    +=' <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />'

@@ -70,7 +70,7 @@ main_page.loadCategory = function(){
 	    	$.each(dat.OUT_REC, function(i,v){
 	    		var j = i + 1;
 	    		if(v.lvl == "1"){
-	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
+	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
 	    		}
 	    	});
 	    	$("#sidebar_catagory_list").html(html);
@@ -189,7 +189,7 @@ main_page.listProduct = function(parentId){
     	    	$.each(data, function(i,v){
     	    		html += '<li>';
     		        html += 	'<a href="javascript:" class="thumb">';
-    			    html += 		'<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="first_product" class="thumb loaded">';
+    			    html += 		'<img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" alt="first_product" class="thumb loaded">';
     			    html += 		'<p class="txtinfo">';
     				html += 		'<em>'+v.title+'</em>';
     				html += 		'<strong class="flt"><span>$'+v.price+'</span></strong>';
@@ -246,7 +246,7 @@ main_page.loadProfileImage = function(){
 		success : function(data){
 
 			$.each(data.OUT_REC, function(i, v){
-				$("#sidebar_photo").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
+				$("#sidebar_photo").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname);
 //				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
 			});
 
