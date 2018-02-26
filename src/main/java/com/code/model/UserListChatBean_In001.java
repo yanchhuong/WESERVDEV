@@ -5,8 +5,6 @@ public class UserListChatBean_In001 {
 	private String role ;
 	private String fullname;
 	private String logoutTime;
-	private String usercd;
-	
 	public String getChatId() {
 		return chatId;
 	}
@@ -30,12 +28,6 @@ public class UserListChatBean_In001 {
 	}
 	public void setLogoutTime(String logoutTime) {
 		this.logoutTime = logoutTime;
-	}
-	public String getUsercd() {
-		return usercd;
-	}
-	public void setUsercd(String usercd) {
-		this.usercd = usercd;
 	}
 
 }

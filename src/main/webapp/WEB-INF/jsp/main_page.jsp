@@ -5,7 +5,6 @@
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 	<%@include file="fragments/include_page.jsp"%>
-	<script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
 
 <style>
 

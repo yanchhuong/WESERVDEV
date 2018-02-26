@@ -6,14 +6,6 @@ public class UserSessionBean {
 	private String sex;
 	private String randname;
 	private String cphone;
-	private String id;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getUsercd() {
 		return usercd;
 	}

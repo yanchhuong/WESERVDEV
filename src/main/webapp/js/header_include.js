@@ -10,6 +10,7 @@ $(document).ready(function(){
 		header_page.loadProfileHeaderImage();
 	}else{
 		$(".wrap_setting").find("ul > li:eq(0), li:eq(2)").hide();
+		
 	}
 	
 	$(document).delegate("#logo", "click", function(){
@@ -31,29 +32,7 @@ $(document).ready(function(){
     	}
     });
     
-    $(document).delegate(".header_pro", "click", function(){
-    	$("#pro_test").slideToggle();
-    });
-    
-    $(document).delegate(".header_pro", "mouseenter", function(){
-    	$("#pro_test").slideToggle();
-    });
-    
     $(document).delegate("#dropdown-toggle", "click", function(){
-    	countClick++;
-    	$(".wrapper").hide();
-    	$('#notification-menu').slideToggle();
-    	$(".wrap_setting").hide();
-    	$(".navbox").hide();
-    	if(countClick > 1){
-    		countClick = 0;
-    		$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
-    	}else{
-    		$(".btn_alrim").css({"background": "url(img/bg/musical-bell-outline-change.png) no-repeat 50% 14px", "background-size": "19px 23px"});
-    	}
-    });
-    
-    $(document).delegate("#dropdown-toggle", "mouseover", function(){
     	countClick++;
     	$(".wrapper").hide();
     	$('#notification-menu').slideToggle();
@@ -106,21 +85,6 @@ $(document).ready(function(){
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
     
-    $(document).delegate(".ico_chat", "mouseover", function(){
-    	countClick++;
-    	if(countClick > 1){
-    		countClick = 0;
-    		$(".ico_chat").find("img").attr("src","img/bg/chat.png");
-    	}else{
-    		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
-    	}
-    	$('#notification-menu').hide();
-    	$(".wrapper").slideToggle();
-    	$(".wrap_setting").hide();
-    	$(".navbox").hide();
-    	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
-    });
-    
     $(document).delegate("ul.people > li.human", "click", function(){
     	countClick = 0;
     	$(".ico_chat").find("img").attr("src","img/bg/chat.png");
@@ -133,14 +97,6 @@ $(document).ready(function(){
     $(document).delegate(".fa-close", "click", function(){ $(this).parents('.chatbox').remove(); });
     
     $(document).delegate('#navbox-trigger', "click", function(){
-    	$(".wrapper").hide();
-    	$('#notification-menu').hide();
-    	$(".wrap_setting").hide();
-//    	$('#navigation-bar').toggleClass('navbox-open');
-    	$(".navbox").slideToggle();
-    });
-    
-    $(document).delegate('#navbox-trigger', "mouseover", function(){
     	$(".wrapper").hide();
     	$('#notification-menu').hide();
     	$(".wrap_setting").hide();
@@ -187,7 +143,7 @@ header_page.loadProfileHeaderImage = function(){
 			$(".animate").find("table, tbody").html("");
 			
 			$.each(data.OUT_REC, function(i, v){
-				$("#header_profile").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname);
+				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
 				
 				if(v.pnm.length > 20){
 					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm.substring(0,15)+' . . .</td></tr>');

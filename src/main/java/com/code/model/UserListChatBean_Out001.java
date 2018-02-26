@@ -6,9 +6,6 @@ public class UserListChatBean_Out001 {
 	private String fullname;
 	private String logoutTime;
 	private String randname;
-	private String usercd;
-	private String grpcd;
-	
 	public String getRandname() {
 		return randname;
 	}
@@ -38,18 +35,6 @@ public class UserListChatBean_Out001 {
 	}
 	public void setLogoutTime(String logoutTime) {
 		this.logoutTime = logoutTime;
-	}
-	public String getUsercd() {
-		return usercd;
-	}
-	public void setUsercd(String usercd) {
-		this.usercd = usercd;
-	}
-	public String getGrpcd() {
-		return grpcd;
-	}
-	public void setGrpcd(String grpcd) {
-		this.grpcd = grpcd;
 	}
 
 }

@@ -22,8 +22,7 @@ public class SessionManager {
 	}
 	
     public static void logout(HttpServletRequest request, HttpServletResponse respond){
-    	 HttpSession session = request.getSession(false);
-         if( session != null ) session.removeAttribute(SESSION_ATTRIBUTE);
-    	
+    	HttpSession session = request.getSession(true);
+    	session.removeAttribute(SESSION_ATTRIBUTE);
     }
 }

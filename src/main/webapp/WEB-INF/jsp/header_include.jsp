@@ -3,7 +3,7 @@
 <head> 
     <script type="text/javascript" src="/js/header_include.js"></script>
 <style>
-@media(max-width:1280px){
+@media(max-width:1290px){
 .menu_header{float:left;position: fixed;top: 97px;right:17px;width: 50px;height: 180px;background-color: #ffffff;background-size: 32px 32px;font-size: 0;border-radius: 20px;border: 1px solid #34b188;}
 .header_pro{position: relative;left: 20%;top: 35%;margin-top: 10px;}
 .header_inner .btn_alrim {position: relative;left: -7px;top: 29%;padding-bottom: 12px;}
@@ -23,8 +23,6 @@
 .seller_other_opt{width:100%;}
 .sellerwrap .seller_info{padding: 5px 15px 10px 300px;}
 .header_inner h1.logo{top:15px;}
-#pro_test{position:absolute;top:6%;margin-left:-450%;}
-#pro_test ul li{background-color:lightgray;}
 }
 
 @media(max-width:955px){
@@ -44,8 +42,6 @@
 .wrap_setting {left: -223px;position: absolute;top: 75%;}
 }
 	
-	
-#pro_test{ left:28.5%; }
 </style>
 </head>
 
@@ -72,20 +68,7 @@
 					<li>
 						<div class="header_pro">
 							<a href="javascript:void(0);"><img id="header_profile" style="border-radius:50%;" width="30px" height="30px" src="../../img/bg/bg_nophoto.png" alt="User"></a>
-						</div>
-						<dropdown class="wrap_setting" id="pro_test">
-						  <ul class="animate">
-						    <li class="animate">Profile<i class="fa fa-suitcase float-right"></i>
-						    	<table style="width: 200px;margin-left: -20px;margin-top:11px">
-						    	    <tbody>
-								    	<tr><td style="padding: 7px 0 10px 38px;">Panda's Onli...(default)</td></tr>
-									</tbody>
-								</table>
-						    </li>
-						    <li class="animate" id="login_sess">Login<i class="fa fa-sign-in float-right"></i></li>
-						    <li class="animate" id="logout_sess" style="color:#d95353;">Logout<i class="fa fa-sign-out float-right"></i></li>
-						  </ul>
-						</dropdown>
+						</div>			
 					</li>
 					<li>
 						<!-- aleim -->
@@ -221,7 +204,7 @@
 							</div>
 						</div>
 					</li>
-					<li style="display:none;">
+					<li>
 						<div class="setting_list">
 							<!-- <div class="col-sm-3"> -->
 								<div id="setting_trigger" style="position:absolute;right:0;top:15.505050505050px;">
