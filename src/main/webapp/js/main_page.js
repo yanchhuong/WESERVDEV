@@ -189,7 +189,7 @@ main_page.listProduct = function(parentId){
     	    	$.each(data, function(i,v){
     	    		html += '<li>';
     		        html += 	'<a href="javascript:" class="thumb">';
-    			    html += 		'<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="first_product" class="thumb loaded">';
+    			    html += 		'<img src="https://s3-us-west-1.amazonaws.com/g9bay-image-files/'+v.randname+'" alt="first_product" class="thumb loaded">';
     			    html += 		'<p class="txtinfo">';
     				html += 		'<em>'+v.title+'</em>';
     				html += 		'<strong class="flt"><span>$'+v.price+'</span></strong>';

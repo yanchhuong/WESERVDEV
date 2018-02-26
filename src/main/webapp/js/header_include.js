@@ -10,7 +10,6 @@ $(document).ready(function(){
 		header_page.loadProfileHeaderImage();
 	}else{
 		$(".wrap_setting").find("ul > li:eq(0), li:eq(2)").hide();
-		
 	}
 	
 	$(document).delegate("#logo", "click", function(){
@@ -32,7 +31,29 @@ $(document).ready(function(){
     	}
     });
     
+    $(document).delegate(".header_pro", "click", function(){
+    	$("#pro_test").slideToggle();
+    });
+    
+    $(document).delegate(".header_pro", "mouseenter", function(){
+    	$("#pro_test").slideToggle();
+    });
+    
     $(document).delegate("#dropdown-toggle", "click", function(){
+    	countClick++;
+    	$(".wrapper").hide();
+    	$('#notification-menu').slideToggle();
+    	$(".wrap_setting").hide();
+    	$(".navbox").hide();
+    	if(countClick > 1){
+    		countClick = 0;
+    		$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+    	}else{
+    		$(".btn_alrim").css({"background": "url(img/bg/musical-bell-outline-change.png) no-repeat 50% 14px", "background-size": "19px 23px"});
+    	}
+    });
+    
+    $(document).delegate("#dropdown-toggle", "mouseover", function(){
     	countClick++;
     	$(".wrapper").hide();
     	$('#notification-menu').slideToggle();
@@ -85,6 +106,21 @@ $(document).ready(function(){
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
     
+    $(document).delegate(".ico_chat", "mouseover", function(){
+    	countClick++;
+    	if(countClick > 1){
+    		countClick = 0;
+    		$(".ico_chat").find("img").attr("src","img/bg/chat.png");
+    	}else{
+    		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
+    	}
+    	$('#notification-menu').hide();
+    	$(".wrapper").slideToggle();
+    	$(".wrap_setting").hide();
+    	$(".navbox").hide();
+    	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+    });
+    
     $(document).delegate("ul.people > li.human", "click", function(){
     	countClick = 0;
     	$(".ico_chat").find("img").attr("src","img/bg/chat.png");
@@ -97,6 +133,14 @@ $(document).ready(function(){
     $(document).delegate(".fa-close", "click", function(){ $(this).parents('.chatbox').remove(); });
     
     $(document).delegate('#navbox-trigger', "click", function(){
+    	$(".wrapper").hide();
+    	$('#notification-menu').hide();
+    	$(".wrap_setting").hide();
+//    	$('#navigation-bar').toggleClass('navbox-open');
+    	$(".navbox").slideToggle();
+    });
+    
+    $(document).delegate('#navbox-trigger', "mouseover", function(){
     	$(".wrapper").hide();
     	$('#notification-menu').hide();
     	$(".wrap_setting").hide();
