@@ -78,10 +78,10 @@ $(document).ready(function(){
     	uploadFormData();
     	if(_imageStatus == 'changeCover'){    		
     		updateCoverImage();
-    		$(".usr_pf").css("background-image","url("+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+_profileRandname+")");
+    		$(".usr_pf").css("background-image","url("+"https://storage.googleapis.com/g9bay-file/"+_profileRandname+")");
     	}else if(_imageStatus == 'changeProfile'){
         	updateProfileImage();
-            $("#user_pic").find("img:eq(0)").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+_profileRandname);
+            $("#user_pic").find("img:eq(0)").attr("src","https://storage.googleapis.com/g9bay-file/"+_profileRandname);
     	}
     });
     
@@ -761,7 +761,7 @@ profile_page_001.loadCoverImage = function(){
 					$("#cv_url").val(v.url);
 					$("#cv_enabled").val(v.enabled);
 					$("#cv_regdate").val(v.regdate);
-					$(".usr_pf").css("background-image","url("+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+")");
+					$(".usr_pf").css("background-image","url("+"https://storage.googleapis.com/g9bay-file/"+v.randname+")");
 					$(".user-name").text(v.pnm);
 				});
 			}		
@@ -793,10 +793,10 @@ profile_page_001.loadProfileImage = function(){
 			$(".usr_pic").html('');
 			
 			$.each(data.OUT_REC, function(i,v){
-				strProfile += '<img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" class="img_Prf"/>';
+				strProfile += '<img src="'+"https://storage.googleapis.com/g9bay-file/"+v.randname+'" class="img_Prf"/>';
 				strProfile += '<span class="btn-change-pic"><img src="../../img/users/camera-ico.png"></span>';
 				if($("#cv_usercd").val() == $("#usercd").val()){
-					$("#header_profile").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname);
+					$("#header_profile").attr("src","https://storage.googleapis.com/g9bay-file/"+v.randname);
 				}
 			});
 			
@@ -949,7 +949,7 @@ profile_page_001.loadPageProduct = function(){
 							+'		  </div>'
 							+'        <div id="wrap-value">'
 							+'       	<div id="pro-thumb-wrap">'
-							+'           	<a href="javascript:" class="pro-img"><img id="wrap" width="100%" height="225px"  src="'+'https://s3-us-west-1.amazonaws.com/g9bay-image-files/'+ v.randname+'" /></a>'
+							+'           	<a href="javascript:" class="pro-img"><img id="wrap" width="100%" height="225px"  src="'+'https://storage.googleapis.com/g9bay-file/'+ v.randname+'" /></a>'
 							+'       	</div><!--end of product thumbnail-->'
 							+'       	<div id="pro-desc-wrap">'
 							+'           	<a href="javascript:" class="pro-title">'+v.title+'</a>'
@@ -1032,7 +1032,7 @@ profile_page_001.loadPageSaveProduct = function(){
 							+'		  </div>'
 							+'        <div id="wrap-value">'
 							+'       	<div id="pro-thumb-wrap">'
-							+'           	<a href="javascript:" class="pro-img"><img id="wrap" width="100%" height="225px"  src="'+'https://s3-us-west-1.amazonaws.com/g9bay-image-files/'+ v.randname+'" /></a>'
+							+'           	<a href="javascript:" class="pro-img"><img id="wrap" width="100%" height="225px"  src="'+'https://storage.googleapis.com/g9bay-file/'+ v.randname+'" /></a>'
 							+'       	</div><!--end of product thumbnail-->'
 							+'       	<div id="pro-desc-wrap">'
 							+'           	<a href="javascript:" class="pro-title">'+v.title+'</a>'
