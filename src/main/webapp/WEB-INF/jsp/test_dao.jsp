@@ -3,9 +3,9 @@
 <%@page import="com.code.session.UserSession"%>
 <%
 
-UserSessionBean sess = SessionManager.getSession(request, response);
+/* UserSessionBean sess = SessionManager.getSession(request, response);
 SessionManager.logout(request, response);
-String usercd = sess.getUsercd();
+String usercd = sess.getUsercd(); */
 
 %>
 <!DOCTYPE html>
@@ -18,7 +18,15 @@ String usercd = sess.getUsercd();
     <meta charset="utf-8">
     <title>Home page</title>
 
+	 <!-- BEGIN Pre-requisites -->
+	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+	  </script>
+	  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+	  </script>
+	  <!-- END Pre-requisites -->
     <%@include file="fragments/include_admin.jsp"%>
+    
+    
     
 <script src="/js/test_dao.js"></script>       
    <style type="text/css">
@@ -50,7 +58,7 @@ String usercd = sess.getUsercd();
 </head>
 <body>
 
-<input type="hidden" value="<%=usercd%>"/>
+<%-- <input type="hidden" value="<%=usercd%>"/> --%>
 <div class="example">
     <div class="container">
         <div class="jumbotron">
@@ -65,17 +73,30 @@ String usercd = sess.getUsercd();
                     Message: ${sessionScope.username}
                 </div>
                 
-                <form>
+                <form id='putFile'>
                      <input type="button" value="Hello Ajax" id="ajaxtest">
                      <input type="button" value="Add" id="btAdd">
                      <input type="button" value="Search" id="tbSearch">
                      <input type="text" id="keysearch"/>
+                     <input name="myFile" type="file" id="txtfile">
                      <br>
                 </form>
+                
+                <form enctype="text/plain" method="POST" name="putFile" id="putFile">
+		           <div>
+		            Bucket: <input type="text" name="bucket" />
+		            File Name: <input type="text" name="fileName" />
+		            <br /> File Contents: <br />
+		            <textarea name="content" id="content" rows="3" cols="60"></textarea>
+		            <br />
+		            <input type="submit" onclick='uploadFile(this)' value="Upload Content" />
+                   </div>
+               </form>
             </nav>
         </div>
 
     </div>
+    <button id="signinButton">Sign in with Google</button>
     
     <div id="wrapper">
 	    <section>
@@ -91,76 +112,52 @@ String usercd = sess.getUsercd();
 
 
 <script>
-$(function() {
-  (function(name) {
-    var container = $('#pagination-' + name);
-    var sources = function () {
-      var result = [];
+var auth2;
+start();
+function start() {
+	 console.log("start");
+     gapi.load('auth2', function() {
+       auth2 = gapi.auth2.init({
+         client_id: '520435578367-lpcvpipldnciot8k75akbvll3tipf82g.apps.googleusercontent.com',
+         // Scopes to request in addition to 'profile' and 'email'
+         //scope: 'additional_scope'
+       });
+     });
+ }
+function signInCallback(authResult) {
+  if (authResult['code']) {
+	  
+	  cosole.log(authResult);
 
-      for (var i = 1; i < 196; i++) {
-        result.push(i);
-      }
+    // Hide the sign-in button now that the user is authorized, for example:
+    $('#signinButton').attr('style', 'display: none');
 
-      return result;
-    }();
-
-    var options = {
-      dataSource: sources,
-      callback: function (response, pagination) {
-        window.console && console.log(response, pagination);
-
-        var dataHtml = '<ul>';
-
-        $.each(response, function (index, item) {
-          dataHtml += '<li>' + item + '</li>';
-        });
-
-        dataHtml += '</ul>';
-
-        container.prev().html(dataHtml);
-      }
-    };
-
-    //$.pagination(container, options);
-
-    container.addHook('beforeInit', function () {
-      window.console && console.log('beforeInit...');
-    });
-    container.pagination(options);
-
-    container.addHook('beforePageOnClick', function () {
-      window.console && console.log('beforePageOnClick...');
-      //return false
-    });
-  })('demo1');
-
-  (function(name) {
-    var container = $('#pagination-' + name);
-    container.pagination({
-      dataSource: 'https://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?',
-      locator: 'items',
-      totalNumber: 120,
-      pageSize: 20,
-      ajax: {
-        beforeSend: function() {
-          container.prev().html('Loading data from flickr.com ...');
-        }
+    // Send the code to the server
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:8080',
+      // Always include an `X-Requested-With` header in every AJAX request,
+      // to protect against CSRF attacks.
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
       },
-      callback: function(response, pagination) {
-        window.console && console.log(22, response, pagination);
-        var dataHtml = '<ul>';
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response.
+      },
+      processData: false,
+      data: authResult['code']
+    });
+  } else {
+    // There was an error.
+  }
+}
+ $('#signinButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+  
 
-        $.each(response, function (index, item) {
-          dataHtml += '<li>' + item.title + '</li>';
-        });
-
-        dataHtml += '</ul>';
-
-        container.prev().html(dataHtml);
-      }
-    })
-  })('demo2');
-})
 </script>
 
 </body>

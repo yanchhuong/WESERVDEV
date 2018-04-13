@@ -2,9 +2,7 @@ var _this;
 $(document).ready(function(){
 	 // on load 
 	 //ListAll();
-
-	 
-	  Session();
+	   Session();
        $("#btfacebooklog").click( "click", function() {
 		   
     	   window.fbAsyncInit = function() {
@@ -34,24 +32,24 @@ $(document).ready(function(){
 function uploadFormData(){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken  = $("meta[name='_csrf']").attr("content");
-	    var formData = new FormData();
+	   var formData = new FormData();
 	    formData.append('file', $('input[type=file]')[0].files[0]);
-	    console.log("form data " + formData);
+	  
 	    $.ajax({
-	      url: '/storage/uploadFile',
-	      data: formData,
-	      processData: false,
-	      contentType: false,
-	      type: 'POST',
-	      beforeSend: function(xhr) {
-			  xhr.setRequestHeader(csrfHeader, csrfToken);
-		  },
-	      success: function(data) {
-	        alert(data);
-	      },
-	      error: function() {
-	        $('#errorMsg').html("An error occurred.");
-	      }
+	        url         :'google_cloud/uploadimg_test',
+		    data		: formData,
+		    cache   	: true,
+		    type		: 'POST',
+		    dataType	: 'text',
+		    processData	: false,
+		    contentType	: false,
+		    beforeSend: function(xhr) {
+		      xhr.setRequestHeader(csrfHeader, csrfToken);
+		    },
+		    success: function(data){
+		            data = JSON.parse(data);
+		            console.log(data);
+		    }
 	    });
 };
 function Session(id){

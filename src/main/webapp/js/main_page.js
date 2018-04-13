@@ -48,7 +48,7 @@ $(document).ready(function(){
 	});
 	
 //	$(document).delegate(".goodslist li", "click", function(){
-	$(".goodslist li").live("click", function(){
+	$(".goodslist li").on("click", function(){
 		var prcd = $(this).find("#prcd").val();
 		var parentid = $(this).find("#parentid").val();
 		window.location.href = document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid;

@@ -1,8 +1,17 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
+<%
+	DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	Date date = new Date();
+	String _localDatetime = dateFormat.format(date);
+%> 
+
 <!DOCTYPE html>
 <html lang="en" >
 
 <head>
-  	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<!-- default header name is X-CSRF-TOKEN -->
  	<meta name="_csrf" content="${_csrf.token}"/>
  	<meta name="_csrf_header" content="${_csrf.headerName}"/>
@@ -20,7 +29,42 @@
     <script src="/js-lib/jquery-2.1.0.min.js"></script>
     <script src="/js-lib/sockjs-0.3.4.js"></script>
     <script src="/js-lib/stomp.js"></script>
-  
+    <script type="text/javascript" src="../../js_admin/wehrm.string.js?<%=_localDatetime%>"></script>
+    
+    <!-- popup -->
+    <script type="text/javascript" src="../../js_admin/wehrm.popup.js?<%=_localDatetime%>"></script> 
+    <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetime%>"></script>
+
+<style>
+	.group {
+	  border-radius: 9999px;
+	  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+	  height: 150px;
+	  margin: 0 20px;
+	  overflow: hidden;
+	  width: 150px;
+	}
+	
+	.group > div {
+	  background-color: #333;
+	  background-position: 50% 50%;
+	  background-size: cover;
+	  float: left;
+	  height: 100%;
+	  width: 50%;
+	}
+	
+	.group > div:first-child:last-child {
+	  width: 100%;
+	}
+	
+	.group > div:last-child:nth-child(3),
+	.group > div:nth-child(2):nth-last-child(2)
+	{
+	  height: 50%;
+	}
+
+</style>
 </head>
 
 <body>
@@ -169,14 +213,14 @@
 				</ul>
 			</div>
 			<div id="bottom-bar">
-				<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-				<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+				<button id="addcontact" class="activeChat"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+				<button id="btnchat_list"><i class="fa fa-paper-plane fa-fw" aria-hidden="true"></i> <span>Chat</span></button>
 			</div>
 		</div>
 		<div class="content">
-			<div class="contact-profile" id="reciever" data-id="AAA">
-				<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-				<p>Harvey Specter</p>
+			<div class="contact-profile" id="reciever" data-id="">
+				<img width="40px" height="40px" src="img/bg/bg_logo.png" alt="" />
+				<p>Discuss to get your beautiful products...!</p>
 				<div class="social-media">
 					<i class="fa fa-facebook" aria-hidden="true"></i>
 					<i class="fa fa-twitter" aria-hidden="true"></i>
@@ -185,41 +229,64 @@
 			</div>
 			<div class="messages">
 				<ul>
-					<li class="sent">
-						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-						<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+					<li style="margin-top: 13%;">
+						<table><tbody>
+					        	<tr>
+						            <td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?1)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?4)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?2)"></div>
+										</div>
+						            </td>
+						        	<td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?9)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?7)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?5)"></div>
+										</div>
+						            </td>
+						            <td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?3)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?8)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?6)"></div>
+										</div>
+						            </td>
+					            </tr>
+					    </tbody></table>
 					</li>
-					<li class="replies">
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>When you're backed against the wall, break the god damn thing down.</p>
-					</li>
-					<li class="replies">
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>Excuses don't win championships.</p>
-					</li>
-					<li class="sent">
-						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-						<p>Oh yeah, did Michael Jordan tell you that?</p>
-					</li>
-					<li class="replies">
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>No, I told him that.</p>
-					</li>
-					<li class="replies">
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>What are your choices when someone puts a gun to your head?</p>
-					</li>
-					<li class="sent">
-						<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-						<p>What are you talking about? You do what they say or they shoot you.</p>
-					</li>
-					<li class="replies">
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+					<li style="margin-top: 13%;">
+						<table><tbody>
+					        	<tr>
+						            <td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?4)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?5)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?6)"></div>
+										</div>
+						            </td>
+						        	<td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?1)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?5)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?4)"></div>
+										</div>
+						            </td>
+						            <td>
+						            	<div class="group">
+											<div style="background-image:url(http://i.pravatar.cc/300?7)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?5)"></div>
+											<div style="background-image:url(http://i.pravatar.cc/300?9)"></div>
+										</div>
+						            </td>
+					            </tr>
+					    </tbody></table>
 					</li>
 				</ul>
+				
 			</div>
-			<div class="message-input">
+			<div class="message-input" style="display:none;">
 				<div class="wrap">
 				<input type="text" placeholder="Write your message..." id="txtCHAT" />
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
