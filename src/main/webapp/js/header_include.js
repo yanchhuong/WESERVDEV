@@ -18,7 +18,7 @@ $(document).ready(function(){
     	
 	$(document).delegate("#login_sess", "click", function(){
 		var status  = 'login';
-		wehrm.popup.openPopup("login", {status}, function(data){
+		wehrm.popup.openPopup("login", {data:status}, function(data){
 			callbackFn(data);
 		});
 	});
@@ -171,7 +171,7 @@ header_page.loadProfileHeaderImage = function(){
 	var input = {};
 	
 	input["usercd"] = getSession();
-	
+	console.log(input);
     $.ajax({
     	type	: 'POST',
 		url		: '/userdetails/selectprofileimage',
@@ -184,13 +184,12 @@ header_page.loadProfileHeaderImage = function(){
 			xhr.setRequestHeader(csrfHeader, csrfToken);
 		},
 		success : function(data){
-			$(".animate").find("table, tbody").html("");
-			
+			$(".animate").find("table, tbody").html("");			
 			$.each(data.OUT_REC, function(i, v){
 				$("#header_profile").attr("src","https://storage.googleapis.com/g9bay-file/"+v.randname);
 				
 				if(v.pnm.length > 20){
-					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm.substring(0,15)+' . . .</td></tr>');
+					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'" test="test">'+v.pnm.substring(0,15)+' . . .</td></tr>');
 				}else{
 					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm+'</td></tr>');
 				}
@@ -211,7 +210,6 @@ function getSession(){
 	 .done(function(dat){
 	  if(dat.SESSION_IS!=null){
 	   sessionObj = dat.SESSION_IS.usercd;
-	   console.log("in getsession: "+sessionObj);
 	  }
 	 })
 	 return sessionObj;

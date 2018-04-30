@@ -10,7 +10,6 @@
 <head>
   <meta charset='UTF-8'>
   <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
   <meta name="_csrf" content="${_csrf.token}"/>
   <meta name="_csrf_header" content="${_csrf.headerName}"/>
   <%@include file="fragments/include_admin.jsp"%>

@@ -59,8 +59,8 @@
 					</div>
 					
 					<div class="usr_pic" id="user_pic">
-						<!-- <img src="https://organicthemes.com/demo/profile/files/2012/12/profile_img.png">
-						<span class="btn-change-pic"><img src="../../img/users/camera-ico.png"></span> -->
+						<img src="https://storage.googleapis.com/bucket-test-001/20180428_50c5d384-17c3-457d-b3d0-97b9bee6fcc2.png">
+						<span class="btn-change-pic"><img src="../../img/users/camera-ico.png"></span> 
 					</div>
 					<!-- //user pf -->
 					

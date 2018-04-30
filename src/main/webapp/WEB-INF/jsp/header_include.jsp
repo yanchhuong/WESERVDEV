@@ -102,37 +102,37 @@
 						                    <span class="time" style="margin-left: 28%;">Make all read</span>
 						                </li>
 						                <li class="person" data-chat="person5">
-						                    <img src="https://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Michael Jordan</span>
 						                    <span class="time">2:09 PM</span>
 						                    <span class="preview">Wasup for the third time like is you bling bitch</span>
 						                </li>
 						                <li class="person" data-chat="person2">
-						                    <img src="https://s3.postimg.org/yf86x7z1r/img2.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Dog Woofson</span>
 						                    <span class="time">1:44 PM</span>
 						                    <span class="preview">I've forgotten how it felt before</span>
 						                </li>
 						                <li class="person" data-chat="person3">
-						                    <img src="https://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Louis CK</span>
 						                    <span class="time">2:09 PM</span>
 						                    <span class="preview">But we’re probably gonna need a new carpet.</span>
 						                </li>
 						                <li class="person" data-chat="person4">
-						                    <img src="https://s3.postimg.org/quect8isv/img4.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Bo Jackson</span>
 						                    <span class="time">2:09 PM</span>
 						                    <span class="preview">It’s not that bad...</span>
 						                </li>
 						                <li class="person" data-chat="person5">
-						                    <img src="https://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Michael Jordan</span>
 						                    <span class="time">2:09 PM</span>
 						                    <span class="preview">Wasup for the third time like is you bling bitch</span>
 						                </li>
 						                <li class="person" data-chat="person3">
-						                    <img src="https://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
+						                    <img src="" alt="" />
 						                    <span class="name">Louis CK</span>
 						                    <span class="time">2:09 PM</span>
 						                    <span class="preview">But we’re probably gonna need a new carpet.</span>
@@ -160,37 +160,37 @@
 							        <div class="left">
 							            <ul class="people">
 							                <li class="person human" data-chat="person1">
-							                    <img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Thomas Bangalter</span>
 							                    <span class="time">2:09 PM</span>
 							                    <span class="preview">I was wondering...</span>
 							                </li>
 							                <li class="person human" data-chat="person2">
-							                    <img src="https://s3.postimg.org/yf86x7z1r/img2.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Dog Woofson</span>
 							                    <span class="time">1:44 PM</span>
 							                    <span class="preview">I've forgotten how it felt before</span>
 							                </li>
 							                <li class="person human" data-chat="person3">
-							                    <img src="https://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Louis CK</span>
 							                    <span class="time">2:09 PM</span>
 							                    <span class="preview">But we’re probably gonna need a new carpet.</span>
 							                </li>
 							                <li class="person human" data-chat="person4">
-							                    <img src="https://s3.postimg.org/quect8isv/img4.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Bo Jackson</span>
 							                    <span class="time">2:09 PM</span>
 							                    <span class="preview">It’s not that bad...</span>
 							                </li>
 							                <li class="person human" data-chat="person5">
-							                    <img src="https://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Michael Jordan</span>
 							                    <span class="time">2:09 PM</span>
 							                    <span class="preview">Wasup for the third time like is you bling bitch</span>
 							                </li>
 							                <li class="person human" data-chat="person6">
-							                    <img src="https://s30.postimg.org/kwi7e42rh/img6.jpg" alt="" />
+							                    <img src="" alt="" />
 							                    <span class="name">Drake</span>
 							                    <span class="time">2:09 PM</span>
 							                    <span class="preview">howdoyoudoaspace</span>

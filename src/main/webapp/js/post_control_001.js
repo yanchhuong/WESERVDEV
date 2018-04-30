@@ -142,7 +142,7 @@
 post_control_001.listMenu=function(){
 	$.ajax({
     	type   : 'GET',
-	    url    : "/category/list",
+	    url    : "/category/list_category",
 	    cache  : true
 	})
     .done(function(dat) {

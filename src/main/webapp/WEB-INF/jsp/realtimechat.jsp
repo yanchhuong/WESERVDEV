@@ -17,14 +17,9 @@
  	<meta name="_csrf_header" content="${_csrf.headerName}"/>
   	<title>Direct Messaging</title>
   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
-
-	<script src="https://use.typekit.net/hoy3lrg.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   	
+ 
     <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
     <script src="/js-lib/jquery-2.1.0.min.js"></script>
     <script src="/js-lib/sockjs-0.3.4.js"></script>

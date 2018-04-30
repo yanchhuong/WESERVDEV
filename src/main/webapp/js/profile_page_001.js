@@ -814,7 +814,7 @@ function uploadFormData(){
    
   	oMyForm.append("file", file.files[0]);
   	$.ajax({
-  		url			: '/upload_file/uploadimg',
+  		url			: 'google_cloud/upload_file',
 	    data		: oMyForm,
 	    async		: false,
 	    cache   	: true,
@@ -871,8 +871,6 @@ function updateCoverImage(){
 	    }
   });
 };
-
-
 
 function updateProfileImage(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");

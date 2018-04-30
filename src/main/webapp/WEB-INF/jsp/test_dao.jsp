@@ -76,7 +76,7 @@ String usercd = sess.getUsercd(); */
                 <form id='putFile'>
                      <input type="button" value="Hello Ajax" id="ajaxtest">
                      <input type="button" value="Add" id="btAdd">
-                     <input type="button" value="Search" id="tbSearch">
+                     <input type="button" value="delete" id="tbdelete">
                      <input type="text" id="keysearch"/>
                      <input name="myFile" type="file" id="txtfile">
                      <br>
@@ -84,8 +84,8 @@ String usercd = sess.getUsercd(); */
                 
                 <form enctype="text/plain" method="POST" name="putFile" id="putFile">
 		           <div>
-		            Bucket: <input type="text" name="bucket" />
-		            File Name: <input type="text" name="fileName" />
+		            Bucket: <input type="text" name="bucket" id="bucket"/>
+		            File Name: <input type="text" name="fileName" id="fileName"/>
 		            <br /> File Contents: <br />
 		            <textarea name="content" id="content" rows="3" cols="60"></textarea>
 		            <br />

@@ -158,7 +158,6 @@ main_page.listProduct = function(parentId){
 
 	var input = {};
 	input["catgid"] = parentId;
-	console.log("first parentId: "+parentId);
 	$.ajax({
     	type   : 'POST',
 	    url    : "/products/list_product",

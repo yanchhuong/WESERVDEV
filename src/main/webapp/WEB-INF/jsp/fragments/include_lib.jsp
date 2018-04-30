@@ -17,9 +17,7 @@
    <meta name="_csrf_header" content="${_csrf.headerName}"/>
    
     <!--css  files-->
-   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> 
-     
+
     <!--js file  -->
     <script src="../../js-lib/jquery-1.7.2.min.js?<%=_localDatetime%>"></script>
     <script src="../../js-lib/sockjs-0.3.4.js?<%=_localDatetime%>"></script>

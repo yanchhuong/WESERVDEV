@@ -27,6 +27,11 @@ $(document).ready(function(){
        $("#txtfile").on('change', function(){
     	   uploadFormData();
        });
+       $("#tbdelete").on('click', function(){
+    	   remove();
+    	   alert();
+       });
+       
 	  
 });
 function uploadFormData(){
@@ -36,7 +41,7 @@ function uploadFormData(){
 	    formData.append('file', $('input[type=file]')[0].files[0]);
 	  
 	    $.ajax({
-	        url         :'google_cloud/uploadimg_test',
+	        url         :'google_cloud/upload_file',
 		    data		: formData,
 		    cache   	: true,
 		    type		: 'POST',
@@ -48,6 +53,30 @@ function uploadFormData(){
 		    },
 		    success: function(data){
 		            data = JSON.parse(data);
+		            console.log(data);
+		    }
+	    });
+};
+
+function remove(){
+	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	  var csrfToken  = $("meta[name='_csrf']").attr("content");
+	  var input = {};
+	  input["bucketName"] = $("#bucket").val();
+	  input["objectName"] = $("#fileName").val();
+	    $.ajax({
+	    	
+	    	type   : 'POST',
+	    	url         :'google_cloud/remove_file',
+		    data   : JSON.stringify(input),
+		    cache: true,
+	        dataType: 'json',
+	    	contentType: 'application/json',
+	        async: false,
+	        beforeSend: function(xhr) {
+	            xhr.setRequestHeader(csrfHeader, csrfToken);
+	        },
+		    success: function(data){
 		            console.log(data);
 		    }
 	    });
