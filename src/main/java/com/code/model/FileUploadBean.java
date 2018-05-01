@@ -6,7 +6,7 @@ public class FileUploadBean  {
 	private String orname  ;
 	private	String  randname ;
 	private	String  regdate ;
-	private	String path ;
+	private	String path ="https://storage.googleapis.com/";
 	private	String type;	
 	private	long size ;	
 	private	String usercd;

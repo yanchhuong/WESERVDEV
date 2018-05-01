@@ -18,27 +18,28 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController  {
     @Autowired
 	UserService userService;
-    
 	@RequestMapping(value = "/login")
 	public String showForm(ModelMap model,HttpServletRequest request) {
-	/*	HttpSession session = request.getSession(false);
+	/*	HttpSession session=request.getSession(false);
 		model.addAttribute("login", new LoginForm());
 		if(session==null){
 			model.addAttribute("status", "Log In");
 		}*/
 		return "login_view";
 	}
-	
 	@RequestMapping(value = "/home",method = RequestMethod.GET)
-	public String home(ModelMap model, HttpServletRequest request, RedirectAttributes redir) {
+	public String home(
+			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
 		return "home";
 	}
 	@RequestMapping(value = "/hello",method = RequestMethod.GET)
-	public String hello(ModelMap model, HttpServletRequest request, RedirectAttributes redir) {
+	public String hello(
+			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
 		return "hello";
 	}
 	@RequestMapping(value = "/403",method = RequestMethod.GET)
-	public String error(ModelMap model, HttpServletRequest request, RedirectAttributes redir) {
+	public String error(
+			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
 		return "403";
 	}
 }
